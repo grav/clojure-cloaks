@@ -12,12 +12,3 @@ with its [license](vendor/LICENSE). SHA256:
 `e04a33ff90947057772f42e683314e9c9f8671ebb922398208b4ad1c76991373`.
 
 Verified in Chromium via `file://`: initial greeting and three successive clicks.
-To repeat the browser check (Node is only needed for testing):
-
-```sh
-npm ci
-npx playwright install chromium
-npm test
-```
-
-Set `CHROMIUM_PATH` to use an existing Chromium executable.

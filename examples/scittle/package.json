@@ -1,1 +1,0 @@
-{"name":"hello-scittle","private":true,"scripts":{"serve":"python3 -m http.server 8074 --bind 0.0.0.0","test":"node test.mjs"},"devDependencies":{"playwright":"1.63.0"}}
