@@ -1,0 +1,6 @@
+Command: clj -M tower.clj -n 2 <test expression from test-tower.py>
+Layer 1 ready in 0.370639273 seconds
+Layer 2 ready in 0.624166458 seconds
+Interpreted node calls by layer: {1 46174, 2 2052}
+Result:
+["hello world" 42 120 55 42 42 [42 1]]
