@@ -1,0 +1,21 @@
+(ns hello)
+
+;; Each edit creates a new persistent map/vector. Older versions stay available.
+(defonce history (atom [{:greetings []}]))
+
+(defn greeting [name]
+  (str "Hello, " name "!"))
+
+(defn current []
+  (peek @history))
+
+(defn greet! [name]
+  (peek (swap! history
+          (fn [versions]
+            (conj versions
+              (update (peek versions) :greetings conj (greeting name)))))))
+
+(defn undo! []
+  (peek (swap! history
+          (fn [versions]
+            (if (> (count versions) 1) (pop versions) versions)))))
