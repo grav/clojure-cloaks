@@ -67,7 +67,8 @@ workflow uses a dedicated GitHub runner with 16 GB of memory.
 ## Verification
 
 The [native GitHub ARM64 build](https://github.com/grav/cream/actions/runs/34621339449)
-produced the executable tested in this Linux ARM64 VM. Default, named, Unicode
+passed the upstream suite (15 libraries, zero failures) and produced the
+executable tested in this Linux ARM64 VM. Default, named, Unicode
 and quoted-name greetings passed, as did direct runtime `eval`.
 The example's interface and implementing class are compiled when the file runs.
 
