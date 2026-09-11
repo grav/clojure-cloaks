@@ -11,7 +11,7 @@ The command targets Linux on the host architecture; use a matching Docker engine
 cd examples/glojure
 CGO_ENABLED=0 GOOS=linux go build -tags glj_aot_runtime -trimpath -o bin/hello .
 docker build -t clojure-hello/glojure:local .
-docker run --rm --read-only --cap-drop ALL -p 127.0.0.1:8080:8080 clojure-hello/glojure:local
+docker run --rm -p 127.0.0.1:8080:8080 clojure-hello/glojure:local
 ```
 
 In another terminal:
@@ -56,8 +56,7 @@ Docker's reported size depends on its image store and is not the unpacked
 filesystem size. Toolchain and architecture can change these measurements.
 
 Verified on Linux ARM64, 2026-09-11: native build and OCI build; HTTP health check,
-default name, named greeting and Unicode name through the container running with
-a read-only filesystem and all capabilities dropped. No image has been published.
+default name, named greeting and Unicode name through the container. No image has been published.
 
 Dependency pinned to [Glojure v0.7.16](https://github.com/glojurelang/glojure/tree/v0.7.16)
 in go.mod/go.sum. The Go host serializes interpreter entry to avoid assuming

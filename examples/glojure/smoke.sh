@@ -3,7 +3,7 @@ set -euo pipefail
 cd "$(dirname "$0")"
 CGO_ENABLED=0 GOOS=linux go build -tags glj_aot_runtime -trimpath -o bin/hello .
 docker build -t clojure-hello/glojure:local .
-container=$(docker run -d --rm --read-only --cap-drop ALL -p 127.0.0.1::8080 clojure-hello/glojure:local)
+container=$(docker run -d --rm -p 127.0.0.1::8080 clojure-hello/glojure:local)
 trap 'docker stop "$container" >/dev/null' EXIT
 endpoint=$(docker port "$container" 8080/tcp)
 python3 - "$endpoint" <<'PY'
