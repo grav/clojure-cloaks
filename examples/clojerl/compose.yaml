@@ -1,0 +1,13 @@
+services:
+  greeter:
+    build: .
+    hostname: greeter
+    environment:
+      ERL_ARGS: '-sname greeter -setcookie hello-local-demo +S 2:2'
+  client:
+    build: .
+    hostname: client
+    depends_on: [greeter]
+    environment:
+      ERL_ARGS: '-sname client -setcookie hello-local-demo +S 2:2'
+    command: ['client.clje']

@@ -1,0 +1,9 @@
+(ns hello)
+
+(defn greeting [name]
+  (str "Hello, " (if (empty? name) "world" name) " from Glojure!"))
+
+;; Go passes a request's query value into this function. The value returned
+;; crosses back into Go and is serialized as JSON by net/http's handler.
+(defn response [name]
+  (greeting name))

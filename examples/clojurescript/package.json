@@ -1,0 +1,13 @@
+{
+  "devDependencies": {
+    "@playwright/test": "1.63.0"
+  },
+  "name": "hello-replicant",
+  "private": true,
+  "scripts": {
+    "build": "clojure -M:build",
+    "dev": "clojure -M:dev",
+    "serve": "python3 -m http.server 8071 --bind 127.0.0.1 --directory public",
+    "test": "playwright test"
+  }
+}

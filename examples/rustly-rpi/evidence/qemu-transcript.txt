@@ -1,0 +1,17 @@
+
+Hello, world from Rustly Clojure on Raspberry Pi 4!
+Clojure -> Rust -> ARM64. No OS, no heap.
+Type letters/digits to blink Morse; empty line stops.
+> clj
+Repeating Morse: clj
+> SOS 42
+Repeating Morse: SOS 42
+> Björk 🌍
+Use up to 64 ASCII letters, digits or spaces; message unchanged.
+> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+Use up to 64 ASCII letters, digits or spaces; message unchanged.
+> clx j
+Repeating Morse: clj
+> 
+Morse stopped.
+> 

@@ -1,0 +1,1 @@
+JVM Clojure: StackOverflowError at n=20000 with -Xss256k (expected).

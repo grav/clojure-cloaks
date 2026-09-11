@@ -1,0 +1,68 @@
+{
+  "originHash" : "825cebf84d61e1a642da602e8a948e4187266f14bd1cb7dfbd8ffdf58f953bc1",
+  "pins" : [
+    {
+      "identity" : "bigdecimal",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Zollerboy1/BigDecimal.git",
+      "state" : {
+        "revision" : "04d17040e4615fbfda3a882b9881f6841f4bf557",
+        "version" : "1.0.2"
+      }
+    },
+    {
+      "identity" : "bigint",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/attaswift/BigInt.git",
+      "state" : {
+        "revision" : "e07e00fa1fd435143a2dcf8b7eec9a7710b2fdfe",
+        "version" : "5.7.0"
+      }
+    },
+    {
+      "identity" : "swift-argument-parser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-argument-parser",
+      "state" : {
+        "revision" : "6a52f3251125d74daf04fcbd5e6f08a75d074382",
+        "version" : "1.8.2"
+      }
+    },
+    {
+      "identity" : "swift-collections",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-collections.git",
+      "state" : {
+        "revision" : "a0cb0954ecb21e4e31b0070e6ed5674e8556685a",
+        "version" : "1.6.0"
+      }
+    },
+    {
+      "identity" : "swift-commandlinekit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/objecthub/swift-commandlinekit.git",
+      "state" : {
+        "revision" : "58aa1a2285c5b8ad54e874a2bd66f790eb7e1766",
+        "version" : "1.1.1"
+      }
+    },
+    {
+      "identity" : "swift-numerics",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-numerics.git",
+      "state" : {
+        "revision" : "0c0290ff6b24942dadb83a929ffaaa1481df04a2",
+        "version" : "1.1.1"
+      }
+    },
+    {
+      "identity" : "swish",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/infiniteNIL/swish.git",
+      "state" : {
+        "revision" : "05f0de5fe7755ec935dcd693dfb4c333c4cc0c33"
+      }
+    }
+  ],
+  "version" : 3
+}

@@ -1,0 +1,16 @@
+(ns hello.greeter)
+
+(defn serve [count]
+  (receive*
+    #erl[:greet from ref name]
+    (let [next-count (inc count)]
+      (erlang/send from #erl[:hello ref
+                            (str "Hello, " name " from " (erlang/node) "!")
+                            next-count])
+      (recur next-count))
+    :stop (println "Greeter stopped.")
+    _ (recur count)))
+
+(erlang/register :greeter (erlang/self))
+(println (str "Greeter ready on " (erlang/node)))
+(serve 0)

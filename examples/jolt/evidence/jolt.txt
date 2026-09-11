@@ -1,0 +1,9 @@
+Hello, world from Jolt!
+Naive Fibonacci(20): 6765
+Tail-call Fibonacci(20): 6765
+Ordinary tail calls; no loop/recur.
+n: 20000
+digits: 4180
+first: 253116232373236124224015500352
+last: 174220460639857683971213093125
+mod-1000000007: 988094463

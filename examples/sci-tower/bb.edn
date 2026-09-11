@@ -1,0 +1,5 @@
+{:paths ["."]
+ :tasks {demo {:task (apply (requiring-resolve 'tower/-main) *command-line-args*)}
+         ladder {:task (doseq [depth (range 5)]
+                         ((requiring-resolve 'tower/-main) (str depth)))}
+         test {:task (load-file "test.clj")}}}

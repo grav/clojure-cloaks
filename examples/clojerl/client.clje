@@ -1,0 +1,25 @@
+(ns hello.client)
+
+(def remote-node (keyword "greeter@greeter"))
+
+(defn request [name]
+  (let [ref (erlang/make_ref)]
+    (erlang/send #erl[:greeter remote-node]
+                 #erl[:greet (erlang/self) ref name])
+    (receive*
+      #erl[:hello response-ref greeting count]
+      (if (= ref response-ref)
+        (do (println (str greeting " Request #" count)) count)
+        (throw (ex-info "Unexpected reply reference" {})))
+      (after 5000 (throw (ex-info "Greeter did not reply within five seconds" {}))))))
+
+(loop [attempt 0]
+  (if (and (= :pong (net_adm/ping remote-node))
+           (erlang/is_pid (rpc/call remote-node :erlang :whereis #erl(:greeter))))
+    nil
+    (if (< attempt 30)
+      (do (timer/sleep 500) (recur (inc attempt)))
+      (throw (ex-info "Could not connect to the greeter actor" {})))))
+(request "Ada")
+(request "world")
+(println "Two-node greeting exchange complete.")

@@ -1,0 +1,17 @@
+(ns hello.graphics (:include "graphics.hpp"))
+
+(def greeting (str "Hello, " "world" " from jank! Click or press Space to change colour."))
+(cpp/hello.open greeting)
+(println greeting)
+
+;; jank owns event handling, palette selection and the loop. C++ wraps SDL handles.
+(loop [frame 0 colour 0]
+  (let [event (cpp/hello.event)
+        next-colour (if (= event 2) (if (= colour 2) 0 (inc colour)) colour)
+        [r g b] (nth [[30 125 110] [205 100 65] [85 100 180]] next-colour)]
+    (cpp/hello.draw r g b)
+    (if (or (= event 1) (and (cpp/hello.smoke) (>= frame 2)))
+      (do (when (cpp/hello.smoke) (cpp/hello.snapshot))
+          (cpp/hello.close)
+          (println "Native window rendered and closed."))
+      (do (cpp/hello.pause) (recur (inc frame) next-colour)))))

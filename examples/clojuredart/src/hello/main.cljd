@@ -1,0 +1,71 @@
+(ns hello.main
+  (:require ["package:flutter/material.dart" :as m]
+            [cljd.flutter :as f]
+            [clojure.string :as str]))
+
+(def teal (m/Color 0xFF176B60))
+(def ink (m/Color 0xFF203A35))
+(def cream (m/Color 0xFFF7F4EC))
+
+(defn greeting-screen []
+  (f/widget
+    :managed [name-controller (m/TextEditingController)]
+    :watch [{:keys [greeting count]} (atom {:greeting "Hello, world!" :count 0}) :as state]
+    :let [say-hello (fn []
+                     (let [name (str/trim (.-text name-controller))]
+                       (swap! state (fn [s]
+                                      {:greeting (str "Hello, " (if (str/blank? name) "world" name) "!")
+                                       :count (inc (:count s))}))))]
+    (m/Scaffold
+      .backgroundColor cream
+      .body
+      (m/SafeArea .child
+        (m/Center .child
+          (m/SingleChildScrollView .padding (m/EdgeInsets.all 24.0) .child
+            (m/ConstrainedBox .constraints (m/BoxConstraints .maxWidth 520.0) .child
+              (m/Column .mainAxisSize m/MainAxisSize.min
+                .crossAxisAlignment m/CrossAxisAlignment.stretch
+                .children
+                [(m/Text "CLOJUREDART / FLUTTER"
+                   .style (m/TextStyle .color teal .fontSize 12.0 .fontWeight m/FontWeight.w700 .letterSpacing 2.0))
+                 (m/SizedBox .height 18.0)
+                 (m/Text "Hello, everywhere."
+                   .style (m/TextStyle .color ink .fontSize 40.0 .fontWeight m/FontWeight.w700 .height 1.1))
+                 (m/SizedBox .height 12.0)
+                 (m/Text "A little greeting, wherever you are."
+                   .style (m/TextStyle .color ink .fontSize 17.0))
+                 (m/SizedBox .height 32.0)
+                 (m/TextField .key (m/ValueKey "name") .controller name-controller
+                   .style (m/TextStyle .fontFamilyFallback ["NotoEmoji"])
+                   .textInputAction m/TextInputAction.done
+                   .onSubmitted (fn [_] (say-hello))
+                   .decoration (m/InputDecoration .labelText "Your name"
+                                 .hintText "World, Ada, or you" .filled true
+                                 .fillColor m/Colors.white
+                                 .border (m/OutlineInputBorder .borderRadius (m/BorderRadius.circular 12.0))))
+                 (m/SizedBox .height 16.0)
+                 (m/FilledButton .key (m/ValueKey "greet")
+                   .onPressed say-hello
+                   .style (m/FilledButton.styleFrom .padding (m/EdgeInsets.symmetric .vertical 18.0))
+                   .child (m/Text "Say hello" .style (m/TextStyle .fontSize 16.0)))
+                 (m/SizedBox .height 28.0)
+                 (m/Container .padding (m/EdgeInsets.all 24.0)
+                   .decoration (m/BoxDecoration .color m/Colors.white .borderRadius (m/BorderRadius.circular 18.0))
+                   .child (m/Column .crossAxisAlignment m/CrossAxisAlignment.start
+                            .children [(m/Semantics .liveRegion true .child
+                                         (m/Text greeting .key (m/ValueKey "greeting")
+                                           .style (m/TextStyle .fontFamilyFallback ["NotoEmoji"] .color teal .fontSize 28.0 .fontWeight m/FontWeight.w600)))
+                                       (m/SizedBox .height 8.0)
+                                       (m/Text (str "Greetings sent: " count) .key (m/ValueKey "count")
+                                         .style (m/TextStyle .color ink))]))
+                 (m/SizedBox .height 28.0)
+                 (m/Text "One ClojureDart app · iOS / web / Linux"
+                   .textAlign m/TextAlign.center
+                   .style (m/TextStyle .color ink .fontSize 12.0))]))))))))
+
+(defn main []
+  (m/runApp
+    (m/MaterialApp .title "Hello, everywhere" .debugShowCheckedModeBanner false
+      .theme (m/ThemeData .useMaterial3 true
+               .colorScheme (m/ColorScheme.fromSeed .seedColor teal))
+      .home (greeting-screen))))

@@ -1,0 +1,8 @@
+FROM ubuntu:24.04@sha256:224a1869083a311ef3f13648a154ba79832fbef6364d31493642ca03082da254
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev \
+    xvfb xauth dbus-x11 fonts-dejavu-core imagemagick xdotool \
+    libgl1-mesa-dri mesa-utils curl git unzip zip python3 ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
+WORKDIR /app

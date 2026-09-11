@@ -1,0 +1,10 @@
+# Rust Pi 4 demo. Original Linux config: config-before-rust.txt
+[pi4]
+arm_64bit=1
+kernel=rust-pi4.img
+enable_uart=1
+init_uart_clock=48000000
+# The kernel directly assigns GPIO14/15 to PL011; no Linux or DT overlay needed.
+# Keep the default Pi 4 device tree for the firmware ARM-stub setup.
+# Emit firmware diagnostics before the Rust kernel starts.
+uart_2ndstage=1

@@ -1,0 +1,11 @@
+[package]
+name = "hello-rustly-pi4"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[profile.release]
+panic = "abort"
+opt-level = "s"
+lto = true
+codegen-units = 1

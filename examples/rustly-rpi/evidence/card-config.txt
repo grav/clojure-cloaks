@@ -1,0 +1,8 @@
+# Rustly Pi 4 demo. Original Linux config: config-before-rust.txt
+[pi4]
+arm_64bit=1
+kernel=rustly-pi4.img
+enable_uart=1
+init_uart_clock=48000000
+# Retain the default Pi 4 device tree used by the verified Rust baseline.
+uart_2ndstage=1

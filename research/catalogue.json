@@ -1,0 +1,2624 @@
+{
+  "as_of": "2026-09-11",
+  "scope": "Publicly discoverable Clojure-family projects, including historical and incomplete attempts; not a claim of universal completeness.",
+  "category_definitions": {
+    "A": "Dialect / implementation / compiler",
+    "B": "Runtime / environment / alternate syntax",
+    "C": "Related language / educational implementation",
+    "D": "Tool / syntax layer",
+    "E": "Proposal / implementation not established"
+  },
+  "counts": {
+    "A": 63,
+    "B": 17,
+    "C": 46,
+    "D": 4,
+    "E": 4
+  },
+  "projects": [
+    {
+      "id": "gitlab-com-balvatar-lisp-nim",
+      "name": "Bara Lang",
+      "category": "A",
+      "host": "Nim",
+      "url": "https://gitlab.com/balvatar/lisp-nim",
+      "notes": "Self-described Clojure for Nim; GitLab repository archived, Codeberg continuation needs checking.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://gitlab.com/balvatar/lisp-nim",
+          "kind": "project-page",
+          "accessed": "2026-09-11"
+        },
+        {
+          "url": "https://gitlab.com/balvatar/lisp-nim",
+          "kind": "repository-metadata",
+          "accessed": "2026-09-11"
+        }
+      ],
+      "repository_metadata": {
+        "created_at": "2026-05-08",
+        "archived": true
+      }
+    },
+    {
+      "id": "github-com-basilisp-lang-basilisp",
+      "name": "Basilisp",
+      "category": "A",
+      "host": "Python 3",
+      "url": "https://github.com/basilisp-lang/basilisp",
+      "notes": "Clojure-compatible dialect with Python interop.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/basilisp-lang/basilisp/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "5099003ba70028ee4914f32871bf1afffadf6af0757b43dc3d20343f613d929d"
+        }
+      ]
+    },
+    {
+      "id": "github-com-calcit-lang-calcit",
+      "name": "Calcit",
+      "category": "A",
+      "host": "Rust / JavaScript",
+      "url": "https://github.com/calcit-lang/calcit",
+      "notes": "Self-described ClojureScript dialect with indentation-based Cirru syntax; now has extensive typed features.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/calcit-lang/calcit/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "0636021587d8f68b6e468559b28c490dd83ddc1bdc9b5e7cb3318567377f8e14"
+        },
+        {
+          "url": "https://api.github.com/repos/calcit-lang/calcit",
+          "kind": "repository-metadata",
+          "accessed": "2026-09-11"
+        }
+      ],
+      "repository_metadata": {
+        "created_at": "2021-04-15T13:43:15Z",
+        "pushed_at": "2026-09-10T15:39:29Z",
+        "archived": false,
+        "fork": false,
+        "default_branch": "main"
+      }
+    },
+    {
+      "id": "github-com-squint-cljs-cherry",
+      "name": "Cherry",
+      "category": "A",
+      "host": "JavaScript ES modules",
+      "url": "https://github.com/squint-cljs/cherry",
+      "notes": "Alternative ClojureScript compiler with persistent CLJS data structures.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/squint-cljs/cherry/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "b4be21f95516a3390cf28964724e0eb72ff67b0562c5e1dbbf0c316c9e73fca7"
+        }
+      ]
+    },
+    {
+      "id": "github-com-joinr-clclojure",
+      "name": "CLClojure",
+      "category": "A",
+      "host": "Common Lisp",
+      "url": "https://github.com/joinr/clclojure",
+      "notes": "Experimental Clojure port, distinct from Cloture.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/joinr/clclojure/HEAD/README.org",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "64546bdb02790cef98dca6b7641868f747e15be588f8c8959c375baad1d18a87"
+        }
+      ]
+    },
+    {
+      "id": "github-com-regibyte-cljam",
+      "name": "Cljam",
+      "category": "A",
+      "host": "JavaScript / TypeScript / Node.js / Bun",
+      "url": "https://github.com/RegiByte/cljam",
+      "notes": "Clojure interpreter with tree-walker and VM; author says complete and not actively maintained.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/RegiByte/cljam/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "d89e69cbf306b5412f81ad0c196f7d265414ae3a02e4d2ee2358e345ec89ddf5"
+        },
+        {
+          "url": "https://api.github.com/repos/RegiByte/cljam",
+          "kind": "repository-metadata",
+          "accessed": "2026-09-11"
+        }
+      ],
+      "repository_metadata": {
+        "created_at": "2026-02-22T20:54:27Z",
+        "pushed_at": "2026-08-28T19:02:22Z",
+        "archived": false,
+        "fork": false,
+        "default_branch": "main"
+      }
+    },
+    {
+      "id": "github-com-borkdude-cljbang-el",
+      "name": "Cljbang",
+      "category": "A",
+      "host": "Emacs Lisp",
+      "url": "https://github.com/borkdude/cljbang.el",
+      "notes": "clj!: compiles and evaluates Clojure forms in Emacs.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/borkdude/cljbang.el/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "036ff710f426a15d7f390bbc12159e4da7754a12e97a9b620771041f4c852d1c"
+        },
+        {
+          "url": "https://api.github.com/repos/borkdude/cljbang.el",
+          "kind": "repository-metadata",
+          "accessed": "2026-09-11"
+        }
+      ],
+      "repository_metadata": {
+        "created_at": "2026-07-21T11:45:08Z",
+        "pushed_at": "2026-07-22T13:36:14Z",
+        "archived": false,
+        "fork": false,
+        "default_branch": "main"
+      },
+      "aliases": [
+        "clj!",
+        "cljbang.el"
+      ]
+    },
+    {
+      "id": "github-com-muthuishere-cljgo",
+      "name": "cljgo",
+      "category": "A",
+      "host": "Go",
+      "url": "https://github.com/muthuishere/cljgo",
+      "notes": "muthuishere/cljgo: compiler emitting Go plus interpreted REPL.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/muthuishere/cljgo/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "691f4fa329acd6d27f4f6b8c8a34935937db2abdefba6d644751b119e5292303"
+        },
+        {
+          "url": "https://api.github.com/repos/muthuishere/cljgo",
+          "kind": "repository-metadata",
+          "accessed": "2026-09-11"
+        }
+      ],
+      "repository_metadata": {
+        "created_at": "2026-07-11T16:28:19Z",
+        "pushed_at": "2026-08-10T03:53:23Z",
+        "archived": false,
+        "fork": false,
+        "default_branch": "main"
+      }
+    },
+    {
+      "id": "github-com-tytrdev-cljrs",
+      "name": "cljrs",
+      "category": "A",
+      "host": "Rust / MLIR / LLVM / GPU path",
+      "url": "https://github.com/tytrdev/cljrs",
+      "notes": "tytrdev/cljrs: independent implementation, not ClojureRS or csm/clojurust.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/tytrdev/cljrs/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "232c03adf3c5a7c4af0b52cbc17fdf2374819a8b71ea7ad988b2adde30f2c238"
+        },
+        {
+          "url": "https://api.github.com/repos/tytrdev/cljrs",
+          "kind": "repository-metadata",
+          "accessed": "2026-09-11"
+        }
+      ],
+      "repository_metadata": {
+        "created_at": "2026-04-18T03:49:27Z",
+        "pushed_at": "2026-04-24T19:38:28Z",
+        "archived": false,
+        "fork": false,
+        "default_branch": "main"
+      }
+    },
+    {
+      "id": "github-com-hraberg-cljs2go",
+      "name": "cljs2go",
+      "category": "A",
+      "host": "Go",
+      "url": "https://github.com/hraberg/cljs2go",
+      "notes": "Alternative ClojureScript backend implemented as an overlay; old CLJS baseline.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/hraberg/cljs2go/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "717acff15e1cb3afb599f15f159f29b3e634c0a387c5af202922460df6a43ab8"
+        }
+      ]
+    },
+    {
+      "id": "gitlab-com-cloje-cloje",
+      "name": "Cloje",
+      "category": "A",
+      "host": "CHICKEN / Racket",
+      "url": "https://gitlab.com/cloje/cloje",
+      "notes": "Clojure clone layered on Scheme; small subset, documented CHICKEN and Racket support.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://gitlab.com/cloje/cloje/-/raw/main/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "7f265eec4f62f672f47daec55bcde3e1df62322228f032f9b5a3bdd3318face3"
+        }
+      ]
+    },
+    {
+      "id": "github-com-clojerl-clojerl",
+      "name": "Clojerl",
+      "category": "A",
+      "host": "BEAM / Erlang",
+      "url": "https://github.com/clojerl/clojerl",
+      "notes": "Clojure implementation for the Erlang VM.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/clojerl/clojerl/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "d57e01b8830718957c416f95d276579d5f4dde92697d2ab688e085aa493d2a6c"
+        }
+      ]
+    },
+    {
+      "id": "github-com-clojure-clojure",
+      "name": "Clojure",
+      "category": "A",
+      "host": "JVM",
+      "url": "https://github.com/clojure/clojure",
+      "notes": "Reference implementation; CLI or Java entry point.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/clojure/clojure/HEAD/readme.txt",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "6228bfec3bec67d77b661faee93709d5ec4384a0770313179a0122f7579a15f8"
+        }
+      ]
+    },
+    {
+      "id": "github-com-dmiller-clojure-clr-next",
+      "name": "clojure-clr-next",
+      "category": "A",
+      "host": ".NET / F#",
+      "url": "https://github.com/dmiller/clojure-clr-next",
+      "notes": "New ClojureCLR implementation under development; keep distinct from released ClojureCLR.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/dmiller/clojure-clr-next/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "47dcf0b72e9997a109f6957b82b0672c1d743449ab2e9987385486516d31237f"
+        }
+      ]
+    },
+    {
+      "id": "github-com-galdolber-clojure-objc",
+      "name": "clojure-objc",
+      "category": "A",
+      "host": "Objective-C",
+      "url": "https://github.com/galdolber/clojure-objc",
+      "notes": "Clojure compiler targeting Objective-C runtimes; historical toolchain.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/galdolber/clojure-objc/HEAD/readme.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "4b729a763b50d6632ea4dfc1a7be84912340c5dfeadbd0898a4e3669269641fc"
+        }
+      ]
+    },
+    {
+      "id": "github-com-clojure-py-clojure-py",
+      "name": "clojure-py (2026)",
+      "category": "A",
+      "host": "Python 3.14 / Cython",
+      "url": "https://github.com/clojure-py/clojure-py",
+      "notes": "New clojure-py implementation attempt; package manifest differs from repository's PyO3 description; entry point unverified.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/clojure-py/clojure-py/main/pyproject.toml",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "cca0c35c97910ed1976e486bda7ce29dcd5b0154a93f6c3188b92fc0854f5d8b"
+        },
+        {
+          "url": "https://api.github.com/repos/clojure-py/clojure-py",
+          "kind": "repository-metadata",
+          "accessed": "2026-09-11"
+        },
+        {
+          "url": "https://github.com/clojure-py/clojure-py",
+          "kind": "project-page",
+          "accessed": "2026-09-11"
+        }
+      ],
+      "repository_metadata": {
+        "created_at": "2026-04-24T01:20:15Z",
+        "pushed_at": "2026-05-06T13:01:02Z",
+        "archived": false,
+        "fork": false,
+        "default_branch": "main"
+      }
+    },
+    {
+      "id": "github-com-drewr-clojure-py",
+      "name": "clojure-py (historical; drewr fork)",
+      "category": "A",
+      "host": "Python",
+      "url": "https://github.com/drewr/clojure-py",
+      "notes": "Historical clojure-py, preserved in drewr fork; original halgari link unavailable.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/drewr/clojure-py/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "86ea6a3a8b2d1f06df2f861db61e38001176937dd816e24adff01863a33fa4a8"
+        }
+      ],
+      "aliases": [
+        "halgari/clojure-py"
+      ]
+    },
+    {
+      "id": "github-com-mll-clojure-rt",
+      "name": "clojure-rt",
+      "category": "A",
+      "host": "C++ / LLVM / C runtime",
+      "url": "https://github.com/mll/clojure-rt",
+      "notes": "Clojure Real Time compiler; README describes bootstrap phase.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/mll/clojure-rt/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "a80f371b8175d271b010945d8ea3a8894c310b5494ced18f32b17a0cb735235a"
+        }
+      ]
+    },
+    {
+      "id": "github-com-takeoutweight-clojure-scheme",
+      "name": "clojure-scheme",
+      "category": "A",
+      "host": "Gambit Scheme / C",
+      "url": "https://github.com/takeoutweight/clojure-scheme",
+      "notes": "ClojureScript-derived Scheme backend; explicitly unmaintained.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/takeoutweight/clojure-scheme/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "8cb048c2c800b674d4876bcbdeca38a5173974218da619c6b93ad24a47bdf76f"
+        }
+      ]
+    },
+    {
+      "id": "github-com-schani-clojurec",
+      "name": "ClojureC",
+      "category": "A",
+      "host": "C / native",
+      "url": "https://github.com/schani/clojurec",
+      "notes": "ClojureScript-derived C compiler; explicitly no longer actively maintained.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/schani/clojurec/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "58aafe5cca0bcd3d374c6ba6351fb1709851ee76f752c1d1495a39d0bb327f20"
+        }
+      ]
+    },
+    {
+      "id": "github-com-clojure-clojure-clr",
+      "name": "ClojureCLR",
+      "category": "A",
+      "host": ".NET / CLR",
+      "url": "https://github.com/clojure/clojure-clr",
+      "notes": "Official Clojure implementation on the CLR.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/clojure/clojure-clr/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "7a3674c29e1165d3eddcc9c5841dd8fc4ee598f32f00ed2d10cb675e4643b1b9"
+        }
+      ]
+    },
+    {
+      "id": "github-com-tensegritics-clojuredart",
+      "name": "ClojureDart",
+      "category": "A",
+      "host": "Dart / Flutter",
+      "url": "https://github.com/Tensegritics/ClojureDart",
+      "notes": "Clojure dialect compiling to Dart; console hello need not use Flutter.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/Tensegritics/ClojureDart/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "be8375d11d246d594efa7c578a7e48ae555076cf71efb695da292681b294d7e7"
+        }
+      ]
+    },
+    {
+      "id": "github-com-buddhilw-clojure-elisp",
+      "name": "ClojureElisp",
+      "category": "A",
+      "host": "Emacs Lisp",
+      "url": "https://github.com/BuddhiLW/clojure-elisp",
+      "notes": "ClojureElisp: separate compiler from Cljbang; .cljel source files.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/BuddhiLW/clojure-elisp/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "812657b7eea86aed949ddbf18cfde8a2bdcd22ce446573b27b26eb88bc7c1416"
+        },
+        {
+          "url": "https://api.github.com/repos/BuddhiLW/clojure-elisp",
+          "kind": "repository-metadata",
+          "accessed": "2026-09-11"
+        }
+      ],
+      "repository_metadata": {
+        "created_at": "2026-01-01T03:30:34Z",
+        "pushed_at": "2026-09-05T21:00:30Z",
+        "archived": false,
+        "fork": false,
+        "default_branch": "main"
+      }
+    },
+    {
+      "id": "gitlab-com-andreyorst-clojurefnl",
+      "name": "ClojureFnl",
+      "category": "A",
+      "host": "Fennel / Lua",
+      "url": "https://gitlab.com/andreyorst/clojurefnl",
+      "notes": "Clojure-to-Fennel proof of concept targeting Lua; .cljf sources; semantics-preserving goals with incomplete compatibility.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://gitlab.com/andreyorst/clojurefnl/-/raw/main/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "204a869ff31fc53becb8e90bc5c268ea078db2b3a2e610f5d846d298bfa8950f"
+        },
+        {
+          "url": "https://gitlab.com/andreyorst/clojurefnl",
+          "kind": "repository-metadata",
+          "accessed": "2026-09-11"
+        }
+      ],
+      "repository_metadata": {
+        "created_at": "2026-03-10"
+      }
+    },
+    {
+      "id": "github-com-clojurehaxe-clojurehaxe",
+      "name": "ClojureHaxe",
+      "category": "A",
+      "host": "Haxe / multiple targets",
+      "url": "https://github.com/ClojureHaxe/ClojureHaxe",
+      "notes": "Experimental Clojure port; README says compiler/core loading work remains.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/ClojureHaxe/ClojureHaxe/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "205d9424f3ddc2ae151d3af06641ba1867c52811343e1b69bf29a8e241702371"
+        }
+      ]
+    },
+    {
+      "id": "github-com-clojure-rs-clojurers",
+      "name": "ClojureRS",
+      "category": "A",
+      "host": "Rust",
+      "url": "https://github.com/clojure-rs/ClojureRS",
+      "notes": "clojure-rs/ClojureRS: interpreter project; distinct from other Rust ports.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/clojure-rs/ClojureRS/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "c54c28f0c6333a0a775e3c57720329f6387a364660f0503d0a099352582fa51a"
+        }
+      ]
+    },
+    {
+      "id": "github-com-chimez-clojure-rust",
+      "name": "ClojureRust (chimez)",
+      "category": "A",
+      "host": "Rust",
+      "url": "https://github.com/chimez/clojure-rust",
+      "notes": "chimez/clojure-rust: Clojure-to-Rust source compiler.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/chimez/clojure-rust/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "b13775a41ed1f478a511e6e3420e1e6839bc9cb887cfccaa01dc37a19ed28eb2"
+        }
+      ]
+    },
+    {
+      "id": "github-com-clojure-clojurescript",
+      "name": "ClojureScript",
+      "category": "A",
+      "host": "JavaScript",
+      "url": "https://github.com/clojure/clojurescript",
+      "notes": "Official Clojure-to-JavaScript compiler; browser and server targets.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/clojure/clojurescript/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "c42e9a93542c6564edc850fa2029559edf776bf85fad5cb36e82109e02635da0"
+        }
+      ]
+    },
+    {
+      "id": "github-com-raph-amiard-clojurescript-lua",
+      "name": "Clojurescript-Lua",
+      "category": "A",
+      "host": "Lua",
+      "url": "https://github.com/raph-amiard/clojurescript-lua",
+      "notes": "ClojureScript compiler with Lua backend; alpha.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/raph-amiard/clojurescript-lua/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "ccbc670e303fb93de1c6898267f86ed2cb4aec690918b2414fc4e8ec3a0e25e9"
+        }
+      ]
+    },
+    {
+      "id": "github-com-ohpauleez-cljs-terra",
+      "name": "ClojureScript-Terra",
+      "category": "A",
+      "host": "Terra / Lua / LLVM",
+      "url": "https://github.com/ohpauleez/cljs-terra",
+      "notes": "Experimental ClojureScript backend; earlier design name CLIC.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/ohpauleez/cljs-terra/master/README.mkd",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "1919ef221b10adfe5eaebec4a2f8b3b68f05fcff152296be59bd81d0a6b48774"
+        }
+      ],
+      "aliases": [
+        "CLIC (earlier design)"
+      ]
+    },
+    {
+      "id": "github-com-clojurewasm-clojurewasm",
+      "name": "ClojureWasm",
+      "category": "A",
+      "host": "Zig / native; Wasm FFI",
+      "url": "https://github.com/clojurewasm/ClojureWasm",
+      "notes": "Independent Clojure runtime; current README explicitly says no longer maintained.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/clojurewasm/ClojureWasm/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "ccf3d340ed50eb6d26c9b4a018aae96e3501c9fe7debf610d9924b74b6b25172"
+        },
+        {
+          "url": "https://api.github.com/repos/clojurewasm/ClojureWasm",
+          "kind": "repository-metadata",
+          "accessed": "2026-09-11"
+        }
+      ],
+      "repository_metadata": {
+        "created_at": "2026-02-01T04:59:18Z",
+        "pushed_at": "2026-08-12T17:12:28Z",
+        "archived": false,
+        "fork": false,
+        "default_branch": "main"
+      }
+    },
+    {
+      "id": "github-com-naomijub-clojurs",
+      "name": "ClojuRS (naomijub)",
+      "category": "A",
+      "host": "Rust",
+      "url": "https://github.com/naomijub/ClojuRS",
+      "notes": "naomijub/ClojuRS: separate Clojure experiment; sparse documentation.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/naomijub/ClojuRS/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "bc6d0c5579030b06bcc70a06df1a98dc42360cca1b4a1a9aa851e50aadbdd21f"
+        }
+      ]
+    },
+    {
+      "id": "github-com-clojurust-clojurust",
+      "name": "ClojuRust (clojurust)",
+      "category": "A",
+      "host": "Rust",
+      "url": "https://github.com/clojurust/clojurust",
+      "notes": "clojurust/clojurust: separate proof-of-concept implementation.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/clojurust/clojurust/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "fac4018bcddaf4fe1387322b410fefc0db6eabd9773c1c2924c1d01002925b32"
+        }
+      ]
+    },
+    {
+      "id": "github-com-csm-clojurust",
+      "name": "clojurust (csm)",
+      "category": "A",
+      "host": "Rust / Cranelift",
+      "url": "https://github.com/csm/clojurust",
+      "notes": "csm/clojurust: Rust-hosted Clojure dialect with JIT and AOT.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/csm/clojurust/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "6546fd0b55f45728de4b56904b2c456d4a277b6c26d04620780863c8ea95b090"
+        },
+        {
+          "url": "https://api.github.com/repos/csm/clojurust",
+          "kind": "repository-metadata",
+          "accessed": "2026-09-11"
+        }
+      ],
+      "repository_metadata": {
+        "created_at": "2026-03-02T21:52:10Z",
+        "pushed_at": "2026-09-10T12:37:52Z",
+        "archived": false,
+        "fork": false,
+        "default_branch": "main"
+      }
+    },
+    {
+      "id": "github-com-ruricolist-cloture",
+      "name": "Cloture",
+      "category": "A",
+      "host": "Common Lisp",
+      "url": "https://github.com/ruricolist/cloture",
+      "notes": "Clojure implementation interoperating with Common Lisp; pre-alpha.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/ruricolist/cloture/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "a2024258729ba78d542a2b29eddd23462c246ebc516853da8407b7e142edfa4e"
+        }
+      ]
+    },
+    {
+      "id": "github-com-austinzheng-cormorant",
+      "name": "Cormorant",
+      "category": "A",
+      "host": "Swift",
+      "url": "https://github.com/austinzheng/Cormorant",
+      "notes": "Clojure dialect interpreter; formerly Lambdatron / Swift Lambdatron.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/austinzheng/Cormorant/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "bda579ef230dad7888b513d0ade14f8e62c6718d8c5aaa4f3854a81f6028afa2"
+        }
+      ],
+      "aliases": [
+        "Lambdatron",
+        "Swift Lambdatron"
+      ]
+    },
+    {
+      "id": "github-com-nakkaya-ferret",
+      "name": "Ferret",
+      "category": "A",
+      "host": "C++ / embedded native",
+      "url": "https://github.com/nakkaya/ferret",
+      "notes": "Clojure-family embedded language compiling to standalone C++.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/nakkaya/ferret/HEAD/readme.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "889a17fa1c2bf4e9329ff7eb0f6126187f6bd9a4f402686d28e32e6527304120"
+        }
+      ]
+    },
+    {
+      "id": "github-com-frankadrian314159-fol",
+      "name": "FOL",
+      "category": "A",
+      "host": "Common Lisp / SBCL",
+      "url": "https://github.com/frankadrian314159/fol",
+      "notes": "Self-described Clojure dialect with CLOS-style objects and array programming; substantially extended semantics.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/frankadrian314159/fol/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "bbcfe85f1f3a5c917d11f01081a10d5f088f88201c9739de6f78c1f66b7337cd"
+        },
+        {
+          "url": "https://api.github.com/repos/frankadrian314159/fol",
+          "kind": "repository-metadata",
+          "accessed": "2026-09-11"
+        }
+      ],
+      "repository_metadata": {
+        "created_at": "2026-01-18T01:20:07Z",
+        "pushed_at": "2026-07-27T02:48:03Z",
+        "archived": false,
+        "fork": false,
+        "default_branch": "main"
+      }
+    },
+    {
+      "id": "github-com-glojurelang-glojure",
+      "name": "Glojure (glojurelang)",
+      "category": "A",
+      "host": "Go",
+      "url": "https://github.com/glojurelang/glojure",
+      "notes": "glojurelang/Glojure: hosted Clojure with Go interop.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/glojurelang/glojure/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "756ad166eeaafdbcb850788fc30fdaf1b9e43c5f4a11461b118ff20c935c1ae5"
+        },
+        {
+          "url": "https://api.github.com/repos/glojurelang/glojure",
+          "kind": "repository-metadata",
+          "accessed": "2026-09-11"
+        }
+      ],
+      "repository_metadata": {
+        "created_at": "2022-11-26T02:17:57Z",
+        "pushed_at": "2026-09-07T23:18:35Z",
+        "archived": false,
+        "fork": false,
+        "default_branch": "main"
+      }
+    },
+    {
+      "id": "github-com-venantius-glojure",
+      "name": "Glojure (venantius)",
+      "category": "A",
+      "host": "Go",
+      "url": "https://github.com/venantius/glojure",
+      "notes": "venantius/Glojure: separate historical compiler; explicitly incomplete.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/venantius/glojure/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "b6f3377e5994693f09ce1d4c682b88004b56116218be237f4fbc898c2f4a51ef"
+        }
+      ]
+    },
+    {
+      "id": "github-com-rcarmo-go-joker",
+      "name": "go-joker",
+      "category": "A",
+      "host": "Go",
+      "url": "https://github.com/rcarmo/go-joker",
+      "notes": "rcarmo/go-joker: independently developed fork of Joker for an agent runtime.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/rcarmo/go-joker/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "e065256ea4685115ff676aeaed3d456261826293e1517b87e3616c94e2a264a3"
+        },
+        {
+          "url": "https://api.github.com/repos/rcarmo/go-joker",
+          "kind": "repository-metadata",
+          "accessed": "2026-09-11"
+        }
+      ],
+      "repository_metadata": {
+        "created_at": "2019-08-23T16:26:11Z",
+        "pushed_at": "2026-09-06T09:24:13Z",
+        "archived": false,
+        "fork": true,
+        "default_branch": "master"
+      }
+    },
+    {
+      "id": "github-com-tcard-gojure",
+      "name": "Gojure",
+      "category": "A",
+      "host": "Go",
+      "url": "https://github.com/tcard/gojure",
+      "notes": "tcard/gojure: historical Clojure-to-Go compiler.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/tcard/gojure/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "5856d5285d3bb2137017f1212cdb17c11b69e51e453b5f4b93eae513a7e644c3"
+        }
+      ]
+    },
+    {
+      "id": "github-com-jgdavey-hammock",
+      "name": "Hammock",
+      "category": "A",
+      "host": "Ruby",
+      "url": "https://github.com/jgdavey/hammock",
+      "notes": "Partial pure-Ruby Clojure implementation; proof of concept.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/jgdavey/hammock/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "4078f745e9b550e0fbc95f65dbf5c4e6b01bbcf8674fcadbe35fddffb4207c67"
+        }
+      ]
+    },
+    {
+      "id": "github-com-jank-lang-jank",
+      "name": "jank",
+      "category": "A",
+      "host": "C++ / LLVM",
+      "url": "https://github.com/jank-lang/jank",
+      "notes": "Native Clojure dialect with C++ interop.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/jank-lang/jank/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "e1c9606e261103f58edfa0e861041b989afde212fbaffb69081dfd077eb8e5ec"
+        }
+      ]
+    },
+    {
+      "id": "github-com-zelex-jo-clojure",
+      "name": "JO Clojure",
+      "category": "A",
+      "host": "C / C++",
+      "url": "https://github.com/Zelex/jo_clojure",
+      "notes": "JO Clojure: Clojure-like implementation intended for embedding.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/Zelex/jo_clojure/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "5d366d679043df1715f9efbf86f68df3aac45f1c901cdaa3da9c4ac20634b1f0"
+        }
+      ]
+    },
+    {
+      "id": "github-com-candid82-joker",
+      "name": "Joker",
+      "category": "A",
+      "host": "Go",
+      "url": "https://github.com/candid82/joker",
+      "notes": "Clojure subset interpreter with linter and formatter; documented CLI.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/candid82/joker/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "4de038e9c52d4b8cffc958eadb9854a659363781701b5b33c4b1dd930d74021d"
+        }
+      ]
+    },
+    {
+      "id": "github-com-jolt-lang-jolt",
+      "name": "Jolt",
+      "category": "A",
+      "host": "Scheme / Chez; Gambit for browser",
+      "url": "https://github.com/jolt-lang/jolt",
+      "notes": "Self-hosted Clojure implementation; current host is Scheme, not its original Janet host.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/jolt-lang/jolt/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "4018f15c70cabebd04da9f6790f58a3425107fe8570c93c2ca6ad048d9ad115c"
+        },
+        {
+          "url": "https://api.github.com/repos/jolt-lang/jolt",
+          "kind": "repository-metadata",
+          "accessed": "2026-09-11"
+        }
+      ],
+      "repository_metadata": {
+        "created_at": "2026-06-01T20:52:20Z",
+        "pushed_at": "2026-09-11T05:29:43Z",
+        "archived": false,
+        "fork": false,
+        "default_branch": "main"
+      }
+    },
+    {
+      "id": "github-com-kalai-transpiler-kalai",
+      "name": "Kalai",
+      "category": "A",
+      "host": "Rust / Java / C++",
+      "url": "https://github.com/kalai-transpiler/kalai",
+      "notes": "Restricted Clojure source-to-source compiler; backend-specific build required.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/kalai-transpiler/kalai/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "0dc60af8ca96c09fe9a7cfd2889e9feab89f1661632534f4c98546af3b7cdaa1"
+        }
+      ]
+    },
+    {
+      "id": "github-com-clojurewasm-kiso",
+      "name": "Kiso",
+      "category": "A",
+      "host": "JavaScript / TypeScript compiler",
+      "url": "https://github.com/clojurewasm/Kiso",
+      "notes": "Independent ClojureScript-to-JavaScript compiler. GitHub repository is archived.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/clojurewasm/Kiso/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "67518d942b8417ead3884721fecb6d337c1368931e62dbdcff0d67041ac7348b"
+        },
+        {
+          "url": "https://api.github.com/repos/clojurewasm/Kiso",
+          "kind": "repository-metadata",
+          "accessed": "2026-09-11"
+        }
+      ],
+      "repository_metadata": {
+        "created_at": "2026-03-03T12:44:09Z",
+        "pushed_at": "2026-03-05T06:08:32Z",
+        "archived": true,
+        "fork": false,
+        "default_branch": "main"
+      }
+    },
+    {
+      "id": "github-com-aemoncannon-las3r",
+      "name": "Las3r",
+      "category": "A",
+      "host": "Flash / AVM2 / ActionScript 3",
+      "url": "https://github.com/aemoncannon/las3r",
+      "notes": "Clojure-based Lisp compiler for AVM2; historical Flash environment required.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/aemoncannon/las3r/HEAD/README.markdown",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "ea07256cb8cd03edc835375865a2159d0351761386cfe677b3eb4600b591cb0e"
+        }
+      ]
+    },
+    {
+      "id": "github-com-nooga-let-go",
+      "name": "let-go",
+      "category": "A",
+      "host": "Go / bytecode VM",
+      "url": "https://github.com/nooga/let-go",
+      "notes": "Clojure dialect with interpreter, compiler and Go interop.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/nooga/let-go/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "3be0a82828d3ca3d201c85841be7df19698573b5d947aa0c06f84f69fcc6edf3"
+        }
+      ]
+    },
+    {
+      "id": "github-com-lingy-lang-lingy",
+      "name": "Lingy",
+      "category": "A",
+      "host": "Perl",
+      "url": "https://github.com/lingy-lang/lingy",
+      "notes": "Clojure implementation for Perl; other host directories represent porting work, not verified runtimes.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/lingy-lang/lingy/main/doc/lingy.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "5befb26eae35e1bc151bd99c95a52c719a77b1db380070e7089380de097e9d82"
+        }
+      ]
+    },
+    {
+      "id": "github-com-lokke-org-lokke",
+      "name": "Lokke",
+      "category": "A",
+      "host": "Guile Scheme",
+      "url": "https://github.com/lokke-org/lokke",
+      "notes": "Experimental Clojure dialect for Guile.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/lokke-org/lokke/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "62a341f4b55c6be6eae84617bf25dfc8fdae5b44d51c681aba773bdabdcd2cf1"
+        }
+      ]
+    },
+    {
+      "id": "github-com-leifericf-mino",
+      "name": "mino",
+      "category": "A",
+      "host": "ANSI C",
+      "url": "https://github.com/leifericf/mino",
+      "notes": "Embeddable Lisp participating in Clojure conformance comparison; include as partial implementation.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/leifericf/mino/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "266c4b416e5621fc222da954f716536c371a75d9b1e959ab11fa62b21dafde46"
+        },
+        {
+          "url": "https://api.github.com/repos/leifericf/mino",
+          "kind": "repository-metadata",
+          "accessed": "2026-09-11"
+        }
+      ],
+      "repository_metadata": {
+        "created_at": "2026-04-13T21:14:22Z",
+        "pushed_at": "2026-09-11T04:26:37Z",
+        "archived": false,
+        "fork": false,
+        "default_branch": "main"
+      }
+    },
+    {
+      "id": "github-com-rekola-nanoclj",
+      "name": "nanoclj",
+      "category": "A",
+      "host": "C",
+      "url": "https://github.com/rekola/nanoclj",
+      "notes": "Tiny Clojure interpreter intended for embedding.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/rekola/nanoclj/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "46f9da031b8adaa3d5563c2d9ae0499107cc189bd9306d5c765182598dfb95f2"
+        }
+      ]
+    },
+    {
+      "id": "github-com-vic-rouge",
+      "name": "Rouge",
+      "category": "A",
+      "host": "Ruby",
+      "url": "https://github.com/vic/rouge",
+      "notes": "Rouge: Clojure-based Ruby Lisp; historical source-run REPL.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/vic/rouge/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "2f6f14fed916441683f07011c3e7f84f5b35cf11eefe2f377dcff5f70d565eef"
+        }
+      ]
+    },
+    {
+      "id": "github-com-timothypratley-rustly",
+      "name": "Rustly",
+      "category": "A",
+      "host": "Rust",
+      "url": "https://github.com/timothypratley/rustly",
+      "notes": "Clojure-to-Rust transpiler; hello-world build example documented.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/timothypratley/rustly/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "887bf522daf2ef93322220bb9f7304cef5ed35fd3034703760f98d4e637b39de"
+        }
+      ]
+    },
+    {
+      "id": "github-com-babashka-sci",
+      "name": "SCI",
+      "category": "A",
+      "host": "Clojure / ClojureScript hosts",
+      "url": "https://github.com/babashka/sci",
+      "notes": "Small Clojure Interpreter; library embedding is a valid hello-world route.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/babashka/sci/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "fd0ba87ec3f907d10b4ebafcae2f75cc564069c48e2d159dbe4d7f1dbbcc453a"
+        }
+      ]
+    },
+    {
+      "id": "github-com-squint-cljs-squint",
+      "name": "Squint",
+      "category": "A",
+      "host": "JavaScript",
+      "url": "https://github.com/squint-cljs/squint",
+      "notes": "ClojureScript dialect using JavaScript data structures.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/squint-cljs/squint/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "f38759ae4d8efdfe345754b0e146dbb8fb351b462e098294e9b1e605dca02777"
+        }
+      ]
+    },
+    {
+      "id": "github-com-infinitenil-swish",
+      "name": "Swish",
+      "category": "A",
+      "host": "Swift",
+      "url": "https://github.com/infiniteNIL/swish",
+      "notes": "Embeddable/compiler implementation; author now describes it as full-blown Clojure, started with Claude Code.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/infiniteNIL/swish/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "b3154bd92922fc6f8acb33a02adacabe2e5bff93bbe0f9c727e4162289a54846"
+        },
+        {
+          "url": "https://api.github.com/repos/infiniteNIL/swish",
+          "kind": "repository-metadata",
+          "accessed": "2026-09-11"
+        }
+      ],
+      "repository_metadata": {
+        "created_at": "2026-02-10T01:53:44Z",
+        "pushed_at": "2026-09-11T03:52:02Z",
+        "archived": false,
+        "fork": false,
+        "default_branch": "main"
+      }
+    },
+    {
+      "id": "github-com-tpope-timl",
+      "name": "TimL",
+      "category": "A",
+      "host": "VimL / Vim",
+      "url": "https://github.com/tpope/timl",
+      "notes": "Clojure-like API and compiler for Vim; editor-hosted example.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/tpope/timl/HEAD/README.markdown",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "c682166424d7d77e4a16c569ac117c4c2779568e08316b4887ed40d6ed20ed9c"
+        }
+      ]
+    },
+    {
+      "id": "github-com-torque-project-torque",
+      "name": "Torque",
+      "category": "A",
+      "host": "LLVM / native",
+      "url": "https://github.com/torque-project/torque",
+      "notes": "Torque compiler; documentation provides Docker build and native REPL.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/torque-project/torque/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "f12860e3c8f207c0bc1968e7a0076ad969e672f6da04be784ecf588feaea56b5"
+        }
+      ]
+    },
+    {
+      "id": "github-com-delonnewman-zera-5",
+      "name": "Zera-5",
+      "category": "A",
+      "host": "JavaScript",
+      "url": "https://github.com/delonnewman/zera-5",
+      "notes": "Experimental lightweight Clojure implementation.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/delonnewman/zera-5/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "478604b48eedd96634da8995f1859e45afd3936cfef968c1900daa4229708ff3"
+        }
+      ]
+    },
+    {
+      "id": "github-com-arcadia-unity-arcadia",
+      "name": "Arcadia",
+      "category": "B",
+      "host": "Unity / ClojureCLR",
+      "url": "https://github.com/arcadia-unity/Arcadia",
+      "notes": "Unity integration; formerly clojure-unity.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/arcadia-unity/Arcadia/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "adec1d2318aa34a9df49829fc84a3d6c65566411b0e4009961cb23d92e8ee4bd"
+        }
+      ],
+      "aliases": [
+        "clojure-unity"
+      ]
+    },
+    {
+      "id": "github-com-babashka-babashka",
+      "name": "Babashka",
+      "category": "B",
+      "host": "Native / SCI",
+      "url": "https://github.com/babashka/babashka",
+      "notes": "Native scripting interpreter built with GraalVM; does not require a JVM at execution time.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/babashka/babashka/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "86fb5c3959d0528e2fa55f37760ad0b22841e5702e3949c329e958d8d75d2a03"
+        }
+      ]
+    },
+    {
+      "id": "github-com-squint-cljs-choq",
+      "name": "Choq",
+      "category": "B",
+      "host": "QuickJS / Cherry",
+      "url": "https://github.com/squint-cljs/choq",
+      "notes": "Choq packages Cherry inside QuickJS; experimental standalone runtime.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/squint-cljs/choq/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "f7aea73d05d78f07934212c4c83c4f35fbb8b44c25cca81e0f2fd5239fdaa1f7"
+        },
+        {
+          "url": "https://api.github.com/repos/squint-cljs/choq",
+          "kind": "repository-metadata",
+          "accessed": "2026-09-11"
+        }
+      ],
+      "repository_metadata": {
+        "created_at": "2026-08-08T09:24:55Z",
+        "pushed_at": "2026-08-11T09:08:25Z",
+        "archived": false,
+        "fork": false,
+        "default_branch": "main"
+      }
+    },
+    {
+      "id": "github-com-dundalek-closh",
+      "name": "Closh",
+      "category": "B",
+      "host": "Clojure / ClojureScript shell",
+      "url": "https://github.com/dundalek/closh",
+      "notes": "Closh shell environment; author declared hiatus in 2022.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/dundalek/closh/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "e1f49030f4105d19ecbb7d42df831f0584ff0444e1a7153ec3d2907a846fa106"
+        }
+      ]
+    },
+    {
+      "id": "github-com-borkdude-cream",
+      "name": "Cream",
+      "category": "B",
+      "host": "GraalVM native-image / Crema",
+      "url": "https://github.com/borkdude/cream",
+      "notes": "Experimental runtime for full JVM Clojure using a custom Clojure fork.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/borkdude/cream/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "28b1e4e274c85736f8cb4b7823b452272200a042ab46ed618f7be6cae6f2c59d"
+        },
+        {
+          "url": "https://api.github.com/repos/borkdude/cream",
+          "kind": "repository-metadata",
+          "accessed": "2026-09-11"
+        }
+      ],
+      "repository_metadata": {
+        "created_at": "2026-02-22T13:46:30Z",
+        "pushed_at": "2026-07-27T15:55:30Z",
+        "archived": false,
+        "fork": false,
+        "default_branch": "main"
+      }
+    },
+    {
+      "id": "github-com-mfikes-esprit",
+      "name": "Esprit",
+      "category": "B",
+      "host": "ESP32 / Espruino",
+      "url": "https://github.com/mfikes/esprit",
+      "notes": "ClojureScript runtime support for embedded hardware.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/mfikes/esprit/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "2666ea441ebb59460c0653cfe2ff9f0eeda33b1a21fadf9a790aec1b1a218839"
+        }
+      ]
+    },
+    {
+      "id": "github-com-gloathub-gloat",
+      "name": "Gloat",
+      "category": "B",
+      "host": "Go / Glojure",
+      "url": "https://github.com/gloathub/gloat",
+      "notes": "Glojure Automation Tool; compile/run Clojure or YAMLScript using Glojure.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/gloathub/gloat/HEAD/ReadMe.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "f24a624ff6d2d7758aa71ccb8c7d7d91964711ecc02d5384266b36f3803bdf4c"
+        }
+      ]
+    },
+    {
+      "id": "github-com-gloathub-glojure",
+      "name": "Glojure (Gloat fork)",
+      "category": "B",
+      "host": "Go / Glojure fork",
+      "url": "https://github.com/gloathub/glojure",
+      "notes": "Temporary implementation fork supporting Gloat; same language family as upstream Glojure.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/gloathub/glojure/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "30e48cb312b34f8a5bb00ffe9d6f79ff4cf644c70686d67c1600e087f8d7195f"
+        }
+      ]
+    },
+    {
+      "id": "github-com-mfikes-goby",
+      "name": "Goby",
+      "category": "B",
+      "host": "iOS / JavaScriptCore",
+      "url": "https://github.com/mfikes/goby",
+      "notes": "ClojureScript and Objective-C integration, not a new language.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/mfikes/goby/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "41270a2e57abc614ba9971eb7a08029df862f803a95291a467cca0ca918b6a8e"
+        }
+      ]
+    },
+    {
+      "id": "github-com-betterthantomorrow-joyride",
+      "name": "Joyride",
+      "category": "B",
+      "host": "VS Code / SCI",
+      "url": "https://github.com/BetterThanTomorrow/joyride",
+      "notes": "ClojureScript scripting environment with access to the VS Code API.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/BetterThanTomorrow/joyride/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "1306534fb6cee256da3e079b1aeb3039b58d9de4cc4f5d61ca1e5c4f73fcc9d1"
+        }
+      ]
+    },
+    {
+      "id": "github-com-anmonteiro-lumo",
+      "name": "Lumo",
+      "category": "B",
+      "host": "Node.js / V8",
+      "url": "https://github.com/anmonteiro/lumo",
+      "notes": "Standalone self-hosted ClojureScript environment; older toolchain.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/anmonteiro/lumo/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "f7cb37166530a1f2f3a9e0f02fbb6ff125e688307b30092809ae149031013d8a"
+        }
+      ]
+    },
+    {
+      "id": "github-com-babashka-nbb",
+      "name": "nbb",
+      "category": "B",
+      "host": "Node.js / SCI",
+      "url": "https://github.com/babashka/nbb",
+      "notes": "ClojureScript scripting runtime using SCI.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/babashka/nbb/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "f3484b804300a192a56a196afc45fd62439a8e3b70a0def2530e13ea5d2f858c"
+        }
+      ]
+    },
+    {
+      "id": "github-com-babashka-obb",
+      "name": "obb",
+      "category": "B",
+      "host": "macOS / OSA / SCI",
+      "url": "https://github.com/babashka/obb",
+      "notes": "ClojureScript automation of Mac applications via osascript.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/babashka/obb/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "f0c00c449591e31d95c77efdfe3ad0fdb4a848f07c40dc8bf95156257109ab45"
+        },
+        {
+          "url": "https://api.github.com/repos/babashka/obb",
+          "kind": "repository-metadata",
+          "accessed": "2026-09-11"
+        }
+      ],
+      "repository_metadata": {
+        "created_at": "2022-01-02T21:02:35Z",
+        "pushed_at": "2022-10-23T09:42:51Z",
+        "archived": false,
+        "fork": false,
+        "default_branch": "main"
+      }
+    },
+    {
+      "id": "github-com-planck-repl-planck",
+      "name": "Planck",
+      "category": "B",
+      "host": "JavaScriptCore",
+      "url": "https://github.com/planck-repl/planck",
+      "notes": "Standalone ClojureScript REPL and scripting runtime.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/planck-repl/planck/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "bd40144e5657f850b85f229386c1cfb4534d7c7ff7e8c48528eee8695fe8c4ba"
+        }
+      ]
+    },
+    {
+      "id": "github-com-babashka-scittle",
+      "name": "Scittle",
+      "category": "B",
+      "host": "Browser / SCI",
+      "url": "https://github.com/babashka/scittle",
+      "notes": "SCI exposed through script tags.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/babashka/scittle/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "3f289679e93e9d39abbca9e5f4409d20c0e463c42c80f5cef4f2aa7b4e5710c4"
+        }
+      ]
+    },
+    {
+      "id": "github-com-erdos-uclj",
+      "name": "uclj",
+      "category": "B",
+      "host": "GraalVM native-image",
+      "url": "https://github.com/erdos/uclj",
+      "notes": "Alternative native Clojure interpreter using JVM Clojure runtime components.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/erdos/uclj/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "a39f8a8233683b49099c57605cfb6b6d2c25e6041575dc4e80185a9fb219659b"
+        }
+      ]
+    },
+    {
+      "id": "github-com-yaml-yamlscript",
+      "name": "YAMLScript",
+      "category": "B",
+      "host": "Clojure / SCI; Glojure via Gloat",
+      "url": "https://github.com/yaml/yamlscript",
+      "notes": "YS / YAMLScript: alternate YAML syntax compiling to Clojure; count host bindings as integrations.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/yaml/yamlscript/HEAD/ReadMe.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "ad5469757816c9e153585dbc81890e8ded47c140f7553f3267be8a8075beb368"
+        },
+        {
+          "url": "https://api.github.com/repos/yaml/yamlscript",
+          "kind": "repository-metadata",
+          "accessed": "2026-09-11"
+        }
+      ],
+      "repository_metadata": {
+        "created_at": "2022-07-03T21:31:31Z",
+        "pushed_at": "2026-08-27T19:03:11Z",
+        "archived": false,
+        "fork": false,
+        "default_branch": "main"
+      },
+      "aliases": [
+        "YS"
+      ]
+    },
+    {
+      "id": "github-com-apricot-lang-apricot",
+      "name": "Apricot",
+      "category": "C",
+      "host": "Ruby / Rubinius",
+      "url": "https://github.com/apricot-lang/apricot",
+      "notes": "Independent Clojure-inspired Lisp compiled to Rubinius bytecode.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/apricot-lang/apricot/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "3c2387c9796cdbe3c4b33a7797d40fe33d0545388e62b8160a711574b17dbe05"
+        }
+      ]
+    },
+    {
+      "id": "github-com-katehonz-bars-lang",
+      "name": "Bars",
+      "category": "C",
+      "host": "Native / Cranelift / LLVM",
+      "url": "https://github.com/katehonz/bars-lang",
+      "notes": "Independent systems language with Clojure syntax and ownership semantics.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/katehonz/bars-lang/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "ebee99dfd6d4c5577d80fbfd29711637018950074aef8139bfcd8f11ca3a53ce"
+        },
+        {
+          "url": "https://api.github.com/repos/katehonz/bars-lang",
+          "kind": "repository-metadata",
+          "accessed": "2026-09-11"
+        }
+      ],
+      "repository_metadata": {
+        "created_at": "2026-06-02T22:49:29Z",
+        "pushed_at": "2026-07-29T22:50:55Z",
+        "archived": false,
+        "fork": false,
+        "default_branch": "main"
+      }
+    },
+    {
+      "id": "github-com-tompassarelli-beagle",
+      "name": "Beagle",
+      "category": "C",
+      "host": "Clojure / JavaScript / Nix; native experiments",
+      "url": "https://github.com/tompassarelli/beagle",
+      "notes": "Author explicitly calls it an independent statically typed Lisp derived from Clojure.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/tompassarelli/beagle/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "e02ee9adfeadaff892df1b6c0d45f61530fa083acc15dfa0cbc27a1c6e0539c0"
+        },
+        {
+          "url": "https://api.github.com/repos/tompassarelli/beagle",
+          "kind": "repository-metadata",
+          "accessed": "2026-09-11"
+        }
+      ],
+      "repository_metadata": {
+        "created_at": "2026-05-15T10:17:09Z",
+        "pushed_at": "2026-09-07T20:49:34Z",
+        "archived": false,
+        "fork": false,
+        "default_branch": "main"
+      }
+    },
+    {
+      "id": "github-com-bridje-bridje",
+      "name": "Bridje",
+      "category": "C",
+      "host": "Graal JVM",
+      "url": "https://github.com/bridje/bridje",
+      "notes": "Independent statically typed language; current design includes C/Java-style surface syntax.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/bridje/bridje/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "876f49c4d86e158fe8467268455513803176e895e4c7073250b925cae3aa09cf"
+        }
+      ]
+    },
+    {
+      "id": "github-com-7even-carbonate",
+      "name": "Carbonate",
+      "category": "C",
+      "host": "Ruby",
+      "url": "https://github.com/7even/carbonate",
+      "notes": "Independent Lisp transpiling to Ruby, heavily influenced by Clojure.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/7even/carbonate/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "d8d72ff49f452cbde079aecf609514e2630d54284d9fe1c07c841326bf51816c"
+        }
+      ]
+    },
+    {
+      "id": "github-com-carp-lang-carp",
+      "name": "Carp",
+      "category": "C",
+      "host": "C / native",
+      "url": "https://github.com/carp-lang/Carp",
+      "notes": "Independent statically typed Lisp with ownership tracking.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/carp-lang/Carp/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "290456fb0dbf759d980edd2b7c63ccfdfbdd396ad43b8cd54b29f576f11cfe63"
+        }
+      ]
+    },
+    {
+      "id": "github-com-sigmasoldi3r-charon-lang",
+      "name": "Charon",
+      "category": "C",
+      "host": "Lua",
+      "url": "https://github.com/sigmasoldi3r/charon-lang",
+      "notes": "Independent functional Lisp transpiler; alpha.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/sigmasoldi3r/charon-lang/HEAD/readme.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "3bd1319b3cc1f8c79ecbeb4fe8b8dee15e83a9bddcaea7612b535a05b2275761"
+        }
+      ]
+    },
+    {
+      "id": "github-com-wehu-cljperl",
+      "name": "CljPerl",
+      "category": "C",
+      "host": "Perl",
+      "url": "https://github.com/wehu/CljPerl",
+      "notes": "CljPerl: Clojure-inspired Lisp with Perl and CPAN interop.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/wehu/CljPerl/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "eadd070896a1bf8350d6e14ed3f8e01a0edb77d82906fb559310f1a3d1afd072"
+        }
+      ]
+    },
+    {
+      "id": "github-com-lattiahirvio-clojette",
+      "name": "Clojette",
+      "category": "C",
+      "host": "GreyScript / MiniScript / GreyHack",
+      "url": "https://github.com/lattiahirvio/Clojette",
+      "notes": "Independent Clojure-like language; requires game environment for intended use.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/lattiahirvio/Clojette/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "835329746e53d19bdb3d0a4f7807c0e249ab07c4a73e1e4e0d8df773a7847c26"
+        },
+        {
+          "url": "https://api.github.com/repos/lattiahirvio/Clojette",
+          "kind": "repository-metadata",
+          "accessed": "2026-09-11"
+        }
+      ],
+      "repository_metadata": {
+        "created_at": "2026-03-09T14:58:43Z",
+        "pushed_at": "2026-06-02T08:54:03Z",
+        "archived": false,
+        "fork": false,
+        "default_branch": "main"
+      }
+    },
+    {
+      "id": "github-com-kimtg-closhure",
+      "name": "Closhure",
+      "category": "C",
+      "host": ".NET",
+      "url": "https://github.com/kimtg/Closhure",
+      "notes": "Embedded Lisp with Clojure-like syntax; distinct from ClojureCLR and Clarp.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/kimtg/Closhure/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "88389082dbcb9754baa5a77c9d096979ed7ba21e38fa350a458902018067691f"
+        }
+      ]
+    },
+    {
+      "id": "github-com-convex-dev-convex",
+      "name": "Convex Lisp",
+      "category": "C",
+      "host": "Convex VM",
+      "url": "https://github.com/Convex-Dev/convex",
+      "notes": "Clojure-related smart-contract language; separate runtime and semantics.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/Convex-Dev/convex/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "9bedec2b053c8aeadafcaad83e489b0a593a7554529fb9a79087fd08d47a3cb0"
+        }
+      ]
+    },
+    {
+      "id": "github-com-rhysd-crisp",
+      "name": "Crisp",
+      "category": "C",
+      "host": "Crystal",
+      "url": "https://github.com/rhysd/Crisp",
+      "notes": "Independent Lisp based on MAL.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/rhysd/Crisp/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "082eecc596c35366c0ceb95f1571a9b0a98d19b7f23776f47c26dc23704442f9"
+        }
+      ]
+    },
+    {
+      "id": "github-com-bakpakin-fennel",
+      "name": "Fennel",
+      "category": "C",
+      "host": "Lua",
+      "url": "https://github.com/bakpakin/Fennel",
+      "notes": "Independent Lua Lisp; distinct from ClojureFnl.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/bakpakin/Fennel/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "376015f85200085c0cf445d476d9a55b9d3e04880fb823b096f6b015b801e589"
+        }
+      ]
+    },
+    {
+      "id": "github-com-chr15m-flk",
+      "name": "Fleck",
+      "category": "C",
+      "host": "Bash / MAL lineage",
+      "url": "https://github.com/chr15m/flk",
+      "notes": "Clojure-like Lisp for Bash; author no longer actively developing it.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/chr15m/flk/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "92579eb7ce4afaccbab053869391ea055283b9f70844bc0dafd9ca997c6eed7a"
+        }
+      ]
+    },
+    {
+      "id": "github-com-chr15m-frock",
+      "name": "Frock",
+      "category": "C",
+      "host": "PHP",
+      "url": "https://github.com/chr15m/frock",
+      "notes": "Clojure-flavoured PHP transpiler; separate from Phel.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/chr15m/frock/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "626895f5ee896c78ea3d980cdce948e65bba6c92b605096781519aa7dd85fa5e"
+        }
+      ]
+    },
+    {
+      "id": "github-com-alandipert-gherkin",
+      "name": "gherkin",
+      "category": "C",
+      "host": "Bash 4",
+      "url": "https://github.com/alandipert/gherkin",
+      "notes": "Independent functional Lisp; explicitly dormant.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/alandipert/gherkin/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "e3f974ff60d8d458c2009c90528124e964280ee48170c6dca5d986bd4f733a26"
+        }
+      ]
+    },
+    {
+      "id": "github-com-baku89-glisp",
+      "name": "Glisp",
+      "category": "C",
+      "host": "Browser / TypeScript",
+      "url": "https://github.com/baku89/glisp",
+      "notes": "Custom Lisp inside a graphical design environment.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/baku89/glisp/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "6c691c62995a6b1258c7a2e07e2c709a06ccad0054b87f285b26a6f319ca728e"
+        }
+      ]
+    },
+    {
+      "id": "github-com-hectorifc-hc-lisp",
+      "name": "HC-Lisp",
+      "category": "C",
+      "host": "TypeScript / JavaScript",
+      "url": "https://github.com/HectorIFC/hc-lisp",
+      "notes": "Educational Clojure/Norvig-inspired Lisp; explicitly experimental.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/HectorIFC/hc-lisp/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "da7bbab9423fe0723583b8440140bab4c3246e6301e56e8354c9433b623bedc0"
+        }
+      ]
+    },
+    {
+      "id": "github-com-hylang-hy",
+      "name": "Hy",
+      "category": "C",
+      "host": "Python",
+      "url": "https://github.com/hylang/hy",
+      "notes": "Independent Lisp embedded in Python; Python AST semantics.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/hylang/hy/HEAD/README.rst",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "1efd6ac5f498681d9e6e79265890b16b6a43326de8edae70a98d146be2411d16"
+        }
+      ]
+    },
+    {
+      "id": "github-com-janet-lang-janet",
+      "name": "Janet",
+      "category": "C",
+      "host": "C / bytecode VM",
+      "url": "https://github.com/janet-lang/janet",
+      "notes": "Independent scripting and embeddable Lisp.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/janet-lang/janet/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "62830ec16c8ba2da5299369ef0a49c4f06a82486e2e1c790bffd2dbe852317d0"
+        }
+      ]
+    },
+    {
+      "id": "github-com-kimtg-javelin",
+      "name": "Javelin",
+      "category": "C",
+      "host": "JVM",
+      "url": "https://github.com/kimtg/Javelin",
+      "notes": "kimtg/Javelin: embedded Lisp with Clojure-like syntax; not Hoplon's Javelin library.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/kimtg/Javelin/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "b738584c1b15d9c52be68fed0da0e4a8748dbf1310e3da8f629e4a7aa6cad89b"
+        }
+      ]
+    },
+    {
+      "id": "github-com-joxa-joxa",
+      "name": "Joxa",
+      "category": "C",
+      "host": "BEAM / Erlang",
+      "url": "https://github.com/joxa/joxa",
+      "notes": "Independent Lisp; README explicitly distinguishes it from Clojure.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/joxa/joxa/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "bbff61ca27e7a928e6b4dd586c20fdfb29945eab54a68712555f00ea47afeed4"
+        }
+      ]
+    },
+    {
+      "id": "github-com-kapok-lang-kapok",
+      "name": "Kapok",
+      "category": "C",
+      "host": "BEAM / Erlang",
+      "url": "https://github.com/kapok-lang/kapok",
+      "notes": "Independent Lisp with Clojure-like syntax.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/kapok-lang/kapok/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "563f7e5ffa561c67940ea159e5867331be0f962d8a5bb4e3e4a8270ec49b4cf3"
+        }
+      ]
+    },
+    {
+      "id": "github-com-lantiga-ki",
+      "name": "ki",
+      "category": "C",
+      "host": "JavaScript / sweet.js",
+      "url": "https://github.com/lantiga/ki",
+      "notes": "Lisp with Clojure-like semantics and Mori collections embedded in JavaScript.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/lantiga/ki/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "9e0de902f4dd27ca399a4c474289c3f5417c069c1a0938f00a0c1643cb1a794c"
+        }
+      ]
+    },
+    {
+      "id": "github-com-baguette-lemma",
+      "name": "Lemma",
+      "category": "C",
+      "host": "Lua",
+      "url": "https://github.com/baguette/lemma",
+      "notes": "Independent Lisp influenced by Scheme, Arc and Clojure.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/baguette/lemma/HEAD/README",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "654b14721e7e92d98f104225ac2dbc32e1f76260454531fe7052e53e7a8e970c"
+        }
+      ]
+    },
+    {
+      "id": "gitlab-com-ollb-lispery",
+      "name": "Lispery",
+      "category": "C",
+      "host": ".NET",
+      "url": "https://gitlab.com/ollb/lispery",
+      "notes": "Embedded Lisp influenced by Schemy and Clojure; project description verified.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://gitlab.com/ollb/lispery",
+          "kind": "project-page",
+          "accessed": "2026-09-11"
+        }
+      ]
+    },
+    {
+      "id": "github-com-dirkschumacher-llr",
+      "name": "llr",
+      "category": "C",
+      "host": "R",
+      "url": "https://github.com/dirkschumacher/llr",
+      "notes": "Small Clojure-inspired Lisp implemented in and compiling to R.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/dirkschumacher/llr/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "8aa126cfddd863d46f140f095683d68ba10e9669b8c276b3442536e99b363a30"
+        }
+      ]
+    },
+    {
+      "id": "github-com-luxlang-lux",
+      "name": "Lux",
+      "category": "C",
+      "host": "JVM and other backends",
+      "url": "https://github.com/LuxLang/lux",
+      "notes": "Independent statically typed language; Clojure is a syntax influence.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/LuxLang/lux/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "6ad87ac20c687bec61e1e1247dd92ee00d290185547e17d4c1b90fc21d392668"
+        }
+      ]
+    },
+    {
+      "id": "github-com-mikera-magic",
+      "name": "Magic",
+      "category": "C",
+      "host": "JVM",
+      "url": "https://github.com/mikera/magic",
+      "notes": "Independent experimental typed Lisp influenced by Clojure.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/mikera/magic/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "d4039d761b141a5548ce8adc638dca8dccc2d3fb63e28e9aacb554e3bbf6f9b9"
+        }
+      ]
+    },
+    {
+      "id": "github-com-kanaka-mal",
+      "name": "mal",
+      "category": "C",
+      "host": "Many hosts",
+      "url": "https://github.com/kanaka/mal",
+      "notes": "Educational Make-a-Lisp language; count the language once, track its many implementations separately.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/kanaka/mal/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "154b3240538ef9e297787697fa083e96b41a966a1dd73e01da4c1bbdca1c1878"
+        }
+      ]
+    },
+    {
+      "id": "github-com-dubek-malc",
+      "name": "malc",
+      "category": "C",
+      "host": "LLVM / native / MAL",
+      "url": "https://github.com/dubek/malc",
+      "notes": "Compiler implementation of MAL; not another Clojure dialect.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/dubek/malc/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "554deef932066229c846cd02d99218ffc875007cc0af2fe8cfe6d54f93c5ca0b"
+        }
+      ]
+    },
+    {
+      "id": "github-com-kanaka-minimal",
+      "name": "miniMAL",
+      "category": "C",
+      "host": "JavaScript / Python / CLJS",
+      "url": "https://github.com/kanaka/miniMAL",
+      "notes": "Independent small Lisp derived from MAL with different syntax.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/kanaka/miniMAL/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "95c0dda6b2d68ba0d301a5294d912c2de7da3ab0d21b4f3d864e8367642ecd7b"
+        }
+      ]
+    },
+    {
+      "id": "github-com-phel-lang-phel-lang",
+      "name": "Phel",
+      "category": "C",
+      "host": "PHP",
+      "url": "https://github.com/phel-lang/phel-lang",
+      "notes": "Closely related language commonly included in dialect lists; own language and PHP compiler.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/phel-lang/phel-lang/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "cec66d64bf72a1082782c16e97b82774e3f2d2b221462896d8261952c0d44e47"
+        }
+      ]
+    },
+    {
+      "id": "github-com-piglet-lang-piglet",
+      "name": "Piglet",
+      "category": "C",
+      "host": "JavaScript ES6",
+      "url": "https://github.com/piglet-lang/piglet",
+      "notes": "Piglet explicitly says it is a different language, not a Clojure implementation.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/piglet-lang/piglet/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "1a3cb7d71d2a90a66e20752e165d9bc65cc4c6f051628e95c4d9b0cb8dd28e29"
+        }
+      ]
+    },
+    {
+      "id": "github-com-pixie-lang-pixie",
+      "name": "Pixie",
+      "category": "C",
+      "host": "RPython / native JIT",
+      "url": "https://github.com/pixie-lang/pixie",
+      "notes": "Clojure-inspired language with its own runtime and standard library.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/pixie-lang/pixie/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "792c9ddeaee9d68b88d4a0480b881b99d5ab583154b0a947cffb2920d7f49d43"
+        }
+      ]
+    },
+    {
+      "id": "github-com-mrsekut-purisp",
+      "name": "Purisp",
+      "category": "C",
+      "host": "PureScript / JavaScript",
+      "url": "https://github.com/mrsekut/purisp",
+      "notes": "Small Lisp project; README documents REPL build, lineage less fully documented.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/mrsekut/purisp/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "91c588ac9159ea08c68661f0661e3087e913c86528814125a152685006c60281"
+        }
+      ]
+    },
+    {
+      "id": "github-com-artagnon-rhine-ml",
+      "name": "Rhine",
+      "category": "C",
+      "host": "OCaml / LLVM",
+      "url": "https://github.com/artagnon/rhine-ml",
+      "notes": "Independent Clojure-inspired Lisp compiler.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/artagnon/rhine-ml/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "9abd3963e8812b77dbd3cfc8c0d39693d983f401e162c93ff7f0c6c99329798b"
+        }
+      ]
+    },
+    {
+      "id": "github-com-shybyte-risp",
+      "name": "Risp",
+      "category": "C",
+      "host": "Rust",
+      "url": "https://github.com/shybyte/risp",
+      "notes": "Small configuration Lisp; author describes it as an approximate Clojure subset.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/shybyte/risp/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "fd6631668d7da274e2fd4cfd40d6faa9e66d2e6ef194e118807e1a8e214e1974"
+        }
+      ]
+    },
+    {
+      "id": "github-com-daveyarwood-rubylisp",
+      "name": "RubyLisp",
+      "category": "C",
+      "host": "Ruby",
+      "url": "https://github.com/daveyarwood/rubylisp",
+      "notes": "Independent Lisp exposing Ruby's facilities.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/daveyarwood/rubylisp/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "dffc0ee878ba0e7886fd55f98eeaa52a36e55cdfa91a922375a2f83cc0384a52"
+        }
+      ]
+    },
+    {
+      "id": "github-com-rusjure-rusjure",
+      "name": "Rusjure",
+      "category": "C",
+      "host": "Rust / LLVM",
+      "url": "https://github.com/rusjure/rusjure",
+      "notes": "Independent compiler and language highly inspired by Clojure.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/rusjure/rusjure/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "854e18e8faa9226de5bf933a18d919e60b0aab6c60fbe08b37aa02e873f51d84"
+        }
+      ]
+    },
+    {
+      "id": "github-com-sheaf-lang-sheaf",
+      "name": "Sheaf",
+      "category": "C",
+      "host": "Rust / StableHLO / IREE",
+      "url": "https://github.com/sheaf-lang/sheaf",
+      "notes": "Independent Clojure-inspired tensor and machine-learning language.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/sheaf-lang/sheaf/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "c85379e5cc09f7533fa1b8245dbdd20976c0d95ae43eff9aa84809022b8cdbcc"
+        }
+      ]
+    },
+    {
+      "id": "github-com-bailesofhey-slisp",
+      "name": "SLisp",
+      "category": "C",
+      "host": "JavaScript",
+      "url": "https://github.com/bailesofhey/slisp",
+      "notes": "Independent experimental Lisp drawing on Clojure and other languages.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/bailesofhey/slisp/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "38f00621aa5c0fcbe9955d9ddee06455545c82b99a3019f3a3eb870b44476f7e"
+        }
+      ]
+    },
+    {
+      "id": "github-com-toccata-lang-toccata",
+      "name": "Toccata",
+      "category": "C",
+      "host": "C / Clang",
+      "url": "https://github.com/Toccata-Lang/toccata",
+      "notes": "Independent Clojure-inspired Lisp compiling to native executables.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/Toccata-Lang/toccata/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "cbfbc06cadaac10ea3ae88aa0f038944f5ed771c91621c9cb60b103d4a44887f"
+        }
+      ]
+    },
+    {
+      "id": "github-com-jlangch-venice",
+      "name": "Venice",
+      "category": "C",
+      "host": "JVM / Java",
+      "url": "https://github.com/jlangch/venice",
+      "notes": "Independent Clojure-inspired sandboxed scripting Lisp.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/jlangch/venice/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "7a821b3fb34500b0b3a707ca4dd200ba7203620b5fb18ee2fb272204f8999cb4"
+        }
+      ]
+    },
+    {
+      "id": "github-com-wisp-lang-wisp",
+      "name": "wisp",
+      "category": "C",
+      "host": "JavaScript",
+      "url": "https://github.com/wisp-lang/wisp",
+      "notes": "Clojure-like Lisp with native JavaScript values and compilation.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/wisp-lang/wisp/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "bc807fbebf86376ac738f2fc412f8e8b3b7b4e2ce6e3ad3557121bb4783c5a77"
+        }
+      ]
+    },
+    {
+      "id": "github-com-glycerine-zygomys",
+      "name": "zygomys",
+      "category": "C",
+      "host": "Go",
+      "url": "https://github.com/glycerine/zygomys",
+      "notes": "Zygo / Zygomys: independent embeddable Lisp borrowing Clojure syntax.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/glycerine/zygomys/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "d02ac060a9b665d06fcad0d4469078d7b42685d0ca41a11b68735ba6e5c52064"
+        }
+      ]
+    },
+    {
+      "id": "github-com-swadey-lispsyntax-jl",
+      "name": "LispSyntax.jl",
+      "category": "D",
+      "host": "Julia",
+      "url": "https://github.com/swadey/LispSyntax.jl",
+      "notes": "Syntax translator to Julia AST; README explicitly says it is not a Clojure implementation.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/swadey/LispSyntax.jl/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "b20e99cdaedf1f0d2198527a326d4bc51eaebc96e7922c66cacf9891457a0c74"
+        }
+      ]
+    },
+    {
+      "id": "github-com-nathell-lithium",
+      "name": "Lithium",
+      "category": "D",
+      "host": "x86",
+      "url": "https://github.com/nathell/lithium",
+      "notes": "Assembler written in Clojure plus toy Lisp compiler; not evidence of Clojure implementation.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/nathell/lithium/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "446a0b5adb68e0f6182d73f8d18013052a286a2cd14d64fece65d22c184a9203"
+        }
+      ]
+    },
+    {
+      "id": "github-com-dundalek-liz",
+      "name": "Liz",
+      "category": "D",
+      "host": "Zig",
+      "url": "https://github.com/dundalek/liz",
+      "notes": "S-expression frontend; author explicitly says it lacks features needed to be a Clojure dialect.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/dundalek/liz/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "94373b19be7d6606aac231a5bcdcd8b652135a3947c13f2faf49537d44d08bf2"
+        }
+      ]
+    },
+    {
+      "id": "github-com-arohner-scriptjure",
+      "name": "Scriptjure",
+      "category": "D",
+      "host": "JavaScript generation from JVM Clojure",
+      "url": "https://github.com/arohner/scriptjure",
+      "notes": "Library generating JavaScript strings from forms; not a standalone Clojure runtime.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/arohner/scriptjure/HEAD/README.markdown",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "5f696984b1956bb73a8b147c007c36217f4c1358ffa72f94f7b9f85d7454f50b"
+        }
+      ]
+    },
+    {
+      "id": "github-com-halgari-clarp",
+      "name": "Clarp",
+      "category": "E",
+      "host": ".NET / C#",
+      "url": "https://github.com/halgari/clarp",
+      "notes": "Runtime code and tests exist; no documented evaluator or hello-world entry point established.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://github.com/halgari/clarp",
+          "kind": "project-page",
+          "accessed": "2026-09-11"
+        },
+        {
+          "url": "https://api.github.com/repos/halgari/clarp",
+          "kind": "repository-metadata",
+          "accessed": "2026-09-11"
+        }
+      ],
+      "repository_metadata": {
+        "created_at": "2025-02-21T04:25:21Z",
+        "pushed_at": "2025-03-31T21:57:25Z",
+        "archived": false,
+        "fork": false,
+        "default_branch": "main"
+      }
+    },
+    {
+      "id": "github-com-clojure-metal-clojure-metal",
+      "name": "clojure-metal",
+      "category": "E",
+      "host": "Native (intended)",
+      "url": "https://github.com/clojure-metal/clojure-metal",
+      "notes": "README remains a generated placeholder; no runnable implementation established.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/clojure-metal/clojure-metal/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "296fe11dc796be24655608c4191d77a1e445d292eb289f74b5421911786d5ba3"
+        }
+      ]
+    },
+    {
+      "id": "historical-chris-houser-clojurescript",
+      "name": "ClojureScript (Chris Houser early attempt)",
+      "category": "E",
+      "host": "JavaScript",
+      "url": "https://clojure.org/news/2011/07/22/introducing-clojurescript",
+      "notes": "Official 2011 announcement acknowledges an earlier, distinct JavaScript implementation; source/build not located in this review.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://clojure.org/news/2011/07/22/introducing-clojurescript",
+          "kind": "official-historical-account",
+          "accessed": "2026-09-11"
+        }
+      ]
+    },
+    {
+      "id": "github-com-sventech-clojureswift",
+      "name": "ClojureSwift",
+      "category": "E",
+      "host": "Swift / LLVM (intended)",
+      "url": "https://github.com/sventech/ClojureSwift",
+      "notes": "Repository contains proposal/literature review and license; no implementation established.",
+      "hello_world_status": "not-tested",
+      "evidence": [
+        {
+          "url": "https://raw.githubusercontent.com/sventech/ClojureSwift/HEAD/README.md",
+          "kind": "project-documentation",
+          "accessed": "2026-09-11",
+          "sha256": "1fa9ad019f27113f4f7309c64ccab8be80872ab51e0324218f1780c8237f9c3e"
+        }
+      ]
+    }
+  ]
+}

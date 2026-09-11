@@ -1,0 +1,103 @@
+# Rustly Clojure on a bare-metal Raspberry Pi 4
+
+[hello.clj](hello.clj) supplies the greeting, response after each serial input
+line, and LED on/off actions. Rustly transpiles those forms into Rust; Rust
+compiles the generated functions and our board driver into an AArch64 SD-boot
+image. There is no JVM, interpreter, OS, allocator, or Rust `std` on the board.
+
+**The original Rustly hello passed on the physical Pi 4. The Morse extension
+passes QEMU and timing tests; physical Pi 4 boot and the `clj` serial command now pass. Visual LED verification remains pending.**
+[Physical Morse capture](evidence/physical-morse-serial.log) ·
+[Physical hello capture](evidence/physical-hello-serial.log) ·
+[Generated Rust](evidence/generated-app.rs) · [Morse QEMU transcript](evidence/qemu-transcript.txt).
+The current 3904-byte image boots at `0x80000` with no unresolved symbols.
+This firmware cannot run on a Pi 1.
+
+## Serial Morse
+
+Send `clj` followed by Enter to repeat **`-.-. .-.. .---`** on the green ACT LED.
+A dot lasts 200 ms, a dash 600 ms. Gaps are one unit between elements, three
+between letters, and seven between words or repetitions. Letters are case
+insensitive; A-Z, 0-9, and spaces are supported, up to 64 input bytes.
+
+A new line replaces the message while blinking. An empty or all-space line
+stops it and turns the LED off. Invalid characters or an overlong line leave
+the previous message unchanged. Backspace edits the input before submission;
+after overflow, submit the line to discard it and start again. CRLF counts as
+one submission. Before the first message the LED stays off after its startup
+flashes.
+
+The Morse alphabet and status messages are authored in `hello.clj`. The
+allocation-free Rust sequencer polls the timer and UART without sleeping through
+pulses, so input remains responsive. Timing tests cover `clj` and repetition,
+word gaps, replacement, stopping, invalid input, capacity, and counter wrap.
+QEMU checks command acknowledgement, replacement, CRLF, Unicode rejection,
+overlong input, backspace, and stop. Physical pulse timing is not yet verified.
+
+## Build and run
+
+Install the Clojure CLI, Java, and Docker. Rust and QEMU are supplied by the same
+Docker toolchain as the pure Rust baseline (Rust 1.98.0, target
+`aarch64-unknown-none-softfloat`). Maven dependencies are pinned in `deps.edn`.
+
+```sh
+cd examples/rustly-rpi
+./build.sh
+./test.sh
+./stage-sd.sh
+```
+
+`build.sh` regenerates `build/app.rs` from `hello.clj` every time, compiles it,
+and writes `build/kernel8.img`. `stage-sd.sh` assembles a directory of firmware
+files; it does not write or format an SD card. Run `build.sh` after source edits
+before staging. The downloaded firmware is distinct from the existing card's
+firmware used for the verified pure Rust baseline.
+
+Use the [baseline wiring](../rust-rpi/#wiring-the-pi-4): ground on physical pin 6,
+adapter RX on pin 8, adapter TX on pin 10, and separate USB-C power.
+Start the automatic hardware check before powering on the Pi:
+
+```sh
+./check-hardware.sh
+# Or use an interactive serial console:
+./serial.sh
+```
+
+The check waits for the Rustly-specific banner and prompt before sending test
+input; it will not mistake the pure Rust baseline for this demo. It saves the
+capture in `build/physical-serial.log`.
+
+The prepared configuration for the existing backed-up card selects
+`rustly-pi4.img`, retains the Pi 4 DTB, and enables firmware serial diagnostics.
+The original 893-byte hello image and configuration were installed on card
+`20AC-1830`, readback-verified, and passed physical serial verification. The
+new 3904-byte Morse image is now installed and byte-for-byte readback-verified.
+The previous Rustly hello is preserved as `rustly-hello.img`.
+Morse kernel SHA256: `41a0c946a75f279effe7b60f5d43fca84f84064d95435b9aefce631945040771`.
+Copy
+`config-pure-rust.txt` back to `config.txt` to restore the working Rust baseline,
+or `config-before-rust.txt` to restore the original Linux boot selection.
+
+Original hello kernel SHA256:
+`cb7253a7604b1ccfa7c0ca46fdec64f05721fe7dc3b8568a863bab521261068c`.
+Installed configuration SHA256:
+`ac811b00ff028ff8efde9e817853ed95719196f58da4d781c7fdbdc2084380e1`.
+
+## Language and hardware boundary
+
+[Rustly](https://github.com/timothypratley/rustly) is an alpha Clojure-to-Rust
+transpiler supporting a small subset, not full Clojure. It uses named `(fn ...)`
+forms here. The parser, translator, and emitter are vendored unchanged at commit
+`e2333ee3873a33cb9e7f4a9d3e4ee849cae8cd09`; provenance and license are in
+[vendor/rustly](vendor/rustly/UPSTREAM.md).
+
+Our small `transpile.clj` calls those upstream components directly. It omits the
+upstream CLI wrapper's unconditional `rpds` collection import because this
+program uses no collections. No generated Rust is manually rewritten.
+
+The Clojure source controls messages, the Morse alphabet, and LED actions. Rust supplies startup,
+GPIO/PL011 register access, Morse sequencing, input validation/polling, echo, and dispatch to generated
+functions. Strings in this demo's Clojure source are ASCII because Rustly emits
+Rust byte-string literals; the UART driver nevertheless echoes arbitrary UTF-8
+input. Collections, closures, dynamic evaluation, and general Clojure semantics
+are outside this example's scope.

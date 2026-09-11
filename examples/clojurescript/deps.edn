@@ -1,0 +1,6 @@
+{:paths ["src"]
+ :deps {org.clojure/clojure {:mvn/version "1.12.6"}
+        org.clojure/clojurescript {:mvn/version "1.12.145"}
+        no.cjohansen/replicant {:mvn/version "2026.07.1"}}
+ :aliases {:build {:main-opts ["-m" "cljs.main" "-co" "build.edn" "-c" "hello.core"]}
+           :dev {:main-opts ["-m" "cljs.main" "-co" "dev.edn" "-w" "src" "-c" "hello.core"]}}}

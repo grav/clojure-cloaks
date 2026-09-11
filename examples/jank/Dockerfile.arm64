@@ -1,0 +1,30 @@
+FROM ubuntu:24.04@sha256:224a1869083a311ef3f13648a154ba79832fbef6364d31493642ca03082da254 AS dependencies
+ARG LLVM_PACKAGE_VERSION=1:23.1.2~++20260910044232+069ef0e7cb36-1~exp1~20260910044242.70
+ENV DEBIAN_FRONTEND=noninteractive LANG=C.UTF-8 LC_ALL=C.UTF-8
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      ca-certificates curl gnupg git cmake ninja-build build-essential g++-14 \
+      libssl-dev libdouble-conversion-dev libboost-all-dev libffi-dev \
+      libzstd-dev libxml2-dev zlib1g-dev pkg-config libsdl2-dev xvfb xauth python3 file && \
+    curl -fsSL https://apt.llvm.org/llvm-snapshot.gpg.key | gpg --dearmor -o /usr/share/keyrings/llvm.gpg && \
+    echo 'deb [signed-by=/usr/share/keyrings/llvm.gpg] https://apt.llvm.org/noble/ llvm-toolchain-noble-23 main' > /etc/apt/sources.list.d/llvm.list && \
+    apt-get update && apt-get install -y --no-install-recommends \
+      clang-23="$LLVM_PACKAGE_VERSION" llvm-23-dev="$LLVM_PACKAGE_VERSION" \
+      libclang-23-dev="$LLVM_PACKAGE_VERSION" libclang-cpp23-dev="$LLVM_PACKAGE_VERSION" \
+      libclang-rt-23-dev="$LLVM_PACKAGE_VERSION" lld-23="$LLVM_PACKAGE_VERSION" && \
+    rm -rf /var/lib/apt/lists/*
+ENV CC=clang-23 CXX=clang++-23
+
+FROM dependencies AS build
+ARG JANK_COMMIT=9bea4140812e995bb868eb3313dc5b65aa075768
+RUN git init /opt/jank && cd /opt/jank && \
+    git remote add origin https://github.com/jank-lang/jank && \
+    git fetch --depth 1 origin "$JANK_COMMIT" && git checkout --detach FETCH_HEAD && \
+    git submodule update --init --recursive --depth 1
+COPY linux-arm64.patch /tmp/linux-arm64.patch
+RUN git -C /opt/jank apply /tmp/linux-arm64.patch
+WORKDIR /opt/jank/compiler+runtime
+RUN cmake -S . -B build -GNinja -DCMAKE_BUILD_TYPE=Release \
+      -Dllvm_dir=/usr/lib/llvm-23 -Dclang_dir=/usr/lib/llvm-23 \
+      -Djank_test=OFF && cmake --build build -j2
+ENV PATH="/opt/jank/compiler+runtime/build:${PATH}"
+WORKDIR /app

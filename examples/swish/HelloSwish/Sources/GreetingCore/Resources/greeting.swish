@@ -1,0 +1,2 @@
+(defn hello [name]
+  (str "Hello, " (if (empty? name) "world" name) "!"))

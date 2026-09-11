@@ -1,0 +1,66 @@
+diff --git a/compiler+runtime/third-party/cppinterop/lib/CppInterOp/DynamicLibraryManagerSymbol.cpp b/compiler+runtime/third-party/cppinterop/lib/CppInterOp/DynamicLibraryManagerSymbol.cpp
+--- a/compiler+runtime/third-party/cppinterop/lib/CppInterOp/DynamicLibraryManagerSymbol.cpp
++++ b/compiler+runtime/third-party/cppinterop/lib/CppInterOp/DynamicLibraryManagerSymbol.cpp
+@@ -32,6 +32,7 @@
+ #include "llvm/Support/WithColor.h"
+ 
+ #include <algorithm>
++#include <cmath>
+ #include <list>
+ #include <string>
+ #include <unordered_set>
+diff --git a/compiler+runtime/third-party/cpptrace/src/symbols/dwarf/dwarf_resolver.cpp b/compiler+runtime/third-party/cpptrace/src/symbols/dwarf/dwarf_resolver.cpp
+index e896746..a9f483f 100644
+--- a/compiler+runtime/third-party/cpptrace/src/symbols/dwarf/dwarf_resolver.cpp
++++ b/compiler+runtime/third-party/cpptrace/src/symbols/dwarf/dwarf_resolver.cpp
+@@ -157,6 +157,36 @@ namespace libdwarf {
+             }
+         }
+ 
++        int apply_aarch64_relocation(
++            std::vector<char>& target,
++            std::size_t offset,
++            unsigned type,
++            Dwarf_Addr symbol,
++            Dwarf_Signed addend,
++            Dwarf_Addr place,
++            int* error
++        ) {
++            switch(type) {
++                case R_AARCH64_NONE:
++                    return DW_DLV_OK;
++                case R_AARCH64_ABS64:
++                    return apply_relocation_value<std::uint64_t>(target, offset, symbol + addend, error);
++                case R_AARCH64_ABS32:
++                    return apply_relocation_value<std::uint32_t>(target, offset, symbol + addend, error);
++                case R_AARCH64_ABS16:
++                    return apply_relocation_value<std::uint16_t>(target, offset, symbol + addend, error);
++                case R_AARCH64_PREL64:
++                    return apply_relocation_value<std::uint64_t>(target, offset, symbol + addend - place, error);
++                case R_AARCH64_PREL32:
++                    return apply_relocation_value<std::uint32_t>(target, offset, symbol + addend - place, error);
++                case R_AARCH64_PREL16:
++                    return apply_relocation_value<std::uint16_t>(target, offset, symbol + addend - place, error);
++                default:
++                    *error = 0;
++                    return DW_DLV_ERROR;
++            }
++        }
++
+         template<typename Rela, typename Sym>
+         int relocate_rela_section_entries(
+             std::size_t reloc_section_index,
+@@ -196,6 +226,13 @@ namespace libdwarf {
+                     if(ret != DW_DLV_OK) {
+                         return ret;
+                     }
++                } else if(object_data.machine == EM_AARCH64) {
++                    auto ret = apply_aarch64_relocation(
++                        target, reloc_offset, type, symbol, addend, place, error
++                    );
++                    if(ret != DW_DLV_OK) {
++                        return ret;
++                    }
+                 } else {
+                     *error = 0;
+                     return DW_DLV_ERROR;

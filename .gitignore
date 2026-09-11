@@ -1,0 +1,22 @@
+.cache/
+**/node_modules/
+**/.shadow-cljs/
+**/.cpcache/
+**/.build/
+**/_build/
+**/target/
+**/dist/
+**/public/js/
+**/bin/
+.DS_Store
+
+**/test-results/
+**/playwright-report/
+**/hello.bmp
+**/obj/
+
+# Local build and interpreter caches
+**/build/
+**/__pycache__/
+*.pyc
+**/.jolt/

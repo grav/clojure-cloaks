@@ -1,0 +1,7 @@
+[pi4]
+arm_64bit=1
+kernel=kernel8.img
+enable_uart=1
+init_uart_clock=48000000
+# The kernel directly assigns GPIO14/15 to PL011; no Linux or DT overlay needed.
+# Keep the default Pi 4 device tree for the firmware ARM-stub setup.

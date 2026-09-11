@@ -1,0 +1,4 @@
+{:paths ["src"]
+ :deps {org.clojure/clojure {:mvn/version "1.12.6"}}
+ :aliases {:run {:main-opts ["-m" "hello.server"]}
+           :test {:extra-paths ["test"] :main-opts ["-m" "hello.server-test"]}}}
