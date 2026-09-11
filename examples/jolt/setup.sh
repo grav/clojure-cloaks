@@ -19,3 +19,14 @@ if [[ ! -d "$jolt_src/.git" ]]; then
   git -C "$jolt_src" submodule update --init --recursive --depth 1
 fi
 JOLT_CHEZ="$chez_prefix/bin/scheme" "$jolt_src/bin/jolt" -e '(println "Native Jolt ready")'
+
+# Put Chez where the upstream launcher already looks for local installations.
+mkdir -p "$jolt_src/.cache/local"
+chez_link="$jolt_src/.cache/local/chezscheme-10.4.1"
+if [[ ! -e "$chez_link" && ! -L "$chez_link" ]]; then ln -s "$chez_prefix" "$chez_link"; fi
+
+# Expose Jolt's upstream launcher directly, without a demo wrapper.
+mkdir -p "$HOME/.local/bin"
+link="$HOME/.local/bin/jolt"
+if [[ ! -e "$link" && ! -L "$link" ]]; then ln -s "$jolt_src/bin/jolt" "$link"; fi
+echo 'Add ~/.local/bin to PATH, then run: jolt fib.clj'

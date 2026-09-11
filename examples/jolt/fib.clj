@@ -1,18 +1,13 @@
-(ns fib)
-
-;; Ordinary function call in tail position: no loop, recur, or trampoline.
-(defn fib-step [n a b]
+;; An ordinary tail call: no loop, recur, or trampoline.
+(defn fib [n a b]
   (if (zero? n)
     a
-    (fib-step (dec n) b (+' a b))))
+    (fib (dec n) b (+' a b))))
 
-(defn tail-fib [n]
-  (fib-step n 0N 1N))
-
-;; Neither recursive call is a tail call: addition still needs both results.
-;; Keep n small; the amount of work grows exponentially.
-(defn naive-fib [n]
-  (if (< n 2)
-    n
-    (+' (naive-fib (- n 1))
-        (naive-fib (- n 2)))))
+(let [n (if-let [arg (first *command-line-args*)] (parse-long arg) 20000)]
+  (when-not (and n (<= 0 n 100000))
+    (throw (ex-info "Use an integer from 0 to 100000" {})))
+  (println "Computing Fibonacci(" n ") with ordinary tail calls")
+  (let [result (fib n 0N 1N)]
+    (println "digits:" (count (str result)))
+    (println "mod-1000000007:" (mod result 1000000007))))

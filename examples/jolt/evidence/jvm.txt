@@ -1,1 +1,3 @@
-JVM Clojure: StackOverflowError at n=20000 with -Xss256k (expected).
+Computing Fibonacci( 20000 ) with ordinary tail calls
+Execution error (StackOverflowError) at java.math.BigInteger/add (BigInteger.java:1390).
+null

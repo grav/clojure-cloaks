@@ -14,21 +14,19 @@ def pair(n):
 
 Path('evidence').mkdir(exist_ok=True)
 for n in (0, 1, 2, 20, 20000):
-    result = subprocess.run(['./run.sh', str(n)], text=True, capture_output=True, timeout=180)
+    result = subprocess.run(['jolt', 'fib.clj', str(n)], text=True, capture_output=True, timeout=180)
     assert result.returncode == 0, result.stderr + result.stdout
     values = dict(line.split(': ', 1) for line in result.stdout.splitlines() if ': ' in line)
     expected = pair(n)[0]
     digits = str(expected)
-    assert values['Naive Fibonacci(20)'] == '6765', values
-    assert values['Tail-call Fibonacci(20)'] == '6765', values
     assert values['digits'] == str(len(digits)), values
-    assert values['first'] == digits[:30], values
-    assert values['last'] == digits[-30:], values
     assert values['mod-1000000007'] == str(expected % 1000000007), values
     if n == 20000:
         Path('evidence/jolt.txt').write_text(result.stdout)
     print(f'PASS: Jolt Fibonacci({n}) matches independent fast-doubling reference')
-result = subprocess.run(['clojure', '-J-Xss256k', '-M', 'compare-jvm.clj'], text=True, capture_output=True, timeout=60)
-assert result.returncode == 0 and 'StackOverflowError' in result.stdout, result.stderr + result.stdout
-Path('evidence/jvm.txt').write_text(result.stdout)
-print(result.stdout.strip())
+result = subprocess.run(['clojure', '-J-Xss256k', '-M', 'fib.clj'], text=True, capture_output=True, timeout=60)
+assert result.returncode != 0 and 'StackOverflowError' in result.stderr, result.stderr + result.stdout
+# The temporary full-report path is machine-specific.
+error = result.stderr.split("Full report at:")[0].rstrip()
+Path('evidence/jvm.txt').write_text(result.stdout + error + '\n')
+print('PASS: JVM exits with StackOverflowError on the same fib.clj')
