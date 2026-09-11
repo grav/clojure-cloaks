@@ -1,32 +1,23 @@
 import assert from 'node:assert/strict';
-import {spawn} from 'node:child_process';
+import {pathToFileURL} from 'node:url';
+import {resolve} from 'node:path';
 import {chromium} from 'playwright';
-const server = spawn('python3', ['-m','http.server','8075','--bind','127.0.0.1'], {stdio:'ignore'});
-let browser;
+
+const browser = await chromium.launch({headless:true,
+  ...(process.env.CHROMIUM_PATH ? {executablePath:process.env.CHROMIUM_PATH} : {})});
 try {
-  for (let n=0; n<50; n++) {
-    try { if ((await fetch('http://127.0.0.1:8075')).ok) break; } catch {}
-    await new Promise(r=>setTimeout(r,100));
+  const page = await browser.newPage({viewport:{width:640,height:240}});
+  const errors = [];
+  page.on('pageerror', e => errors.push(e.message));
+  await page.goto(pathToFileURL(resolve('index.html')).href);
+  assert.equal(await page.getByRole('status').textContent(), 'Hello, world!');
+  for (let n=1; n<=3; n++) {
+    await page.getByRole('button', {name:'Say hello'}).click();
+    assert.equal(await page.getByRole('status').textContent(), `Hello from Scittle! Click #${n}`);
   }
-  browser = await chromium.launch({headless:true, ...(process.env.CHROMIUM_PATH ? {executablePath:process.env.CHROMIUM_PATH} : {})});
-  const page = await browser.newPage({viewport:{width:1000,height:760}});
-  const errors=[];
-  page.on('pageerror', e=>errors.push(e.message));
-  await page.goto('http://127.0.0.1:8075');
-  await page.getByRole('status').filter({hasText:'Hello, world!'}).waitFor();
-  for (const [input, expected] of [['  Björk 🌍  ','Hello, Björk 🌍!'], ['   ','Hello, world!'], ['<img src=x onerror=alert(1)>','Hello, <img src=x onerror=alert(1)>!']]) {
-    await page.getByLabel('Your name').fill(input);
-    await page.getByRole('button',{name:'Say hello'}).click();
-    assert.equal(await page.getByRole('status').textContent(),expected);
-  }
-  assert.equal(await page.locator('#greeting img').count(),0);
-  await page.getByLabel('Your name').fill('Clojure');
-  await page.getByLabel('Your name').press('Enter');
-  assert.equal(await page.getByRole('status').textContent(),'Hello, Clojure!');
+  assert.deepEqual(errors, []);
   await page.screenshot({path:'screenshot.png'});
-  assert.deepEqual(errors,[]);
-  console.log('PASS: Scittle loads, default/Unicode/blank/literal HTML greetings, button and Enter submission; no browser errors.');
+  console.log('PASS: file:// loading and three clicks update the greeting through Scittle.');
 } finally {
-  await browser?.close();
-  server.kill();
+  await browser.close();
 }

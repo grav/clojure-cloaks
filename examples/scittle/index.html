@@ -2,59 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Hello, Scittle</title>
   <script src="vendor/scittle.js"></script>
-  <style>
-    :root { font-family: system-ui, sans-serif; color: #243329; background: #f4f6ef; }
-    body { margin: 0; min-height: 100vh; display: grid; place-items: center; }
-    main { width: min(32rem, calc(100% - 4rem)); padding: 2rem; }
-    .eyebrow { text-transform: uppercase; letter-spacing: .16em; font-size: .75rem; color: #466b48; }
-    h1 { font-size: clamp(2rem, 7vw, 3.5rem); letter-spacing: -.05em; margin: .4em 0; }
-    p { line-height: 1.6; }
-    form { margin: 2rem 0; }
-    label { display: block; margin-bottom: .5rem; font-weight: 600; }
-    .fields { display: flex; flex-wrap: wrap; gap: .6rem; }
-    input, button { font: inherit; padding: .8rem 1rem; border-radius: .5rem; }
-    input { flex: 1; min-width: 8rem; border: 1px solid #9bab95; background: white; }
-    button { border: 0; background: #285e37; color: white; cursor: pointer; }
-    :focus-visible { outline: 3px solid #b28129; outline-offset: 3px; }
-    #greeting { font-size: 1.5rem; overflow-wrap: anywhere; }
-    footer { border-top: 1px solid #cbd5c4; padding-top: 1rem; color: #52634f; font-size: .9rem; }
-  </style>
 </head>
 <body>
-  <main>
-    <p class="eyebrow">A little Clojure in your browser</p>
-    <h1>Hello, Scittle.</h1>
-    <p>A name, a button, a greeting. Clojure runs directly in this page.</p>
-    <form id="hello-form">
-      <label for="name">Your name</label>
-      <div class="fields">
-        <input id="name" name="name" placeholder="World" autocomplete="given-name" maxlength="120">
-        <button type="submit">Say hello</button>
-      </div>
-    </form>
-    <p id="greeting" role="status" aria-live="polite">Loading Scittle…</p>
-    <footer>No compilation step. Just HTML and a Clojure script tag.</footer>
-    <noscript>Please enable JavaScript to run this Scittle example.</noscript>
-  </main>
+  <p id="greeting" role="status">Hello, world!</p>
+  <button id="hello">Say hello</button>
+
   <script type="application/x-scittle">
-    (require '[clojure.string :as str])
+    (def clicks (atom 0))
 
-    (defn greet! []
-      (let [input (.getElementById js/document "name")
-            name (str/trim (.-value input))
-            greeting (.getElementById js/document "greeting")]
-        (set! (.-textContent greeting)
-              (str "Hello, " (if (str/blank? name) "world" name) "!"))))
-
-    (.addEventListener (.getElementById js/document "hello-form")
-                      "submit"
-                      (fn [event]
-                        (.preventDefault event)
-                        (greet!)))
-    (greet!)
+    (.addEventListener (.getElementById js/document "hello") "click"
+      (fn [_]
+        (set! (.-textContent (.getElementById js/document "greeting"))
+              (str "Hello from Scittle! Click #" (swap! clicks inc)))))
   </script>
 </body>
 </html>

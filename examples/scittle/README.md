@@ -1,40 +1,23 @@
 # Hello, Scittle
 
-A small browser greeting written directly in an `application/x-scittle` script
-tag in [index.html](index.html). No Clojure compiler, React, or application build
-step is needed. [Screenshot](screenshot.png).
+Open [index.html](index.html) directly in your browser. Click **Say hello**:
+inline Clojure updates the greeting and increments an atom. No CSS, build step,
+or server. Keep `vendor/` beside the HTML file.
 
-```sh
-cd examples/scittle
-python3 -m http.server 8074 --bind 0.0.0.0
-```
+[Source](index.html) · [Screenshot](screenshot.png) · [Scittle documentation](https://babashka.org/scittle/)
 
-Open http://localhost:8074 (or the VM's address on port 8074). Enter a name and
-click **Say hello** or press Enter. Blank names default to “world”; input is
-rendered as text, including Unicode and HTML-like strings.
+Scittle **0.8.33** is bundled from the
+[official release URL](https://cdn.jsdelivr.net/npm/scittle@0.8.33/dist/scittle.js),
+with its [license](vendor/LICENSE). SHA256:
+`e04a33ff90947057772f42e683314e9c9f8671ebb922398208b4ad1c76991373`.
 
-Scittle 0.8.33 is bundled in `vendor/`, so the running page makes no external
-requests. Runtime source:
-https://cdn.jsdelivr.net/npm/scittle@0.8.33/dist/scittle.js
-
-SHA256: `e04a33ff90947057772f42e683314e9c9f8671ebb922398208b4ad1c76991373`.
-The upstream license is retained in [vendor/LICENSE](vendor/LICENSE).
-See [Scittle's documentation](https://babashka.org/scittle/) and
-[release v0.8.33](https://github.com/babashka/scittle/releases/tag/v0.8.33).
-
-## Verification
-
-Chromium on Linux ARM64 passed initial greeting, Unicode/whitespace/blank input,
-literal HTML rendering, button and Enter submission, with no browser errors.
-The browser test also saves `screenshot.png`.
+Verified in Chromium via `file://`: initial greeting and three successive clicks.
+To repeat the browser check (Node is only needed for testing):
 
 ```sh
 npm ci
 npx playwright install chromium
 npm test
-# Or use an existing Chromium installation:
-CHROMIUM_PATH=/path/to/chromium npm test
 ```
 
-Node and Playwright are only needed for the test. Python's static server is
-sufficient to run the demo.
+Set `CHROMIUM_PATH` to use an existing Chromium executable.
