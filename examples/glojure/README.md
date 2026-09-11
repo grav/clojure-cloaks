@@ -55,6 +55,27 @@ Measured on this Linux ARM64 VM after the local build: Docker reports
 Docker's reported size depends on its image store and is not the unpacked
 filesystem size. Toolchain and architecture can change these measurements.
 
+Go's linker can also omit symbol and debugging information with
+`-ldflags='-s -w'`. This makes the same application smaller, at the cost of
+less information for native debuggers. To try that optional build:
+
+```sh
+CGO_ENABLED=0 GOOS=linux go build -tags glj_aot_runtime -trimpath -ldflags='-s -w' -o bin/hello .
+docker build -t clojure-hello/glojure:stripped .
+wc -c < bin/hello
+docker image inspect clojure-hello/glojure:stripped --format '{{.Size}}'
+```
+
+Measured on this VM with the same Go toolchain:
+
+| Build | Unpacked executable | Docker-reported image size |
+| --- | ---: | ---: |
+| Default | 22.82 MB | 11.36 MB |
+| With `-ldflags='-s -w'` | 15.40 MB | 5.30 MB |
+
+That's **7.42 MB (32.5%) less executable data** just by changing linker options.
+The default build above keeps the debugging information.
+
 Verified on Linux ARM64, 2026-09-11: native build and OCI build; HTTP health check,
 default name, named greeting and Unicode name through the container. No image has been published.
 
