@@ -24,7 +24,7 @@ for n in (0, 1, 2, 20, 20000):
     if n == 20000:
         Path('evidence/jolt.txt').write_text(result.stdout)
     print(f'PASS: Jolt Fibonacci({n}) matches independent fast-doubling reference')
-result = subprocess.run(['clojure', '-J-Xss256k', '-M', 'fib.clj'], text=True, capture_output=True, timeout=60)
+result = subprocess.run(['clojure', '-M', 'fib.clj'], text=True, capture_output=True, timeout=60)
 assert result.returncode != 0 and 'StackOverflowError' in result.stderr, result.stderr + result.stdout
 # The temporary full-report path is machine-specific.
 error = result.stderr.split("Full report at:")[0].rstrip()

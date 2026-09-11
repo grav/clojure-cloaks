@@ -4,7 +4,7 @@ From this directory, with Clojure and Jolt installed:
 
 ```sh
 cat fib.clj
-clj -J-Xss256k -M fib.clj
+clj -M fib.clj
 jolt fib.clj
 ```
 
@@ -19,11 +19,12 @@ mod-1000000007: 988094463
 Both commands execute the exact same [fib.clj](fib.clj), including its entry
 point. There are no demo launchers or separate comparison programs. An optional
 argument changes the input: `jolt fib.clj 20` or
-`clj -J-Xss256k -M fib.clj 20` both finish.
+`clj -M fib.clj 20` both finish.
 
 The recursive call is in tail position. Jolt inherits proper tail calls from
-Chez Scheme; JVM Clojure consumes stack for ordinary recursive calls. The
-256 KiB JVM stack makes the overflow reproducible. There is no `loop`, `recur`
+Chez Scheme; JVM Clojure consumes stack for ordinary recursive calls. With the default JVM stack on this VM, n=20000 overflows in about
+0.55 seconds including JVM startup; the failure depth depends on the JVM
+and its stack settings. There is no `loop`, `recur`
 or trampoline, and arithmetic uses exact integers. TCO bounds stack growth,
 not the space occupied by those integers. This is not a speed benchmark.
 
