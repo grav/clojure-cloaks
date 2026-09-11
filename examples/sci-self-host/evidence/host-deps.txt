@@ -1,0 +1,7 @@
+Loading sci.core
+Loading sci.ctx-store
+Loading sci.impl.callstack
+Loading sci.impl.types
+Loading sci.impl.macros
+BLOCKED: defrecord/deftype currently only support protocol implementations, found: ICustomType
+{:type :sci/error, :file "file:/home/grav/.gitlibs/libs/org.babashka/sci/ebd3462b9e777d4d0b83ad13b81e526707391354/src/sci/impl/callstack.cljc", :line 3, :column 3}
