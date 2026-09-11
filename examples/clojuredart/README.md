@@ -49,6 +49,9 @@ flutter test
 
 ## Web
 
+Run these commands from `examples/clojuredart` (the server resolves `build/web`
+relative to your current directory):
+
 ```sh
 flutter build web --release --no-web-resources-cdn
 python3 -m http.server 8074 --bind 127.0.0.1 --directory build/web
