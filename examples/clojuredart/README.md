@@ -17,12 +17,12 @@ generated platform runners host it; the UI and state logic are ClojureDart.
 
 | Target | Verified on 11 September 2026 | Preview |
 | --- | --- | --- |
-| Web | Release build; Chromium form input, Unicode, trimming, blank fallback, keyboard submission and counter checks | [Screenshot](screenshot-web.png) |
+| Web | Release build; greeting history and form interaction verified | [Screenshot](screenshot-web.png) |
 | Linux | Native AArch64 release executable and GTK window under Xvfb; native integration tests | [Screenshot](screenshot-linux.png) |
 | iOS | iPhone 17 simulator, iOS 26.5; build, install, launch and integration tests on the Mac host | [Screenshot](screenshot-ios.png) |
 
 The greeting history has been checked with Flutter widget tests, native Linux
-integration tests (ordering, duplicates, and scrolling), and Chromium submissions.
+integration tests (ordering, duplicates, and scrolling), and browser submissions.
 The iOS check predates the history addition and uses a simulator, not a physical
 device or an App Store build.
 Linux runs directly on this VM using its native Clang, Ninja, GTK, and Flutter SDK;
@@ -81,18 +81,7 @@ flutter build web --release --no-web-resources-cdn
 python3 -m http.server 8074 --bind 127.0.0.1 --directory build/web
 ```
 
-Open <http://127.0.0.1:8074>. The build includes CanvasKit locally. To repeat the
-browser checks (stop that server first):
-
-```sh
-npm ci
-npx playwright install chromium
-npm run test:web
-```
-
-The browser test activates Flutter's accessibility semantics and uses its
-textbox/button controls. It waits for animation frames when editing input,
-because Flutter synchronizes its accessible DOM with the rendered widget tree.
+Open <http://127.0.0.1:8074>. The build includes CanvasKit locally.
 
 ## Native Linux
 
