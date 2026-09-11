@@ -25,6 +25,7 @@ Updated as each demo is verified. “Working” means the listed execution check
 
 | Demo | Status | Verification |
 | --- | --- | --- |
+| Cream / runtime JVM types | [Native compiler demo](examples/cream/) | Linux ARM64: native Cream creates an interface and implementing class at runtime; default, named, Unicode, quoted-name and eval checks pass. |
 | Planck / runtime compilation | [Eval demo](examples/planck/) | Planck 2.28.0, native Linux and macOS ARM64 / JavaScriptCore: command-line expressions compiled and evaluated; greeting, anonymous function and Unicode output verified. |
 | ClojureScript + Replicant SPA | [Working demo](examples/clojurescript/) | Opens directly via file:// after compilation; Chromium verifies form, hash routes, browser back, clear, blank and HTML-like input; Linux ARM64. |
 | Glojure OCI service | [Working demo](examples/glojure/) | Local Go build; packaging-only scratch OCI image with size inspection instructions; health, named/default and Unicode requests under a non-root container; Linux ARM64. |
@@ -294,7 +295,8 @@ Use a common theme—**“Hello, <name>!”**—with one interaction or observab
 | JO Clojure / nanoclj / mino | Tiny C or C++ app registers a host `display-greeting` function and invokes it from an embedded script. | Embeddable interpreters and host callbacks. | Reload the script while the host loop continues running. |
 | clojurust / cljrs | Native command-line greeter using one documented Rust/foreign-function boundary where available. | Native execution and integration with the implementation's host. | For cljrs, use its GPU path to draw or transform a tiny greeting image. |
 | ClojureWasm | Clojure code calls a tiny Wasm export that returns a greeting count, then prints the greeting and count. | Calling a WebAssembly module from the native Clojure runtime. | Replace the Wasm module with one built from a different language. |
-| Cream / uclj | Native executable that reads a name from stdin and prints a greeting. | Deploying a Clojure runtime as a native executable. | For Cream, explore runtime evaluation through its documented facilities. |
+| Cream | [Create a JVM interface and implementing class at runtime](examples/cream/), then call its greeting method. | Full Clojure runtime compilation through Crema and Ristretto in a native executable. | Load a library after startup. |
+| uclj | Native executable that reads a name from stdin and prints a greeting. | Deploying a Clojure runtime as a native executable. | Explore its supported runtime evaluation facilities. |
 | Lingy | Greeting program using a Perl/CPAN module; call the greeting function from a Perl host. | Perl's library ecosystem and embedded language interop. | Package the greeting as a small Perl module. |
 | YAMLScript | YAML document computes a greeting from a supplied name and emits the resulting data. | Executable configuration and code-as-data. | Load the same document through one host-language binding. |
 
