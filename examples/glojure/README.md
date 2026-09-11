@@ -9,7 +9,7 @@ The command targets Linux on the host architecture; use a matching Docker engine
 
 ```sh
 cd examples/glojure
-CGO_ENABLED=0 GOOS=linux go build -tags glj_aot_runtime -trimpath -ldflags='-s -w' -o bin/hello .
+CGO_ENABLED=0 GOOS=linux go build -tags glj_aot_runtime -trimpath -o bin/hello .
 docker build -t clojure-hello/glojure:local .
 docker run --rm --read-only --cap-drop ALL -p 127.0.0.1:8080:8080 clojure-hello/glojure:local
 ```
@@ -26,12 +26,12 @@ curl http://localhost:8080/healthz
 To build and run directly on your host instead:
 
 ```sh
-CGO_ENABLED=0 go build -tags glj_aot_runtime -trimpath -ldflags='-s -w' -o bin/hello .
+CGO_ENABLED=0 go build -tags glj_aot_runtime -trimpath -o bin/hello .
 ./bin/hello
 ```
 
 `ADDR` overrides the default `:8080`. The final OCI image starts from `scratch`,
-contains only the locally built, stripped, statically linked executable, and runs as UID/GID
+contains only the locally built, statically linked executable, and runs as UID/GID
 65532. It requires no shell, libc, JVM, or Go toolchain. The compact Glojure runtime
 build tag removes development features; the script is evaluated at startup,
 not AOT-compiled into Go source.
@@ -50,8 +50,8 @@ docker image inspect clojure-hello/glojure:local --format 'arch={{.Architecture}
 ```
 
 Measured on this Linux ARM64 VM after the local build: Docker reports
-**5,304,896 bytes (5.30 MB)**; the unpacked executable is
-**15,401,120 bytes (15.40 MB)**, also shown by the COPY layer in the history.
+**11,359,428 bytes (11.36 MB)**; the unpacked executable is
+**22,821,120 bytes (22.82 MB)**, also shown by the COPY layer in the history.
 Docker's reported size depends on its image store and is not the unpacked
 filesystem size. Toolchain and architecture can change these measurements.
 
