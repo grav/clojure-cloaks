@@ -1,8 +1,9 @@
 # ClojureDart: Hello, everywhere
 
 One Flutter app for **iOS, web, and native Linux**. Enter a name and press
-**Say hello** (or submit from the keyboard). An atom holds the greeting and
-submission count; `cljd.flutter` watches it and rebuilds the screen. A managed
+**Say hello** (or submit from the keyboard). An atom stores every submitted
+greeting, including duplicates; `cljd.flutter` watches it and rebuilds the screen. The list shows newest greetings first and
+scrolls as it grows. History lasts for the current app session. A managed
 `TextEditingController` follows the widget lifecycle. Blank names greet the world.
 The bundled [Noto Emoji font](https://github.com/google/fonts/tree/main/ofl/notoemoji)
 provides a consistent fallback for emoji; its [OFL license](assets/fonts/OFL.txt)
@@ -20,7 +21,10 @@ generated platform runners host it; the UI and state logic are ClojureDart.
 | Linux | Native AArch64 release executable and GTK window under Xvfb; native integration tests | [Screenshot](screenshot-linux.png) |
 | iOS | iPhone 17 simulator, iOS 26.5; build, install, launch and integration tests on the Mac host | [Screenshot](screenshot-ios.png) |
 
-The iOS check uses a simulator, not a physical device or an App Store build.
+The greeting history has been checked with Flutter widget tests, native Linux
+integration tests (ordering, duplicates, and scrolling), and Chromium submissions.
+The iOS check predates the history addition and uses a simulator, not a physical
+device or an App Store build.
 Linux runs directly on this VM using its native Clang, Ninja, GTK, and Flutter SDK;
 release build and integration tests passed without Docker.
 

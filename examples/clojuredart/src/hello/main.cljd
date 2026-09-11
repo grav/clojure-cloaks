@@ -10,12 +10,12 @@
 (defn greeting-screen []
   (f/widget
     :managed [name-controller (m/TextEditingController)]
-    :watch [{:keys [greeting count]} (atom {:greeting "Hello, world!" :count 0}) :as state]
+    :watch [greetings (atom []) :as state]
     :let [say-hello (fn []
                      (let [name (str/trim (.-text name-controller))]
-                       (swap! state (fn [s]
-                                      {:greeting (str "Hello, " (if (str/blank? name) "world" name) "!")
-                                       :count (inc (:count s))}))))]
+                       (swap! state (fn [previous]
+                                      (into [(str "Hello, " (if (str/blank? name) "world" name) "!")]
+                                            previous)))))]
     (m/Scaffold
       .backgroundColor cream
       .body
@@ -52,11 +52,19 @@
                  (m/Container .padding (m/EdgeInsets.all 24.0)
                    .decoration (m/BoxDecoration .color m/Colors.white .borderRadius (m/BorderRadius.circular 18.0))
                    .child (m/Column .crossAxisAlignment m/CrossAxisAlignment.start
-                            .children [(m/Semantics .liveRegion true .child
-                                         (m/Text greeting .key (m/ValueKey "greeting")
-                                           .style (m/TextStyle .fontFamily "DemoSans" .fontFamilyFallback ["NotoEmoji"] .color teal .fontSize 28.0 .fontWeight m/FontWeight.w600)))
+                            .children [(m/SizedBox .height 220.0 .child
+                                         (m/ListView .key (m/ValueKey "greetings")
+                                           .children
+                                           (map-indexed
+                                             (fn [i greeting]
+                                               (m/Semantics .container true .child
+                                                 (m/Padding .padding (m/EdgeInsets.only .bottom 12.0) .child
+                                                 (m/Text greeting
+                                                   .key (m/ValueKey (if (zero? i) "greeting" (str "greeting-" i)))
+                                                   .style (m/TextStyle .fontFamily "DemoSans" .fontFamilyFallback ["NotoEmoji"] .color teal .fontSize 28.0 .fontWeight m/FontWeight.w600)))))
+                                             (if (seq greetings) greetings ["Hello, world!"]))))
                                        (m/SizedBox .height 8.0)
-                                       (m/Text (str "Greetings sent: " count) .key (m/ValueKey "count")
+                                       (m/Text (str "Greetings sent: " (count greetings)) .key (m/ValueKey "count")
                                          .style (m/TextStyle .color ink))]))
                  (m/SizedBox .height 28.0)
                  (m/Text "One ClojureDart app · iOS / web / Linux"
