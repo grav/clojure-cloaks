@@ -19,3 +19,10 @@
   (peek (swap! history
           (fn [versions]
             (if (> (count versions) 1) (pop versions) versions)))))
+
+(defn -main []
+  (greet! "world")
+  (let [snapshot (current)]
+    (println "After Ada:" (greet! "Ada"))
+    (println "Snapshot:" snapshot)
+    (println "After undo:" (undo!))))
