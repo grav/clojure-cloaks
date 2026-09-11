@@ -1,6 +1,6 @@
 # SCI: evaluate an expression on four hosts
 
-Each runner passes its command-line argument to `sci/eval-string`. SCI interprets
+One [shared `.cljc` file](src/hello/eval.cljc) passes its command-line argument to `sci/eval-string`. SCI interprets
 its Clojure subset inside the host, with the host's `println` and `prn` exposed
 for terminal output. This is ordinary embedding; the separate
 [self-hosting experiment](../sci-self-host/) interprets SCI's implementation.
@@ -8,8 +8,8 @@ for terminal output. This is ordinary embedding; the separate
 From this directory, run the same expression on each host:
 
 ```sh
-clj -M eval.clj '(println (str "hello world"))'
-bb eval.clj '(println (str "hello world"))'
+clj -M src/hello/eval.cljc '(println (str "hello world"))'
+bb src/hello/eval.cljc '(println (str "hello world"))'
 ```
 
 Compile the ClojureScript runner once, then run it with Node (no npm packages):
@@ -38,17 +38,10 @@ Every command prints:
 hello world
 ```
 
-The JVM and Babashka runner is just:
-
-```clojure
-(require '[sci.core :as sci])
-
-(sci/eval-string (first *command-line-args*)
-                 {:bindings {'println println 'prn prn}})
-```
-
-The other runners use the same call, with their platform's command-line entry
-point. Return values are not automatically printed; use `prn` or `println`.
+The evaluation function is shared by all four hosts. Reader conditionals select
+only the entry point: JVM Clojure and Babashka read `*command-line-args*`,
+ClojureScript sets `*main-cli-fn*`, and ClojureDart defines `main`.
+Return values are not automatically printed; use `prn` or `println`.
 For example, `'(prn (map inc [1 2 3]))'` prints `(2 3 4)`.
 
 ## Compatibility

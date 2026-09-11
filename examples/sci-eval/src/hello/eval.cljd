@@ -1,5 +1,0 @@
-(ns hello.eval
-  (:require [sci.core :as sci]))
-
-(defn main [args]
-  (sci/eval-string (first args) {:bindings {'println println 'prn prn}}))
