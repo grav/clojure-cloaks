@@ -25,6 +25,7 @@ Updated as each demo is verified. “Working” means the listed execution check
 
 | Demo | Status | Verification |
 | --- | --- | --- |
+| Planck / runtime compilation | [Eval demo](examples/planck/) | Planck 2.28.0, macOS ARM64 / JavaScriptCore: command-line expressions compiled and evaluated; greeting, anonymous function and Unicode output verified. |
 | ClojureScript + Replicant SPA | [Working demo](examples/clojurescript/) | Opens directly via file:// after compilation; Chromium verifies form, hash routes, browser back, clear, blank and HTML-like input; Linux ARM64. |
 | Glojure OCI service | [Working demo](examples/glojure/) | Local Go build; packaging-only scratch OCI image with size inspection instructions; health, named/default and Unicode requests under a non-root container; Linux ARM64. |
 | Clojerl two-node actors | [Working demo](examples/clojerl/) | Two separate BEAM nodes exchanged correlated greeting replies with actor-owned request counts; OTP 26, Linux ARM64. |
@@ -272,6 +273,7 @@ Use a common theme—**“Hello, <name>!”**—with one interaction or observab
 | nbb | Node.js script that reads a names file asynchronously and prints greetings using a small npm package for terminal presentation. | npm modules, filesystem access and promises. | Turn it into an interactive terminal prompt. |
 | Squint / Cherry / Kiso | Small greeting component imported into a JavaScript web app as an ES module. | Interoperation with ordinary JavaScript modules and frontend tooling. | Import and call a JavaScript package from the component. |
 | Scittle | One HTML file containing a Clojure script that changes a greeting when a button is clicked. | Browser scripting directly in script tags. | Add a second independently scripted widget. |
+| Planck | [Evaluate a command-line expression](examples/planck/) using a three-line ClojureScript script. | Self-hosted compilation and runtime evaluation on JavaScriptCore. | Evaluate a form that constructs and evaluates another form. |
 | Choq | Greeting script that runs as a small standalone command using its embedded JavaScript engine. | A compact runtime without an external Node installation. | Serve the greeting over HTTP if the pinned runtime supports it. |
 | Joyride | VS Code command that asks for a name and inserts a greeting into the current document. | Editor commands, input UI and document APIs. | Expose the command through a keybinding. |
 | Cljbang / ClojureElisp | Interactive Emacs command that asks for a name and opens a greeting buffer. | Interactive commands, buffers and Lisp extensibility. | Add a small minor mode with a greeting keybinding. |
