@@ -6,7 +6,10 @@ submission count; `cljd.flutter` watches it and rebuilds the screen. A managed
 `TextEditingController` follows the widget lifecycle. Blank names greet the world.
 The bundled [Noto Emoji font](https://github.com/google/fonts/tree/main/ofl/notoemoji)
 provides a consistent fallback for emoji; its [OFL license](assets/fonts/OFL.txt)
-is included.
+is included. Text fields and greetings also use bundled
+[Roboto](https://github.com/google/fonts/tree/main/ofl/roboto) with its
+[OFL license](assets/fonts/OFL-Roboto.txt), so native Linux does not rely on
+system font fallback to render Latin text.
 
 The application is [one ClojureDart namespace](src/hello/main.cljd). Flutter's
 generated platform runners host it; the UI and state logic are ClojureDart.
@@ -18,7 +21,8 @@ generated platform runners host it; the UI and state logic are ClojureDart.
 | iOS | iPhone 17 simulator, iOS 26.5; build, install, launch and integration tests on the Mac host | [Screenshot](screenshot-ios.png) |
 
 The iOS check uses a simulator, not a physical device or an App Store build.
-Linux runs native ARM64 code; Docker supplies the compiler and GTK libraries.
+Linux runs directly on this VM using its native Clang, Ninja, GTK, and Flutter SDK;
+release build and integration tests passed without Docker.
 
 ## Toolchains
 
@@ -72,20 +76,25 @@ flutter run -d linux
 flutter build linux --release
 ```
 
-On this ARM64 VM, the [container wrapper](linux-container.sh) installs the Linux
-build dependencies without changing host packages. It uses the workspace SDK,
-or the directory specified by `FLUTTER_SDK`:
+On this ARM64 VM, [linux.sh](linux.sh) locates Flutter on PATH, in `FLUTTER_SDK`,
+or in the workspace's `.cache/flutter`. It runs commands directly on the host:
 
 ```sh
-./linux-container.sh flutter build linux --release
-./linux-container.sh xvfb-run -a flutter test integration_test/app_test.dart -d linux
-./linux-container.sh xvfb-run -a ./capture-linux.sh
+./linux.sh                         # flutter run -d linux
+./linux.sh flutter build linux --release
+./linux.sh xvfb-run -a flutter test integration_test/app_test.dart -d linux
+./linux.sh xvfb-run -a -s '-screen 0 1280x800x24' ./capture-linux.sh
 ```
 
+Native builds need Clang, CMake, Ninja, pkg-config, GTK 3 and liblzma development
+files. Headless checks use Xvfb and xauth; screenshots additionally need xdotool
+and ImageMagick. These are installed on the VM.
+
 The release application is `build/linux/arm64/release/bundle/cljd_clojuredart`;
-keep its `data/` and `lib/` directories alongside it. The wrapper mounts the
-project and caches and restores ownership of generated build files on exit.
-Xvfb supplies a virtual X11 screen for this VM's native graphical checks.
+keep its `data/` and `lib/` directories alongside it. The original
+[container wrapper](linux-container.sh) remains an optional fallback. If switching
+between host and container builds, remove `build/linux` first to discard CMake's
+cached compiler paths.
 
 ## iOS
 

@@ -38,7 +38,7 @@ The Homebrew jank binary downloaded on 2026-09-11 had SHA256
 jank is alpha software; this example explicitly cycles integer indices because
 the tested build's `mod` returned a real value unsuitable for `nth`.
 
-## Linux ARM64 source build
+## Native Linux ARM64
 
 ```sh
 cd examples/jank
@@ -47,15 +47,34 @@ cd examples/jank
 ./run-linux-arm64.sh
 ```
 
-The wrapper builds [Dockerfile.arm64](Dockerfile.arm64) if its local image is
-missing. This compiles jank natively for AArch64 using LLVM 23 and GCC 14's
-standard library. It needs several GB of disk and RAM; compilation uses two jobs.
-The smoke check runs the native SDL window on an Xvfb display.
+`run-linux-arm64.sh` now runs directly on the host. The VM has the tested
+jank bundle installed in `~/.local/share/jank`; [jank.sh](jank.sh) supplies its
+LLVM 23 library paths and GCC 14 headers. An existing `jank` on PATH is also
+supported, or set `JANK_HOME` to select another exported bundle.
+SDL2 and pkg-config must be installed on the host; smoke checks use Xvfb/xauth.
 
-Verified on Linux ARM64 on 2026-09-11: native AArch64 ELF executable,
-`jank check-health` JIT and AOT checks, window rendering, synthetic Space key,
-and captured palette/background pixels all passed. Docker uses `--init` so
-Xvfb can signal its parent that the virtual display is ready.
+Verified without a running container on Linux ARM64: runtime initialization,
+C++ JIT, AOT compilation, native SDL rendering, synthetic Space key handling,
+and captured palette/background pixels all passed.
+
+To provision the same local bundle on another Linux ARM64 machine:
+
+```sh
+./install-native.sh
+./jank.sh check-health
+./run-linux-arm64.sh --smoke
+```
+
+The installer uses Docker **once** to build/export the known working toolchain,
+then installs the compiler, matching LLVM libraries, and GCC headers into the
+user directory. It uses the existing image if available. Building the image
+needs several GB of disk and RAM and uses two compilation jobs. The bundle
+retains its original Ubuntu library dependencies alongside the compiler;
+normal launches execute directly on the host, with no container or chroot.
+This bundle has been tested on this Arch Linux ARM64 VM, not every Linux distro.
+
+The original all-container runner remains available as
+`./run-docker-arm64.sh --smoke`.
 
 The build pins jank commit `9bea4140812e995bb868eb3313dc5b65aa075768` and the
 LLVM apt package version. [linux-arm64.patch](linux-arm64.patch) adds a missing

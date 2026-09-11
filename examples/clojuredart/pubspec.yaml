@@ -20,3 +20,6 @@ flutter:
     - family: NotoEmoji
       fonts:
         - asset: assets/fonts/NotoEmoji.ttf
+    - family: DemoSans
+      fonts:
+        - asset: assets/fonts/Roboto.ttf

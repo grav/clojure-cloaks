@@ -36,7 +36,7 @@
                    .style (m/TextStyle .color ink .fontSize 17.0))
                  (m/SizedBox .height 32.0)
                  (m/TextField .key (m/ValueKey "name") .controller name-controller
-                   .style (m/TextStyle .fontFamilyFallback ["NotoEmoji"])
+                   .style (m/TextStyle .fontFamily "DemoSans" .fontFamilyFallback ["NotoEmoji"])
                    .textInputAction m/TextInputAction.done
                    .onSubmitted (fn [_] (say-hello))
                    .decoration (m/InputDecoration .labelText "Your name"
@@ -54,7 +54,7 @@
                    .child (m/Column .crossAxisAlignment m/CrossAxisAlignment.start
                             .children [(m/Semantics .liveRegion true .child
                                          (m/Text greeting .key (m/ValueKey "greeting")
-                                           .style (m/TextStyle .fontFamilyFallback ["NotoEmoji"] .color teal .fontSize 28.0 .fontWeight m/FontWeight.w600)))
+                                           .style (m/TextStyle .fontFamily "DemoSans" .fontFamilyFallback ["NotoEmoji"] .color teal .fontSize 28.0 .fontWeight m/FontWeight.w600)))
                                        (m/SizedBox .height 8.0)
                                        (m/Text (str "Greetings sent: " count) .key (m/ValueKey "count")
                                          .style (m/TextStyle .color ink))]))
