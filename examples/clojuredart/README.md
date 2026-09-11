@@ -105,6 +105,23 @@ keep its `data/` and `lib/` directories alongside it. The original
 between host and container builds, remove `build/linux` first to discard CMake's
 cached compiler paths.
 
+## Distributing desktop apps
+
+Users do not need Flutter, Dart, or Clojure installed. Flutter normally produces
+an app bundle containing the executable, runtime libraries, and assets rather
+than a single self-contained executable.
+
+| Platform | What to distribute |
+| --- | --- |
+| macOS | An `.app` bundle, usually zipped or packaged in a DMG. See the [release guide](https://docs.flutter.dev/deployment/macos). |
+| Windows | The `.exe`, DLLs, assets, and Visual C++ runtime, together in a zip or installer. See the [packaging guide](https://docs.flutter.dev/platform-integration/windows/building#building-your-own-zip-file-for-windows). |
+| Linux | The entire `bundle/` directory. The destination still needs compatible system libraries, including GTK; portability between distributions requires checking those dependencies. See the [distribution guide](https://docs.flutter.dev/platform-integration/linux/building#prepare-linux-apps-for-distribution). |
+
+For this demo's verified Linux ARM64 release, distribute
+`build/linux/arm64/release/bundle/`, keeping the executable, `lib/`, and `data/`
+together. The macOS and Windows entries describe Flutter's packaging options;
+this example has not been built or tested for those desktop targets.
+
 ## iOS
 
 On a Mac with Xcode, copy this project, add Flutter and Clojure to `PATH`, then:
