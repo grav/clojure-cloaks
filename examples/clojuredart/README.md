@@ -76,6 +76,8 @@ With Flutter's Linux desktop dependencies installed:
 
 ```sh
 flutter run -d linux
+# If the window flickers in the VM, use Mesa software rendering:
+# LIBGL_ALWAYS_SOFTWARE=1 flutter run -d linux
 flutter build linux --release
 ```
 
