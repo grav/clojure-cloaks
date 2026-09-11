@@ -70,4 +70,4 @@ a closure computing `49`, a Unicode greeting, and nested evaluation of
 platform but is not built separately in this example.
 
 Jolt passed the greeting, arithmetic, closure, collection and nested-eval checks.
-For embedding SCI in ordinary Rust, see the [GraalVM shared-library example](../sci-rust/).
+For embedding SCI from Rust or Zig through C FFI, see the [GraalVM shared-library example](../sci-ffi/).
