@@ -32,9 +32,13 @@ CGO_ENABLED=0 go build -tags glj_aot_runtime -trimpath -o bin/hello .
 
 `ADDR` overrides the default `:8080`. The final OCI image starts from `scratch`,
 contains only the locally built, statically linked executable, and runs as UID/GID
-65532. It requires no shell, libc, JVM, or Go toolchain. The compact Glojure runtime
-build tag removes development features; the script is evaluated at startup,
-not AOT-compiled into Go source.
+65532. It requires no shell, libc, JVM, or Go toolchain.
+
+`glj_aot_runtime` is a Go build tag selecting Glojure's compact runtime. It keeps
+precompiled core-library code but omits the Go-source generator and bundled
+standard-library source fallbacks; additional precompiled namespaces must be
+explicitly linked when needed. AOT means “ahead of time,” but this tag does not
+compile our `hello.glj` into Go: the embedded script is still interpreted at startup.
 
 Inspect the image and its size:
 
