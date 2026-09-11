@@ -25,7 +25,7 @@ Updated as each demo is verified. “Working” means the listed execution check
 
 | Demo | Status | Verification |
 | --- | --- | --- |
-| ClojureScript + Replicant SPA | [Working demo](examples/clojurescript/) | Production build and Chromium test: form, history routes, browser back, clear, blank and HTML-like input; Linux ARM64. |
+| ClojureScript + Replicant SPA | [Working demo](examples/clojurescript/) | Opens directly via file:// after compilation; Chromium verifies form, hash routes, browser back, clear, blank and HTML-like input; Linux ARM64. |
 | Glojure OCI service | [Working demo](examples/glojure/) | Local Go build; packaging-only scratch OCI image with size inspection instructions; health, named/default and Unicode requests under a non-root container; Linux ARM64. |
 | Clojerl two-node actors | [Working demo](examples/clojerl/) | Two separate BEAM nodes exchanged correlated greeting replies with actor-owned request counts; OTP 26, Linux ARM64. |
 | jank native graphics | [Working demo](examples/jank/) | Native macOS and Linux ARM64 SDL windows; Linux now runs directly on the host with a local LLVM/GCC bundle; synthetic Space key and captured pixels verified. Linux ARM64 source build also passes jank JIT/AOT health checks; x86-64 emulation remains an optional fallback. |

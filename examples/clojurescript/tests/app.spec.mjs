@@ -1,9 +1,11 @@
 import {test, expect} from '@playwright/test';
 
+const appURL = new URL('../public/index.html', import.meta.url).href;
+
 test('greet, navigate without reloading, clear, and handle literal HTML safely', async ({page}) => {
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
-  await page.goto('/');
+  await page.goto(appURL);
   await expect(page.getByRole('status')).toHaveText('Hello, world!');
   await page.getByLabel("What's your name?").fill('Ada');
   await page.getByRole('button', {name: 'Say hello'}).click();

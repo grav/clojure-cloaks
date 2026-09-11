@@ -1,2 +1,2 @@
 {:output-to "public/js/main.js" :output-dir "public/js/out"
- :asset-path "/js/out" :optimizations :none}
+ :asset-path "js/out" :optimizations :none}
