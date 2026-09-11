@@ -1,9 +1,15 @@
 # jank: a native SDL window
 
-jank constructs the greeting, owns the event loop and selects an immutable colour
-palette. Direct C++ interop calls a small [SDL wrapper](graphics.hpp) that manages
-the native window and renderer. The greeting appears in the window title and
-terminal; a smiling shape appears in the window.
+[hello.jank](hello.jank) calls SDL directly through jank's C++ interop. It creates
+the window and renderer, reads native event structs, selects an immutable colour
+palette, draws the face, and releases the SDL resources in `finally` blocks.
+The greeting appears in the window title and terminal. There is no custom C++
+wrapper or header.
+
+`(:include "SDL2/SDL.h")` imports SDL's declarations; `cpp/SDL_*` calls its
+functions. `cpp/.-field`, `cpp/=`, and `cpp/&` access fields, assign native values,
+and take addresses. The smoke screenshot uses `SDL_SaveBMP_RW` directly because
+`SDL_SaveBMP` is a function-like C macro.
 
 On Apple Silicon macOS:
 
@@ -30,7 +36,8 @@ second palette colour, then writes `screenshot.png`. It uses only Python's
 standard library.
 
 Verified on macOS 26.5.1 ARM64 with Homebrew jank 0.1 and SDL 2.32.10:
-native window launch, jank event loop, palette update and captured pixel checks.
+direct SDL calls from jank, native window launch, palette update and captured
+pixel checks.
 
 ![Native SDL canvas after a Space keypress](screenshot.png)
 
@@ -58,7 +65,8 @@ SDL2 and pkg-config must be installed on the host; smoke checks use Xvfb/xauth.
 
 Verified without a running container on Linux ARM64: runtime initialization,
 C++ JIT, AOT compilation, native SDL rendering, synthetic Space key handling,
-and captured palette/background pixels all passed.
+and captured palette/background pixels all passed. The direct-interop version
+also passed a normal-mode window-title and Escape-key exit check on X11.
 
 To provision the same local bundle on another Linux ARM64 machine:
 

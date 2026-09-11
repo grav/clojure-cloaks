@@ -1,17 +1,68 @@
-(ns hello.graphics (:include "graphics.hpp"))
+(ns hello.graphics (:include "SDL2/SDL.h" "cstdlib" "string"))
 
-(def greeting (str "Hello, " "world" " from jank! Click or press Space to change colour."))
-(cpp/hello.open greeting)
-(println greeting)
+(def greeting "Hello, world from jank! Click or press Space to change colour.")
 
-;; jank owns event handling, palette selection and the loop. C++ wraps SDL handles.
-(loop [frame 0 colour 0]
-  (let [event (cpp/hello.event)
-        next-colour (if (= event 2) (if (= colour 2) 0 (inc colour)) colour)
-        [r g b] (nth [[30 125 110] [205 100 65] [85 100 180]] next-colour)]
-    (cpp/hello.draw r g b)
-    (if (or (= event 1) (and (cpp/hello.smoke) (>= frame 2)))
-      (do (when (cpp/hello.smoke) (cpp/hello.snapshot))
-          (cpp/hello.close)
-          (println "Native window rendered and closed."))
-      (do (cpp/hello.pause) (recur (inc frame) next-colour)))))
+(defn check-sdl [result]
+  (when (neg? result)
+    (throw (ex-info (str (cpp/SDL_GetError)) {}))))
+
+(check-sdl (cpp/SDL_Init cpp/SDL_INIT_VIDEO))
+(let [title (cpp/cast cpp/std.string greeting)
+      window (cpp/SDL_CreateWindow (cpp/.c_str title)
+                                  cpp/SDL_WINDOWPOS_CENTERED cpp/SDL_WINDOWPOS_CENTERED
+                                  640 400 0)]
+  (try
+    (when (cpp/! window)
+      (throw (ex-info (str (cpp/SDL_GetError)) {})))
+    (let [renderer (cpp/SDL_CreateRenderer window -1 cpp/SDL_RENDERER_SOFTWARE)]
+      (try
+        (when (cpp/! renderer)
+          (throw (ex-info (str (cpp/SDL_GetError)) {})))
+        (let [smoke? (not (cpp/! (cpp/std.getenv "HELLO_SMOKE")))
+              event (cpp/SDL_Event.)]
+          (when smoke?
+            (cpp/= (cpp/.-type event) (cpp/cast cpp/Uint32 cpp/SDL_KEYDOWN))
+            (cpp/= (cpp/.-sym (cpp/.-keysym (cpp/.-key event))) (cpp/cast cpp/SDL_Keycode cpp/SDLK_SPACE))
+            (check-sdl (cpp/SDL_PushEvent (cpp/& event))))
+          (println greeting)
+          (loop [frame 0 colour 0]
+            (let [action (loop []
+                           (if (zero? (cpp/SDL_PollEvent (cpp/& event)))
+                             :none
+                             (let [type (cpp/.-type event)]
+                               (cond
+                                 (or (= type cpp/SDL_QUIT)
+                                     (and (= type cpp/SDL_KEYDOWN)
+                                          (= (cpp/.-sym (cpp/.-keysym (cpp/.-key event))) cpp/SDLK_ESCAPE))) :quit
+                                 (or (= type cpp/SDL_MOUSEBUTTONDOWN)
+                                     (and (= type cpp/SDL_KEYDOWN)
+                                          (= (cpp/.-sym (cpp/.-keysym (cpp/.-key event))) cpp/SDLK_SPACE))) :next
+                                 :else (recur)))))
+                  next-colour (if (= action :next) (if (= colour 2) 0 (inc colour)) colour)
+                  [r g b] (nth [[30 125 110] [205 100 65] [85 100 180]] next-colour)
+                  block (cpp/SDL_Rect. 220 100 200 200)]
+              (check-sdl (cpp/SDL_SetRenderDrawColor renderer 246 242 231 255))
+              (check-sdl (cpp/SDL_RenderClear renderer))
+              (check-sdl (cpp/SDL_SetRenderDrawColor renderer r g b 255))
+              (check-sdl (cpp/SDL_RenderFillRect renderer (cpp/& block)))
+              (check-sdl (cpp/SDL_SetRenderDrawColor renderer 255 255 255 255))
+              (doseq [[x y w h] [[265 155 20 20] [355 155 20 20] [275 225 90 12]]]
+                (let [rect (cpp/SDL_Rect. x y w h)]
+                  (check-sdl (cpp/SDL_RenderFillRect renderer (cpp/& rect)))))
+              (cpp/SDL_RenderPresent renderer)
+              (if (or (= action :quit) (and smoke? (>= frame 2)))
+                (do
+                  (when smoke?
+                    (let [surface (cpp/SDL_CreateRGBSurfaceWithFormat 0 640 400 32 cpp/SDL_PIXELFORMAT_ARGB8888)]
+                      (when (cpp/! surface)
+                        (throw (ex-info (str (cpp/SDL_GetError)) {})))
+                      (try
+                        (check-sdl (cpp/SDL_RenderReadPixels renderer cpp/nullptr
+                                   (cpp/.-format (cpp/.-format surface))
+                                   (cpp/.-pixels surface) (cpp/.-pitch surface)))
+                        (check-sdl (cpp/SDL_SaveBMP_RW surface (cpp/SDL_RWFromFile "hello.bmp" "wb") 1))
+                        (finally (cpp/SDL_FreeSurface surface)))))
+                  (println "Native window rendered and closed."))
+                (do (cpp/SDL_Delay 16) (recur (inc frame) next-colour))))))
+        (finally (cpp/SDL_DestroyRenderer renderer))))
+    (finally (cpp/SDL_DestroyWindow window) (cpp/SDL_Quit))))
