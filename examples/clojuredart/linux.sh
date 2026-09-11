@@ -11,6 +11,6 @@ if ! command -v flutter >/dev/null 2>&1; then
   exit 1
 fi
 if (( $# == 0 )); then
-  exec flutter run -d linux
+  exec clojure -M:cljd flutter -d linux
 fi
 exec "$@"

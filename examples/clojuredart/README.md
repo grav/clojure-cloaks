@@ -41,22 +41,42 @@ The toolchains installed for this workspace are:
 - VM: `../../.cache/flutter` from this directory.
 - Mac: `~/clojure-dialects-demos/toolchains/flutter`.
 
-Compile the ClojureDart source before invoking Flutter:
+From the repository root, set up the SDK and start development with hot reload:
 
 ```sh
 cd examples/clojuredart
 # This workspace's Linux SDK; omit if Flutter is already on PATH.
 export PATH="$PWD/../../.cache/flutter/bin:$PATH"
+clojure -M:cljd flutter
+```
+
+Select a device, then edit `src/hello/main.cljd`. The watcher recompiles your
+ClojureDart changes and hot reloads Flutter automatically. Press Enter in the
+watcher terminal to restart the app if a change needs a restart (which resets
+in-memory greeting history). Stop the watcher before running standalone builds
+or tests.
+
+For a release build or tests, first compile the current ClojureDart source:
+
+```sh
 clojure -M:cljd compile
 flutter test
 ```
 
 ## Web
 
-Run these commands from `examples/clojuredart` (the server resolves `build/web`
-relative to your current directory):
+Run from `examples/clojuredart`. For browser development with hot reload:
 
 ```sh
+clojure -M:cljd flutter -d chrome
+```
+
+For a release build served locally (without hot reload), stop the watcher and run
+these commands from the same directory. The server resolves `build/web` relative
+to your current directory:
+
+```sh
+clojure -M:cljd compile
 flutter build web --release --no-web-resources-cdn
 python3 -m http.server 8074 --bind 127.0.0.1 --directory build/web
 ```
@@ -76,12 +96,19 @@ because Flutter synchronizes its accessible DOM with the rendered widget tree.
 
 ## Native Linux
 
-With Flutter's Linux desktop dependencies installed:
+With Flutter's Linux desktop dependencies installed, run from
+`examples/clojuredart` for development with hot reload:
 
 ```sh
-flutter run -d linux
+clojure -M:cljd flutter -d linux
 # If the window flickers in the VM, use Mesa software rendering:
-# LIBGL_ALWAYS_SOFTWARE=1 flutter run -d linux
+# LIBGL_ALWAYS_SOFTWARE=1 clojure -M:cljd flutter -d linux
+```
+
+For a release build, stop the watcher and run:
+
+```sh
+clojure -M:cljd compile
 flutter build linux --release
 ```
 
@@ -89,7 +116,7 @@ On this ARM64 VM, [linux.sh](linux.sh) locates Flutter on PATH, in `FLUTTER_SDK`
 or in the workspace's `.cache/flutter`. It runs commands directly on the host:
 
 ```sh
-./linux.sh                         # flutter run -d linux
+./linux.sh                         # clojure -M:cljd flutter -d linux
 ./linux.sh flutter build linux --release
 ./linux.sh xvfb-run -a flutter test integration_test/app_test.dart -d linux
 ./linux.sh xvfb-run -a -s '-screen 0 1280x800x24' ./capture-linux.sh
@@ -127,10 +154,16 @@ this example has not been built or tested for those desktop targets.
 On a Mac with Xcode, copy this project, add Flutter and Clojure to `PATH`, then:
 
 ```sh
+flutter devices
+clojure -M:cljd flutter -d <simulator-id>
+```
+
+This watches ClojureDart changes and hot reloads the simulator app. For a
+standalone simulator build and tests, stop the watcher and run:
+
+```sh
 clojure -M:cljd compile
 flutter build ios --simulator --debug
-flutter devices
-flutter run -d <simulator-id>
 flutter test integration_test/app_test.dart -d <simulator-id>
 ```
 
@@ -140,7 +173,6 @@ Its dedicated simulator is `HelloClojureDartDemo`
 The integration tests use Flutter's text-input test channel for Unicode input
 while exercising the actual native app, widgets and atom updates.
 
-For ClojureDart hot reload, use `clojure -M:cljd flutter` and select a device.
 See the [upstream Flutter quick start](https://github.com/Tensegritics/ClojureDart/blob/main/doc/flutter-quick-start.md).
 
 ![Hello, everywhere on the web](screenshot-web.png)
