@@ -25,7 +25,7 @@ Updated as each demo is verified. “Working” means the listed execution check
 
 | Demo | Status | Verification |
 | --- | --- | --- |
-| Planck / runtime compilation | [Eval demo](examples/planck/) | Planck 2.28.0, macOS ARM64 / JavaScriptCore: command-line expressions compiled and evaluated; greeting, anonymous function and Unicode output verified. |
+| Planck / runtime compilation | [Eval demo](examples/planck/) | Planck 2.28.0, native Linux and macOS ARM64 / JavaScriptCore: command-line expressions compiled and evaluated; greeting, anonymous function and Unicode output verified. |
 | ClojureScript + Replicant SPA | [Working demo](examples/clojurescript/) | Opens directly via file:// after compilation; Chromium verifies form, hash routes, browser back, clear, blank and HTML-like input; Linux ARM64. |
 | Glojure OCI service | [Working demo](examples/glojure/) | Local Go build; packaging-only scratch OCI image with size inspection instructions; health, named/default and Unicode requests under a non-root container; Linux ARM64. |
 | Clojerl two-node actors | [Working demo](examples/clojerl/) | Two separate BEAM nodes exchanged correlated greeting replies with actor-owned request counts; OTP 26, Linux ARM64. |
