@@ -4,43 +4,53 @@ import GreetingCore
 @main
 struct HelloSwishApp: App {
     var body: some Scene {
-        WindowGroup { GreetingView() }
+        WindowGroup { ScriptView() }
     }
 }
 
-struct GreetingView: View {
-    @State private var name = ""
-    @State private var greeting = ""
+// Swish owns the screen and events; this host renders three native controls.
+struct ScriptView: View {
+    @State private var elements: [Element] = []
     @State private var error: String?
     @State private var engine: Greeting?
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 24) {
-            Label("SWISH × SWIFTUI", systemImage: "sparkles")
-                .font(.caption.weight(.bold)).foregroundStyle(.secondary)
-            Text("A little hello.").font(.largeTitle.bold())
-            Text("Your name travels into a Swish function and comes back as a greeting.")
-                .foregroundStyle(.secondary)
-            TextField("Your name", text: $name)
-                .textFieldStyle(.roundedBorder).accessibilityIdentifier("name")
-                .onSubmit { greet() }
-            Button("Say hello", action: greet)
-                .buttonStyle(.borderedProminent).accessibilityIdentifier("greet")
-            Text(greeting).font(.title2.bold()).accessibilityIdentifier("greeting")
+        VStack(alignment: .leading, spacing: 20) {
+            ForEach(elements) { element in
+                switch element.kind {
+                case "field":
+                    TextField(element.id.capitalized, text: Binding(
+                        get: { element.text },
+                        set: { send(element.id, value: $0) }
+                    ))
+                    .textFieldStyle(.roundedBorder)
+                    .accessibilityIdentifier(element.id)
+                case "button":
+                    Button(element.text) { send(element.id) }
+                        .buttonStyle(.borderedProminent)
+                        .accessibilityIdentifier(element.id)
+                default:
+                    Text(element.text).accessibilityIdentifier(element.id)
+                }
+            }
             if let error { Text(error).foregroundStyle(.red) }
-            Spacer()
-            Text("Native views. A scripted greeting.").font(.footnote).foregroundStyle(.secondary)
         }
         .padding(32).frame(maxWidth: 560, alignment: .leading)
-        .tint(.teal)
         .task {
-            do { engine = try Greeting(); greet() }
-            catch { self.error = error.localizedDescription }
+            do {
+                let engine = try Greeting()
+                self.engine = engine
+                elements = try engine.screen()
+            } catch { self.error = error.localizedDescription }
         }
     }
 
-    private func greet() {
-        do { greeting = try engine?.greet(name) ?? ""; error = nil }
-        catch { self.error = error.localizedDescription }
+    private func send(_ event: String, value: String = "") {
+        do {
+            guard let engine else { return }
+            try engine.send(event, value: value)
+            elements = try engine.screen()
+            error = nil
+        } catch { self.error = error.localizedDescription }
     }
 }

@@ -1,2 +1,22 @@
-(defn hello [name]
-  (str "Hello, " (if (empty? name) "world" name) "!"))
+(def initial-state {:name "" :greeting "Hello, world!" :clicks 0})
+(def state (atom initial-state))
+
+(defn dispatch! [event value]
+  (case event
+    :name (swap! state assoc :name value)
+    :greet (swap! state
+             (fn [s]
+               (assoc s
+                 :greeting (str "Hello, " (if (empty? (:name s)) "world" (:name s)) "!")
+                 :clicks (inc (:clicks s)))))
+    :reset (reset! state initial-state)))
+
+;; Each vector describes a native control: [kind event-or-id text].
+(defn screen []
+  (let [{:keys [name greeting clicks]} @state]
+    [[:text :title "Hello, Swish!"]
+     [:field :name name]
+     [:button :greet "Say hello"]
+     [:text :greeting greeting]
+     [:text :count (str "Greetings: " clicks)]
+     [:button :reset "Start again"]]))

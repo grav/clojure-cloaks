@@ -7,6 +7,8 @@ triple=arm64-apple-ios18.0-simulator
 swift build --sdk "$sdk" --triple "$triple" --product HelloSwish
 bin=$(swift build --sdk "$sdk" --triple "$triple" --show-bin-path)
 app="$PWD/.build/HelloSwish.app"
+# Recreate the bundle: dependency resources can be read-only after copying.
+rm -rf "$app"
 mkdir -p "$app"
 cp "$bin/HelloSwish" "$app/HelloSwish"
 for bundle in "$bin/"*.bundle; do cp -R "$bundle" "$app/"; done

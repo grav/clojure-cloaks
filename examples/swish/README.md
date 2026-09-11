@@ -1,9 +1,20 @@
 # Swish inside SwiftUI
 
-A native SwiftUI app embeds a Swish interpreter. The greeting function lives in
-[greeting.swish](HelloSwish/Sources/GreetingCore/Resources/greeting.swish);
-Swift owns the text field and button. Input is encoded as a string literal before
-calling the script, including quotes and newlines.
+Swish owns the application: an atom holds the name, greeting and click count;
+`dispatch!` handles edits, greetings and resets; `screen` returns vectors
+describing the native controls. All of that lives in
+[greeting.swish](HelloSwish/Sources/GreetingCore/Resources/greeting.swish).
+
+For example, `[:button :greet "Say hello"]` renders a native button that sends
+the `:greet` event back to Swish. Swift only loads the interpreter, decodes
+`[kind id text]` vectors, and renders text, fields and buttons in a SwiftUI stack.
+This tiny renderer is part of the demo, not a built-in Swish UI library.
+After each event it asks Swish for the screen again. User input and event names
+are encoded as string literals at the interpreter boundary.
+
+Type a name, press **Say hello**, and watch the greeting and counter change.
+**Start again** resets the state. Change the script to rearrange controls or
+change their behavior without editing Swift; rerun to load the bundled script.
 
 On a Mac with Xcode and Swift 6.2 or later:
 
@@ -28,7 +39,7 @@ for a physical iPhone or distribute the app.
 
 Verified 2026-09-11 on an Apple Silicon Mac reached from the Linux VM over SSH:
 
-- macOS build and XCTest checks for default, named, Unicode, quoted, newline and slash input passed.
+- macOS build and XCTest checks for the screen, editing, greeting count, reset, and default, named, Unicode, quoted, newline and slash input passed.
 - iOS 26.5 simulator build, install and launch passed; the rendered screen displayed the greeting produced by Swish.
 - Screenshot inspected; simulator typing/button interaction has not been automated.
 
