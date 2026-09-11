@@ -1,6 +1,8 @@
-# Clojurust: immutable greetings in the REPL and a native executable
+# Clojurust: runtime eval, immutable greetings, and AOT
 
-An atom points to a history of immutable maps. Adding a greeting creates a new
+The command-line entry point reads a Clojure expression, evaluates it, and prints
+the result—even in the AOT executable. The same file also supplies a REPL demo:
+an atom points to a history of immutable maps. Adding a greeting creates a new
 version; undo selects the previous version. A saved snapshot keeps its value
 as you edit. The application is entirely [Clojure](hello.cljrs), running in
 [csm/clojurust](https://github.com/csm/clojurust)'s Rust runtime.
@@ -21,30 +23,36 @@ executable installed as `~/.local/bin/cljrs`.
 
 ## Run and compile
 
-From `examples/clojurust`, run the `-main` walkthrough through the interpreter,
-or compile it ahead of time and run the resulting executable:
+From `examples/clojurust`, evaluate an expression through the interpreter,
+or compile the evaluator ahead of time and run the resulting executable:
 
 ```sh
-cljrs run hello.cljrs
+cljrs run hello.cljrs -- '(str "Hello, world!")'
 cljrs compile hello.cljrs -o hello
-./hello
+./hello '(str "Hello, world!")'
 ```
 
-Both runs print:
+Both runs print `"Hello, world!"`. The host uses `prn`, so strings retain quotes
+and collections print as Clojure data. Supply one expression; use `do` to group
+multiple operations:
 
-```text
-After Ada: {:greetings [Hello, world! Hello, Ada!]}
-Snapshot: {:greetings [Hello, world!]}
-After undo: {:greetings [Hello, world!]}
+```sh
+./hello '(mapv inc [1 2 3])'
+# => [2 3 4]
+./hello '(do (hello/greet! "world") (hello/greet! "Ada") (hello/undo!))'
+# => {:greetings ["Hello, world!"]}
 ```
 
 The native executable includes the Clojurust runtime; running it needs neither
 `cljrs`, Rust/Cargo, nor a JVM installed. It still depends on compatible OS
 libraries. Compilation needs the Rust toolchain and the pinned source checkout.
 
-Clojurust compiles the function bodies to machine code via Cranelift. For this
-example it also embeds a small startup preamble that the bundled interpreter
-evaluates; AOT does not mean every form bypasses the interpreter.
+Clojurust compiles the greeting functions to machine code via Cranelift. This
+pinned compiler currently returns `nil` when a compiled function calls `eval`.
+The example works around that by defining `-main` with `defonce`, which keeps
+that small evaluator in the interpreted startup preamble. The executable still
+includes everything needed to run it. The command-line expression is read and
+evaluated at runtime, so you can change it without recompiling.
 
 ## REPL
 
@@ -99,3 +107,7 @@ snapshot preservation, undo including an empty history, duplicate and Unicode
 greetings, and live function redefinition in the actual `cljrs repl`. The AOT
 executable produces identical output to `cljrs run`, including when copied to a
 separate directory and run with no toolchains on PATH.
+
+Expression checks cover strings, Unicode, collections, greeting/undo calls,
+`nil`, and 100,000 `loop`/`recur` iterations in both modes. Missing arguments,
+malformed expressions, and unknown symbols return nonzero exit codes.

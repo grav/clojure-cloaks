@@ -20,9 +20,8 @@
           (fn [versions]
             (if (> (count versions) 1) (pop versions) versions)))))
 
-(defn -main []
-  (greet! "world")
-  (let [snapshot (current)]
-    (println "After Ada:" (greet! "Ada"))
-    (println "Snapshot:" snapshot)
-    (println "After undo:" (undo!))))
+;; This pinned compiler cannot call eval from native code yet. defonce keeps
+;; the evaluator in its interpreted startup preamble; greetings still use AOT.
+(defonce -main
+  (fn [expression]
+    (prn (eval (read-string expression)))))
