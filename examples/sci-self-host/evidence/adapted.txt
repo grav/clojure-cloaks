@@ -1,0 +1,48 @@
+Loading sci.core
+Loading sci.ctx-store
+Loading sci.impl.callstack
+Loading sci.impl.interpreter
+Loading sci.impl.analyzer
+Loading sci.impl.reflector
+Loading sci.impl.evaluator
+Loading sci.impl.interop
+Loading sci.impl.utils
+Loading sci.impl.macros
+Loading sci.impl.resolve
+Loading sci.impl.faster
+Loading sci.impl.fns
+Loading sci.impl.load
+Loading sci.impl.parser
+Loading sci.impl.opts
+Loading sci.impl.namespaces
+Loading sci.impl.proxy
+Loading sci.impl.copy-vars
+Loading sci.impl.cljs
+Loading sci.impl.core-protocols
+Loading sci.impl.destructure
+Loading sci.impl.doseq-macro
+Loading sci.impl.for-macro
+Loading sci.impl.hierarchies
+Loading sci.impl.io
+Loading sci.impl.macroexpand
+Loading sci.impl.multimethods
+Loading sci.impl.protocols
+Loading sci.impl.read
+Loading sci.impl.reify
+PASS: greeting Hello from interpreted SCI!
+PASS: arithmetic 3
+PASS: closure 42
+PASS: recursion 40320
+PASS: loop/recur 500500
+PASS: macro 42
+PASS: atom 42
+PASS: exception 42
+PASS: protocol and record 42
+PASS: metadata {:answer 42}
+PASS: destructuring 42
+PASS: multimethod 42
+PASS: reify 42
+PASS: type 42
+PASS: dynamic binding [42 1]
+PASS: fresh contexts are isolated
+PASS: host analyzer/eval entry points stayed disabled

@@ -5,8 +5,8 @@ implements. SCI runs the first copy, which can interpret another copy, which
 can interpret another, eventually evaluating a greeting.
 
 **This is not SCI interpreting its own implementation.** See the separate
-[SCI self-hosting experiment](../sci-self-host/) for a source-loading test and
-its reproduced JVM type-system blocker.
+[SCI self-hosting experiment](../sci-self-host/) for a working partial self-hosting adapter, its checks, and the
+original JVM type-system blocker.
 
 Requires Babashka; verified with **v1.13.219** on Linux ARM64 with an
 8 MiB process stack. Available depth depends on platform and stack size.

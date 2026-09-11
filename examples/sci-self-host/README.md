@@ -1,11 +1,77 @@
-# Testing SCI self-hosting
+# SCI interpreting SCI, with a host runtime
 
-**Blocked on the JVM with unchanged SCI source.** This experiment loads SCI's
-actual source into a fresh SCI context and asks the interpreted copy to evaluate
-`(+ 1 2)`. It does not install the host's `sci.core/eval-string` into that
-context.
+**Working partial self-hosting on the JVM.** The adapted runner loads SCI's
+actual analyzer, evaluator, interpreter, public API and supporting source into
+SCI. Five runtime/type-support namespaces remain host-compiled. This is more
+than calling the host's `eval-string` recursively, but is not completely
+interpreted SCI.
 
-Run from this directory with the Clojure CLI:
+```sh
+cd examples/sci-self-host
+clj -M adapted.clj
+# Optional expression, evaluated after the checks:
+clj -M adapted.clj '(mapv inc [1 2 3])'
+```
+
+The runner prints a greeting and checks arithmetic, closures, recursion,
+`loop/recur`, macros, atoms, exceptions, records/protocols, metadata,
+destructuring, multimethods, `reify`, `deftype`, dynamic binding and context
+isolation. These checks pass on Linux ARM64. [Captured output](evidence/adapted.txt).
+
+## What is interpreted, and what is supplied
+
+The source loader renames implementation symbols into `self.sci.*` so it
+cannot silently reuse the outer interpreter's built-in namespaces. It preserves
+quoted namespace names used in the inner language's namespace tables.
+
+The declared host SCI runtime is exactly:
+
+- `sci.impl.types`: evaluation interfaces and node/type machinery.
+- `sci.impl.vars`: mutable vars and thread-binding machinery.
+- `sci.lang`: JVM representations of vars, namespaces and types.
+- `sci.impl.records` and `sci.impl.deftype`: concrete type implementations
+  and their support functions.
+
+The entire contents of these five namespaces are supplied, not just their
+constructors. Their analysis/resolution callbacks are redirected to the
+**interpreted** analyzer and resolver while running the inner evaluator.
+
+Reader libraries, Java I/O, locking, standard Clojure primitives and JVM classes
+also come from the host. The loader uses the host reader to prepare the
+implementation source; the resulting interpreted SCI uses Edamame to read
+user programs.
+
+A Java proxy implements the interfaces required by SCI's evaluation nodes.
+Its method bodies are interpreted functions, installed through SCI's existing
+`:reify-fn` hook. No JVM compiler evaluates the inner user's program.
+
+The only omitted source form is the evaluator's `extend-protocol types/Eval`
+block for constants: the supplied host protocol already implements those same
+identity operations. Unsupported mutable types are retained in the host
+runtime rather than replaced with incomplete substitutes.
+
+## How the check rules out a host-eval shortcut
+
+After loading the implementation, the runner obtains the interpreted
+`eval-string` function. During every check it replaces the host's
+`sci.core/eval-string`, `sci.core/eval-string*`,
+`sci.impl.interpreter/eval-string*` and `sci.impl.analyzer/analyze` entry
+points with functions that throw. The checks still pass. The outer interpreter
+continues executing the already-analyzed implementation's function bodies.
+
+This is an experimental, single-threaded runner: scoped host callback
+rebindings affect the process while a check runs. It uses an unrestricted
+context for trusted implementation source, not a sandbox. The focused checks
+do not establish full SCI compatibility, concurrency support or arbitrarily
+deep self-hosting. ClojureScript and ClojureDart hosts have not been tested.
+
+SCI is pinned in `deps.edn` to
+[`ebd3462`](https://github.com/babashka/sci/tree/ebd3462b9e777d4d0b83ad13b81e526707391354).
+No upstream source checkout is modified. Tested on 2026-09-11.
+
+## Original probes
+
+These remain available to demonstrate why an adapter is needed; each exits 1:
 
 ```sh
 clj -M probe.clj
@@ -13,11 +79,7 @@ clj -M probe.clj --host-deps
 clj -M type-check.clj
 ```
 
-Each currently exits 1 and prints its blocker. Dependencies pin SCI to
-[`ebd3462`](https://github.com/babashka/sci/tree/ebd3462b9e777d4d0b83ad13b81e526707391354).
-Tested on the Linux ARM64 VM on 2026-09-11.
-
-## Results
+## Unmodified-source results
 
 | Attempt | Result |
 | --- | --- |
@@ -47,8 +109,7 @@ requiring callstack namespace; `type-check.clj` isolates the actual failing form
 This establishes a blocker for **unmodified JVM source**, not impossibility
 across all SCI hosts or after changes. Getting further requires adapting the
 type layer or extending SCI's interface support; additional blockers may follow.
-We have not tested the ClojureScript or ClojureDart branches. Replacing SCI's
-type layer with host-compiled SCI types would be a separate, hybrid experiment.
+We have not tested the ClojureScript or ClojureDart branches. The adapted runner above uses a hybrid approach with host-compiled runtime types.
 
 Captured output:
 [source loading](evidence/source-load.txt),
