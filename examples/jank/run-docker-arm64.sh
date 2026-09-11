@@ -7,7 +7,7 @@ if ! docker image inspect "$image" >/dev/null 2>&1; then
 fi
 if [[ ${1:-} == --smoke ]]; then
   docker run --rm --init --platform linux/arm64 -e HELLO_SMOKE=1 \
-    -v "$PWD:/app" "$image" xvfb-run -a ./run.sh
+    -v "$PWD:/app" "$image" xvfb-run -a jank -I . -L /usr/lib/aarch64-linux-gnu -l SDL2 run hello.jank
   python3 check-snapshot.py
 else
   : "${DISPLAY:?Set DISPLAY for a Linux X11 desktop, or use --smoke for a virtual display}"
@@ -17,5 +17,5 @@ else
   elif [[ -f $HOME/.Xauthority ]]; then
     display_args+=(-e XAUTHORITY=/tmp/xauthority -v "$HOME/.Xauthority:/tmp/xauthority:ro")
   fi
-  docker run --rm --init --platform linux/arm64 "${display_args[@]}" -v "$PWD:/app" "$image" ./run.sh
+  docker run --rm --init --platform linux/arm64 "${display_args[@]}" -v "$PWD:/app" "$image" jank -I . -L /usr/lib/aarch64-linux-gnu -l SDL2 run hello.jank
 fi

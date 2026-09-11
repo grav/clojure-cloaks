@@ -10,7 +10,8 @@ On Apple Silicon macOS:
 ```sh
 brew install jank-lang/jank/jank sdl2
 cd examples/jank
-./run.sh
+sdl=$(brew --prefix sdl2)
+jank -I . -I "$sdl/include" -L "$sdl/lib" -l SDL2 run hello.jank
 ```
 
 Click or press Space to cycle colours. Press Escape or close the window to quit.
@@ -19,7 +20,7 @@ The first invocation builds jank's precompiled header and takes longer.
 Repeat the rendering/event check:
 
 ```sh
-HELLO_SMOKE=1 ./run.sh
+HELLO_SMOKE=1 jank -I . -I "$sdl/include" -L "$sdl/lib" -l SDL2 run hello.jank
 python3 check-snapshot.py
 ```
 
@@ -42,15 +43,17 @@ the tested build's `mod` returned a real value unsuitable for `nth`.
 
 ```sh
 cd examples/jank
-./run-linux-arm64.sh --smoke
+HELLO_SMOKE=1 xvfb-run -a ./jank.sh -I . -L "$(pkg-config --variable=libdir sdl2)" -l SDL2 run hello.jank
+python3 check-snapshot.py
 # With DISPLAY set on an X11 desktop:
-./run-linux-arm64.sh
+./jank.sh -I . -L "$(pkg-config --variable=libdir sdl2)" -l SDL2 run hello.jank
 ```
 
-`run-linux-arm64.sh` now runs directly on the host. The VM has the tested
-jank bundle installed in `~/.local/share/jank`; [jank.sh](jank.sh) supplies its
-LLVM 23 library paths and GCC 14 headers. An existing `jank` on PATH is also
-supported, or set `JANK_HOME` to select another exported bundle.
+The VM has the tested jank bundle installed in `~/.local/share/jank`.
+[jank.sh](jank.sh) supplies its LLVM 23 library paths and GCC 14 headers;
+the command above passes the example's SDL options directly to that compiler.
+With a regular jank installation on PATH, replace `./jank.sh` with `jank`.
+Set `JANK_HOME` to select another exported bundle.
 SDL2 and pkg-config must be installed on the host; smoke checks use Xvfb/xauth.
 
 Verified without a running container on Linux ARM64: runtime initialization,
@@ -62,7 +65,8 @@ To provision the same local bundle on another Linux ARM64 machine:
 ```sh
 ./install-native.sh
 ./jank.sh check-health
-./run-linux-arm64.sh --smoke
+HELLO_SMOKE=1 xvfb-run -a ./jank.sh -I . -L "$(pkg-config --variable=libdir sdl2)" -l SDL2 run hello.jank
+python3 check-snapshot.py
 ```
 
 The installer uses Docker **once** to build/export the known working toolchain,
@@ -96,7 +100,7 @@ provides it; this VM used `tonistiigi/binfmt --install amd64`).
 docker build --platform linux/amd64 -t clojure-hello/jank-toolchain:local .
 docker run --rm --platform linux/amd64 -e HELLO_SMOKE=1 -e SDL_VIDEODRIVER=dummy \
   -v "$PWD:/app" clojure-hello/jank-toolchain:local \
-  ./run.sh
+  jank -I . -L /usr/lib/x86_64-linux-gnu -l SDL2 run hello.jank
 python3 check-snapshot.py
 ```
 

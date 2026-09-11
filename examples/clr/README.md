@@ -5,14 +5,18 @@ ClojureCLR's public API. The Clojure code calls .NET's `String.Format`,
 `String.IsNullOrWhiteSpace`, and `DateTimeOffset` APIs. Strings cross the language
 boundary as objects, so names are never evaluated as code.
 
-The default launcher runs directly on the host with .NET SDK 8. It uses
-`dotnet` on PATH, or `DOTNET_ROOT`, defaulting to `~/.local/share/dotnet`
-(the installation on this VM):
+On this VM, add the locally installed .NET SDK 8 to PATH once in your shell:
+
+```sh
+export PATH="$HOME/.local/share/dotnet:$PATH"
+```
+
+Then build and run directly (or use an existing SDK 8 on PATH):
 
 ```sh
 cd examples/clr
-./run.sh Ada
-./run.sh --check
+dotnet run -- Ada
+dotnet run -- --check
 ```
 
 Or use the pinned SDK container (no native .NET installation needed):
@@ -32,7 +36,6 @@ Hello, Ada from ClojureCLR! UTC: 2026-09-11T07:49:42.7976703+00:00
 No argument greets `world`; multiple arguments form one name. `--check` verifies
 empty/whitespace names, Unicode, quoted input, newlines, and a parseable UTC
 timestamp returned from .NET through ClojureCLR. It exits nonzero on failure.
-The equivalent direct command is `dotnet run -- --check`.
 
 Verified directly on Linux ARM64 with .NET SDK 8.0.425 and ClojureCLR 1.12.2
 on 2026-09-11; all interop checks passed without Docker.
