@@ -3,7 +3,10 @@
         {:git/url "https://github.com/babashka/sci"
          :git/sha "ebd3462b9e777d4d0b83ad13b81e526707391354"}}
  :aliases
- {:cljs {:extra-deps {org.clojure/clojurescript {:mvn/version "1.12.145"}}
+ {:jolt {:override-deps {org.babashka/sci
+                         {:git/url "https://github.com/babashka/sci"
+                          :git/sha "32d62a5136ad3dc148588752f5bcc4cc30b14752"}}}
+  :cljs {:extra-deps {org.clojure/clojurescript {:mvn/version "1.12.145"}}
          :main-opts ["-m" "cljs.main" "-co" "build.edn" "-c" "hello.eval"]}
   :cljd {:extra-deps {tensegritics/clojuredart
                       {:git/url "https://github.com/tensegritics/ClojureDart.git"
