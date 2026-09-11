@@ -1,0 +1,12 @@
+{:paths ["src"]
+ :deps {org.babashka/sci
+        {:git/url "https://github.com/babashka/sci"
+         :git/sha "ebd3462b9e777d4d0b83ad13b81e526707391354"}}
+ :aliases
+ {:cljs {:extra-deps {org.clojure/clojurescript {:mvn/version "1.12.145"}}
+         :main-opts ["-m" "cljs.main" "-co" "build.edn" "-c" "hello.eval"]}
+  :cljd {:extra-deps {tensegritics/clojuredart
+                      {:git/url "https://github.com/tensegritics/ClojureDart.git"
+                       :git/sha "79759559c2cf4280832e596949a81226db336014"}}
+         :main-opts ["-m" "cljd.build"]}}
+ :cljd/opts {:kind :dart :main hello.eval}}

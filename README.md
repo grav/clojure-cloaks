@@ -33,12 +33,15 @@ Updated as each demo is verified. “Working” means the listed execution check
 | Swish + SwiftUI | [Working demo](examples/swish/) | Swish defines the screen, atom-backed state and events; a SwiftUI host renders native controls. macOS tests and iOS 26.5 simulator launch/screenshot verified. |
 | Clojure / JVM HTTP + REPL | [Working demo](examples/jvm/) | Linux ARM64: HTTP greetings, Java timestamp, socket REPL redefinition and preserved atom counter; nine integration assertions passed. |
 | ClojureCLR / C# interop | [Working demo](examples/clr/) | Native Linux ARM64, .NET SDK 8.0.425 (no container): C# calls ClojureCLR; .NET formatting and UTC date APIs; default, Unicode and quoted-input checks passed. |
+| SCI / expression evaluation | [Four-host eval demo](examples/sci-eval/) | Linux ARM64: JVM Clojure, Babashka, compiled ClojureScript on Node, and ClojureDart on Dart; greeting, closure, Unicode and nested eval verified. |
 | SCI / partial self-hosting | [Interpreted SCI + checks](examples/sci-self-host/) | Recursive runner verified at 0–2 interpreted layers with default JVM stack settings; five runtime/type-support namespaces stay native. Layer traversal and behavior checks pass with host analyzer/eval entry points disabled. |
 | ClojureDart + Flutter | [Demo + screenshots](examples/clojuredart/) | Web release + Chromium, native Linux ARM64 + GTK (host build/run, no Docker), and iOS 26.5 simulator: Unicode/blank greetings and counter integration checks passed. |
 | Scittle / browser script tags | [Demo + screenshot](examples/scittle/) | Plain HTML with inline Clojure and an atom; Chromium verified file:// loading and successive button-click greetings. No CSS, server, or build step. |
 | Jolt / tail-call Fibonacci | [Native demo + comparison output](examples/jolt/) | Linux ARM64, Chez 10.4.1: ordinary tail recursion computes Fibonacci(20000), checked against an independent reference; identical function overflows on JVM Clojure with default stack settings. No Docker required. |
-| Pure Rust / Raspberry Pi 4 baseline | [Hardware demo + serial capture](examples/rust-rpi/) | Physical Pi 4 SD boot, UART greeting, bidirectional Unicode/CRLF echo, and observed LED heartbeat passed. QEMU checks also pass. Original card boot partition backed up; installed files readback-verified. This is a hardware prerequisite, not a Clojure dialect. |
 | Rustly / Raspberry Pi 4 firmware | [Hardware hello + Morse demo](examples/rustly-rpi/) | Original Clojure-to-Rust hello passed physical Pi 4 boot and Unicode echo. Serial-controlled Morse extension passes sequencer and QEMU tests; Morse image passed physical Pi 4 boot and accepted `clj` over serial; visual LED verification pending. |
+
+The [pure Rust Raspberry Pi boot and UART baseline](research/rust-rpi/) is kept
+in research as supporting hardware work for the Rustly example.
 
 ## Recent projects worth checking first
 

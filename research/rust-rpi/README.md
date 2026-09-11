@@ -42,7 +42,7 @@ binutils, QEMU and a serial terminal. The first invocation builds the toolchain
 image; no host package installation is needed.
 
 ```sh
-cd examples/rust-rpi
+cd research/rust-rpi
 ./build.sh
 ./toolchain.sh python3 smoke.py
 ./stage-sd.sh

@@ -53,7 +53,7 @@ files; it does not write or format an SD card. Run `build.sh` after source edits
 before staging. The downloaded firmware is distinct from the existing card's
 firmware used for the verified pure Rust baseline.
 
-Use the [baseline wiring](../rust-rpi/#wiring-the-pi-4): ground on physical pin 6,
+Use the [baseline wiring](../../research/rust-rpi/#wiring-the-pi-4): ground on physical pin 6,
 adapter RX on pin 8, adapter TX on pin 10, and separate USB-C power.
 Start the automatic hardware check before powering on the Pi:
 

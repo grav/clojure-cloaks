@@ -1,0 +1,3 @@
+name: sci_eval
+environment:
+  sdk: ">=3.13.0 <4.0.0"

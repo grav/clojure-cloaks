@@ -1,0 +1,4 @@
+{:target :nodejs
+ :output-to "target/eval.js"
+ :output-dir "target/cljs"
+ :optimizations :simple}
