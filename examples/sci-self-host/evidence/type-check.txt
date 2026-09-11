@@ -1,1 +1,0 @@
-BLOCKED: defrecord/deftype currently only support protocol implementations, found: sci.impl.types.ICustomType

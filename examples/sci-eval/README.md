@@ -2,8 +2,7 @@
 
 One [shared `.cljc` file](src/hello/eval.cljc) passes its command-line argument to `sci/eval-string`. SCI interprets
 its Clojure subset inside the host, with the host's `println` and `prn` exposed
-for terminal output. This is ordinary embedding; the separate
-[self-hosting experiment](../sci-self-host/) interprets SCI's implementation.
+for terminal output.
 
 From this directory, run the same expression on each host:
 

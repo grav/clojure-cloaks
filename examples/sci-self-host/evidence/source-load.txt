@@ -1,5 +1,0 @@
-Loading sci.core
-Loading clojure.tools.reader.reader-types
-Loading clojure.tools.reader.impl.utils
-BLOCKED: Unable to resolve symbol: Character/isWhitespace
-{:type :sci/error, :phase "analysis", :file "jar:file:/home/grav/.m2/repository/org/clojure/tools.reader/1.5.2/tools.reader-1.5.2.jar!/clojure/tools/reader/impl/utils.clj", :line 80, :column 9}
