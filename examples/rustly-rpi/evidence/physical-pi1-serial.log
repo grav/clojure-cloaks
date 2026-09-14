@@ -1,0 +1,6 @@
+Listening at 115200 8N1; waiting for the Rust kernel banner.
+b'\x00'
+b'\x00'
+b'\r\nHello, world from Rustly Clojure on Raspberry Pi!\r\nClojure -> Rust -> bare metal. No OS, no heap.\r\nType letters/digits to blink Morse; empty line stops.\r\n> '
+Echo: b'clj\r\nRepeating Morse: clj\r\n> '
+PASS: physical Raspberry Pi Rustly Clojure boot and serial Morse command accepted; observe LED timing separately.
