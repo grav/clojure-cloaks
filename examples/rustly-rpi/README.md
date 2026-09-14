@@ -12,7 +12,8 @@ passes QEMU and timing tests; physical Pi 4 boot and the `clj` serial command no
 [Generated Rust](evidence/generated-app.rs) · [Morse QEMU transcript](evidence/qemu-transcript.txt).
 The Pi 4 image boots at `0x80000`. The new **original Pi 1 A/B (26-pin header)**
 image boots at `0x8000`; its build, QEMU serial checks, and physical Pi 1 boot
-and `clj` serial acknowledgement pass. Physical LED timing verification is pending.
+and `clj` serial acknowledgement pass. The user also confirmed the ACT LED
+repeats `clj` in Morse on 14 September 2026.
 [Physical Pi 1 capture](evidence/physical-pi1-serial.log). These boards use separate kernel images.
 Both builds have no unresolved symbols.
 
@@ -65,7 +66,8 @@ installation again. A byte-for-byte backup of the original 100 MiB boot partitio
 is stored locally at `.cache/rustly-pi1-card-backup/3DDC-D542/boot-partition.img`
 (relative to the repository root). Physical Pi 1 boot and bidirectional serial communication passed on 14 September
 2026: the firmware printed its Rustly greeting and acknowledged `clj` with
-`Repeating Morse: clj`. Visual LED timing verification is still pending.
+`Repeating Morse: clj`. The user visually confirmed the repeating ACT LED pattern
+`-.-. .-.. .---`. Pulse durations have not been measured on physical hardware.
 
 Installed Pi 1 kernel SHA256:
 `1617fe751bce9e23497320b9c60b7efa9a00feecf1a3ed4ac81214e17a8c8b78`.
