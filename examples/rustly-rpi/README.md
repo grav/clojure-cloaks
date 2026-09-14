@@ -56,6 +56,17 @@ adapter TX on pin 10; use separate **micro-USB power** for Pi 1. On hardware,
 expect three short ACT flashes, then an idle LED until a serial message arrives.
 Use `./serial.sh` at 115200 baud; `clj` plus Enter should repeat its Morse pattern.
 
+The 14.8 GiB card with boot UUID `3DDC-D542` has been prepared for the Pi 1.
+Its existing Arch Linux ARM root partition and original kernel/firmware are
+preserved. The new `rustly-pi1.img` and `config.txt` were readback-verified;
+restore `config-before-rustly-pi1.txt` as `config.txt` to boot the original Linux
+installation again. A byte-for-byte backup of the original 100 MiB boot partition
+is stored locally at `.cache/rustly-pi1-card-backup/3DDC-D542/boot-partition.img`
+(relative to the repository root). Physical Pi 1 verification is still pending.
+
+Installed Pi 1 kernel SHA256:
+`1617fe751bce9e23497320b9c60b7efa9a00feecf1a3ed4ac81214e17a8c8b78`.
+
 Hardware references: [BCM2835 processor](https://www.raspberrypi.com/documentation/hardware/raspberrypi/bcm2835/),
 [Circle's board-specific ACT LED table](https://github.com/rsta2/circle/blob/master/lib/machineinfo.cpp),
 and [Raspberry Pi firmware boot settings](https://www.raspberrypi.com/documentation/computers/legacy_config_txt.html).

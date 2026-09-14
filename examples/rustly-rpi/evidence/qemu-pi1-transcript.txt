@@ -12,6 +12,6 @@ Use up to 64 ASCII letters, digits or spaces; message unchanged.
 Use up to 64 ASCII letters, digits or spaces; message unchanged.
 > clx j
 Repeating Morse: clj
-> 
+>
 Morse stopped.
-> 
+>
