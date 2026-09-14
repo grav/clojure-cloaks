@@ -1,8 +1,8 @@
 ;; Rustly uses named fn forms rather than defn.
 ;; Calls target board functions supplied by our no_std Rust driver.
 (fn greeting []
-  (uart_write "\nHello, world from Rustly Clojure on Raspberry Pi 4!\n")
-  (uart_write "Clojure -> Rust -> ARM64. No OS, no heap.\n")
+  (uart_write "\nHello, world from Rustly Clojure on Raspberry Pi!\n")
+  (uart_write "Clojure -> Rust -> bare metal. No OS, no heap.\n")
   (uart_write "Type letters/digits to blink Morse; empty line stops.\n> "))
 
 (fn accepted [] (uart_write "\nRepeating Morse: "))

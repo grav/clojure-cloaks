@@ -1,13 +1,20 @@
 #!/usr/bin/env python3
-"""Boot the actual Pi 4 kernel image and verify its PL011 serial console."""
+"""Boot a kernel image in QEMU and verify its PL011 serial console."""
+import argparse
 import os
 from pathlib import Path
 import selectors
 import subprocess
 import time
 
+parser = argparse.ArgumentParser()
+parser.add_argument('--pi1', action='store_true')
+args = parser.parse_args()
+emulator, machine, kernel = (
+    ('qemu-system-arm', 'raspi1ap', 'build/kernel.img') if args.pi1 else
+    ('qemu-system-aarch64', 'raspi4b', 'build/kernel8.img'))
 proc = subprocess.Popen([
-    'qemu-system-aarch64', '-M', 'raspi4b', '-kernel', 'build/kernel8.img',
+    emulator, '-M', machine, '-bios' if args.pi1 else '-kernel', kernel,
     '-display', 'none', '-serial', 'stdio', '-monitor', 'none', '-no-reboot',
 ], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 selector = selectors.DefaultSelector()
@@ -28,7 +35,7 @@ def receive(expected):
 
 try:
     boot = receive(b'\r\n> ')
-    assert boot.count(b'Hello, world from Rustly Clojure on Raspberry Pi 4!') == 1
+    assert boot.count(b'Hello, world from Rustly Clojure on Raspberry Pi!') == 1
     assert b'No OS, no heap.' in boot
     def submit(data, expected):
         proc.stdin.write(data)
@@ -43,7 +50,7 @@ try:
     submit(b'a'*65 + b'\r', b'a'*65 + error)
     submit(b'clx\x7fj\r', b'clx\x08 \x08j\r\nRepeating Morse: clj\r\n> ')
     submit(b'\r', b'\r\nMorse stopped.\r\n> ')
-    Path('build/qemu-transcript.txt').write_text(transcript.decode())
+    Path('build/qemu-pi1-transcript.txt' if args.pi1 else 'build/qemu-transcript.txt').write_text(transcript.decode())
     print(transcript.decode())
     print('PASS: Rustly boot, Morse requests, replacement, CRLF, invalid/long input, backspace and stop')
 finally:

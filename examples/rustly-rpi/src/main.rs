@@ -5,12 +5,19 @@ use core::arch::{asm, global_asm};
 use core::panic::PanicInfo;
 use core::ptr::{read_volatile, write_volatile};
 
+#[cfg(target_arch = "aarch64")]
 global_asm!(include_str!("boot.S"));
+#[cfg(target_arch = "arm")]
+global_asm!(include_str!("boot-pi1.S"));
 mod morse;
 
 // BCM2711 (Pi 4) physical peripheral addresses; MMU remains disabled.
-const GPIO: usize = 0xfe20_0000;
-const UART: usize = 0xfe20_1000;
+#[cfg(target_arch = "aarch64")]
+const BASE: usize = 0xfe00_0000;
+#[cfg(target_arch = "arm")]
+const BASE: usize = 0x2000_0000;
+const GPIO: usize = BASE + 0x20_0000;
+const UART: usize = BASE + 0x20_1000;
 
 unsafe fn read(address: usize) -> u32 {
     read_volatile(address as *const u32)
@@ -26,7 +33,17 @@ unsafe fn init_uart() {
     let select = read(GPIO + 0x04);
     write(GPIO + 0x04, (select & !((7 << 12) | (7 << 15))) | (4 << 12) | (4 << 15));
     // Pi 4 uses GPPUPPDN0, unlike the older Pi pull-control sequence.
+    #[cfg(target_arch = "aarch64")]
     write(GPIO + 0xe4, read(GPIO + 0xe4) & !((3 << 28) | (3 << 30)));
+    #[cfg(target_arch = "arm")]
+    {
+        // BCM2835 GPPUD handshake: wait at least 150 cycles at each step.
+        write(GPIO + 0x94, 0);
+        for _ in 0..150 { asm!("nop", options(nomem, nostack)); }
+        write(GPIO + 0x98, (1 << 14) | (1 << 15));
+        for _ in 0..150 { asm!("nop", options(nomem, nostack)); }
+        write(GPIO + 0x98, 0);
+    }
     write(UART + 0x44, 0x7ff); // Clear pending interrupts.
     write(UART + 0x38, 0); // Polling only; mask interrupts.
     // 48 MHz UART clock / (16 * 115200) = 26 + 3/64.
@@ -35,7 +52,11 @@ unsafe fn init_uart() {
     write(UART + 0x28, 3);
     write(UART + 0x2c, (3 << 5) | (1 << 4)); // 8N1, FIFO enabled.
     write(UART + 0x30, (1 << 9) | (1 << 8) | 1); // RX, TX, UART enabled.
+    #[cfg(target_arch = "aarch64")]
     asm!("dsb sy", "isb", options(nostack, preserves_flags));
+    #[cfg(target_arch = "arm")]
+    asm!("mcr p15, 0, {zero}, c7, c10, 4", zero = in(reg) 0u32,
+         options(nostack, preserves_flags));
 }
 
 fn put(byte: u8) {
@@ -56,27 +77,54 @@ fn print(text: &str) {
     }
 }
 
+#[cfg(target_arch = "aarch64")]
 fn ticks() -> u64 {
     let value: u64;
     unsafe { asm!("mrs {}, cntpct_el0", out(reg) value, options(nomem, nostack)) };
     value
 }
 
+#[cfg(target_arch = "aarch64")]
 fn timer_frequency() -> u64 {
     let value: u64;
     unsafe { asm!("mrs {}, cntfrq_el0", out(reg) value, options(nomem, nostack)) };
     value
 }
 
+#[cfg(target_arch = "arm")]
+fn ticks() -> u64 {
+    // BCM2835's free-running 1 MHz system timer, read without rollover tearing.
+    unsafe {
+        loop {
+            let high = read(BASE + 0x3008);
+            let low = read(BASE + 0x3004);
+            if high == read(BASE + 0x3008) {
+                return ((high as u64) << 32) | low as u64;
+            }
+        }
+    }
+}
+
+#[cfg(target_arch = "arm")]
+fn timer_frequency() -> u64 { 1_000_000 }
+
+#[cfg(target_arch = "aarch64")]
+const LED_PIN: usize = 42;
+#[cfg(target_arch = "arm")]
+const LED_PIN: usize = 16; // Original Pi 1 A/B (26-pin header), active low.
+
 fn led(on: bool) {
-    // Pi 4B ACT LED: GPIO42, active high (bank 1, bit 10).
-    unsafe { write(GPIO + if on { 0x20 } else { 0x2c }, 1 << 10) };
+    let high = if cfg!(target_arch = "arm") { !on } else { on };
+    let register = if high { 0x1c } else { 0x28 };
+    unsafe { write(GPIO + register + (LED_PIN / 32) * 4, 1 << (LED_PIN % 32)) };
 }
 
 fn startup_flashes(period: u64) {
     unsafe {
-        // GPIO42 output; preserve the functions of the other pins.
-        write(GPIO + 0x10, (read(GPIO + 0x10) & !(7 << 6)) | (1 << 6));
+        let register = GPIO + (LED_PIN / 10) * 4;
+        let shift = (LED_PIN % 10) * 3;
+        led(false);
+        write(register, (read(register) & !(7 << shift)) | (1 << shift));
     }
     for _ in 0..3 {
         led(true);
@@ -158,7 +206,7 @@ pub extern "C" fn kernel_main() -> ! {
 fn panic(_: &PanicInfo) -> ! {
     print("\nPANIC\n");
     loop {
-        unsafe { asm!("wfe", options(nomem, nostack)) };
+        core::hint::spin_loop();
     }
 }
 

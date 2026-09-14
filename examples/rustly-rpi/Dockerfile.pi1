@@ -1,0 +1,5 @@
+FROM clojure-hello/rust-rpi:local
+# ARMv6 bare metal is tier 3: build core from this pinned compiler's source.
+RUN rustup component add rust-src && \
+    apt-get update && apt-get install -y --no-install-recommends binutils-arm-none-eabi && \
+    rm -rf /var/lib/apt/lists/*

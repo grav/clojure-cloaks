@@ -3,3 +3,6 @@ target = "aarch64-unknown-none-softfloat"
 
 [target.aarch64-unknown-none-softfloat]
 rustflags = ["-C", "target-cpu=cortex-a72", "-C", "link-arg=-Tlink.ld"]
+
+[target.armv6-none-eabi]
+rustflags = ["-C", "target-cpu=arm1176jzf-s", "-C", "link-arg=-Tlink-pi1.ld"]

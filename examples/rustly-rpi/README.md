@@ -1,17 +1,64 @@
-# Rustly Clojure on a bare-metal Raspberry Pi 4
+# Rustly Clojure on bare-metal Raspberry Pi 1 and Pi 4
 
 [hello.clj](hello.clj) supplies the greeting, response after each serial input
 line, and LED on/off actions. Rustly transpiles those forms into Rust; Rust
-compiles the generated functions and our board driver into an AArch64 SD-boot
-image. There is no JVM, interpreter, OS, allocator, or Rust `std` on the board.
+compiles the generated functions and our board driver into an ARMv6 (Pi 1) or
+AArch64 (Pi 4) SD-boot image. There is no JVM, interpreter, OS, allocator, or Rust `std` on the board.
 
 **The original Rustly hello passed on the physical Pi 4. The Morse extension
 passes QEMU and timing tests; physical Pi 4 boot and the `clj` serial command now pass. Visual LED verification remains pending.**
 [Physical Morse capture](evidence/physical-morse-serial.log) ·
 [Physical hello capture](evidence/physical-hello-serial.log) ·
 [Generated Rust](evidence/generated-app.rs) · [Morse QEMU transcript](evidence/qemu-transcript.txt).
-The current 3904-byte image boots at `0x80000` with no unresolved symbols.
-This firmware cannot run on a Pi 1.
+The Pi 4 image boots at `0x80000`. The new **original Pi 1 A/B (26-pin header)**
+image boots at `0x8000`; its build and QEMU serial checks pass, but physical Pi 1
+boot and LED verification are pending. These boards use separate kernel images.
+Both builds have no unresolved symbols.
+
+## Original Raspberry Pi 1 A/B
+
+From the repository root:
+
+```sh
+cd examples/rustly-rpi
+./build-pi1.sh
+./test.sh pi1
+./stage-sd-pi1.sh
+```
+
+This produces `build/kernel.img` (4,224 bytes) and assembles
+`build/sdcard-pi1/` with `bootcode.bin`, `start.elf`, `fixup.dat`, `config.txt`,
+and checksums. Staging does not write an SD card. Rebuild after source edits
+before staging. The configuration is for the original A/B, not the A+/B+.
+
+The Clojure Morse alphabet/messages and Rust sequencer are shared with Pi 4.
+The Pi 1 implementation changes:
+
+- ARM1176/ARMv6 startup in 32-bit ARM mode, with code and stack at `0x8000`.
+- BCM2835 peripherals at `0x20000000`, including the older GPIO pull-control sequence.
+- The 1 MHz system timer instead of the ARM64 architectural counter.
+- GPIO16 ACT LED, active low, instead of the Pi 4's active-high GPIO42.
+
+Rust's [`armv6-none-eabi`](https://doc.rust-lang.org/rustc/platform-support/armv6-none-eabi.html)
+target has no prebuilt `core`. The separate Docker toolchain installs `rust-src`
+for Rust 1.98.0 and uses `RUSTC_BOOTSTRAP=1` only for Cargo's unstable `build-std`
+step, building `core` and `compiler_builtins` for ARM1176. The firmware remains
+`no_std`, allocation-free, and soft-float.
+
+QEMU's `raspi1ap` machine supplies the same ARM1176/BCM2835 peripherals for the
+serial tests. It is an A+ model, so this does **not** verify the original board's
+GPIO16 LED wiring. The test uses `-bios build/kernel.img` to load the actual raw
+image at `0x8000`; QEMU's normal `-kernel` path uses different loading rules.
+[Pi 1 QEMU transcript](evidence/qemu-pi1-transcript.txt).
+
+The serial wiring remains ground on physical pin 6, adapter RX on pin 8, and
+adapter TX on pin 10; use separate **micro-USB power** for Pi 1. On hardware,
+expect three short ACT flashes, then an idle LED until a serial message arrives.
+Use `./serial.sh` at 115200 baud; `clj` plus Enter should repeat its Morse pattern.
+
+Hardware references: [BCM2835 processor](https://www.raspberrypi.com/documentation/hardware/raspberrypi/bcm2835/),
+[Circle's board-specific ACT LED table](https://github.com/rsta2/circle/blob/master/lib/machineinfo.cpp),
+and [Raspberry Pi firmware boot settings](https://www.raspberrypi.com/documentation/computers/legacy_config_txt.html).
 
 ## Serial Morse
 
@@ -34,7 +81,7 @@ word gaps, replacement, stopping, invalid input, capacity, and counter wrap.
 QEMU checks command acknowledgement, replacement, CRLF, Unicode rejection,
 overlong input, backspace, and stop. Physical pulse timing is not yet verified.
 
-## Build and run
+## Pi 4 build and run
 
 Install the Clojure CLI, Java, and Docker. Rust and QEMU are supplied by the same
 Docker toolchain as the pure Rust baseline (Rust 1.98.0, target
@@ -67,11 +114,15 @@ The check waits for the Rustly-specific banner and prompt before sending test
 input; it will not mistake the pure Rust baseline for this demo. It saves the
 capture in `build/physical-serial.log`.
 
+### Previously verified Pi 4 card
+
 The prepared configuration for the existing backed-up card selects
 `rustly-pi4.img`, retains the Pi 4 DTB, and enables firmware serial diagnostics.
 The original 893-byte hello image and configuration were installed on card
 `20AC-1830`, readback-verified, and passed physical serial verification. The
-new 3904-byte Morse image is now installed and byte-for-byte readback-verified.
+previously verified 3904-byte Morse image was installed and byte-for-byte readback-verified.
+The shared source now uses a board-neutral banner, so rebuilding produces a
+different hash; the hashes below identify the older physically verified images.
 The previous Rustly hello is preserved as `rustly-hello.img`.
 Morse kernel SHA256: `41a0c946a75f279effe7b60f5d43fca84f84064d95435b9aefce631945040771`.
 Copy

@@ -1,0 +1,8 @@
+# Original Raspberry Pi 1 Model A/B (26-pin header).
+arm_64bit=0
+kernel=kernel.img
+kernel_address=0x8000
+enable_uart=1
+init_uart_clock=48000000
+# Our kernel configures PL011 and GPIO16 directly; it does not consume a DTB.
+device_tree=
