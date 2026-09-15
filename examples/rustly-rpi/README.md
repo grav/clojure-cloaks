@@ -1,5 +1,68 @@
 # Rustly Clojure on bare-metal Raspberry Pi 1 and Pi 4
 
+## How Clojure becomes Pi firmware
+
+[Rustly](https://github.com/timothypratley/rustly) is a transpiler implemented in
+Clojure that translates a small subset of Clojure into Rust. Our application
+source is [hello.clj](hello.clj). During the build, that file is **read as data,
+not executed by JVM Clojure**: [transpile.clj](transpile.clj) passes its forms
+through Rustly's parser, translator, and Rust emitter.
+
+For example, this call in Clojure syntax:
+
+```clojure
+(uart_write "Hello!")
+```
+
+becomes this Rust call:
+
+```rust
+uart_write(b"Hello!");
+```
+
+Rustly emits the function name without requiring a Clojure definition of
+`uart_write`. Rust's compiler resolves that name later. Our handwritten
+[src/main.rs](src/main.rs) supplies it:
+
+```rust
+fn uart_write(bytes: &[u8]) {
+    for &byte in bytes {
+        if byte == b'\n' { put(b'\r'); }
+        put(byte);
+    }
+}
+```
+
+`put` writes each byte to the UART hardware. The same Rust source file includes
+the generated application functions:
+
+```rust
+include!(concat!(env!("CARGO_MANIFEST_DIR"), "/build/app.rs"));
+```
+
+The generated `greeting()` and handwritten `uart_write()` therefore belong to
+the **same Rust module** and call each other as ordinary Rust functions. There
+is no runtime interpreter or FFI boundary between them. If a function name is
+misspelled, Rustly emits that name and Rust compilation fails because it cannot
+resolve the function.
+
+```text
+hello.clj → Rustly → build/app.rs
+                         +
+                  handwritten Rust
+                         ↓
+                       rustc
+                         ↓
+                    Pi firmware
+```
+
+Clojure supplies the messages, Morse alphabet, and calls to LED actions. Rust
+supplies board startup, hardware access, serial input handling, and Morse timing.
+The resulting firmware contains native machine code; Clojure and the JVM are
+needed only during the build.
+
+## Demo status
+
 [hello.clj](hello.clj) supplies the greeting, response after each serial input
 line, and LED on/off actions. Rustly transpiles those forms into Rust; Rust
 compiles the generated functions and our board driver into an ARMv6 (Pi 1) or
