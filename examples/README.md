@@ -11,8 +11,8 @@ this overview for now.
 | --- | --- | --- | --- |
 | [SCI eval](sci-eval/) | JVM Clojure, Babashka, JavaScript, Dart, Chez Scheme | SCI interprets the supplied expression inside each host. | One `.cljc` evaluator runs across five compatible hosts. |
 | [SCI FFI](sci-ffi/) | Rust and Zig calling a GraalVM native library | SCI is AOT-compiled into a library; expressions remain interpreted. | Embed the same evaluator through a C ABI, without a JVM process. |
-| [Scittle](scittle/) | JavaScript / browser | SCI interprets inline Clojure in the page. | Add Clojure behavior to plain HTML with script tags and an atom; no build step. |
 | [ClojureScript + Replicant](clojurescript/) | JavaScript / browser | ClojureScript is compiled to JavaScript before loading the page. | A reactive SPA with data-driven rendering and hash routing, served even from `file://`. |
+| [Scittle](scittle/) | JavaScript / browser | SCI interprets inline Clojure in the page. | Add Clojure behavior to plain HTML with script tags and an atom; no build step. |
 | [Planck](planck/) | JavaScriptCore | The self-hosted ClojureScript compiler compiles expressions to JavaScript at runtime. | Evaluate ClojureScript without a JVM or Node.js. |
 | [Rustly](rustly-rpi/) | Rust / bare-metal ARMv6 and ARM64 | A small Clojure subset is transpiled to Rust, then AOT-compiled to firmware. | Clojure-authored messages and Morse alphabet run on Pi 1 and Pi 4 alongside Rust hardware drivers. |
 | [Clojurust](clojurust/) | Rust runtime / Cranelift | Tiered interpreter/JIT in the REPL; the AOT demo retains an interpreted entry point for `eval`. | Immutable snapshots, undo and live redefinition; a native executable can still evaluate new expressions. |
