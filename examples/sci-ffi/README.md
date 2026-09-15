@@ -19,6 +19,9 @@ hello world
 the result. Rust copies the result before shutdown; Zig prints it while the
 isolate is alive. Neither executable needs a JVM process.
 
+A **GraalVM Native Image isolate is an instance of the compiled runtime, with
+its own managed heap and garbage collector, inside your process**.
+
 Clojure compiles SCI to JVM bytecode, then GraalVM Native Image compiles that
 bytecode to native machine code with runtime support such as garbage collection.
 It exports a C-compatible interface; it does not translate SCI into C. SCI still
