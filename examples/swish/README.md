@@ -1,5 +1,11 @@
 # Swish inside SwiftUI
 
+[Swish](https://github.com/infiniteNIL/swish) is an interpreter written in
+**Swift** for a subset of Clojure. In this example, its `SwishKit` library runs
+Clojure-like source inside a Swift application at runtime; it does not transpile
+the script into Swift or require a JVM. **SwiftUI** is Apple's UI framework,
+which our Swift host uses to render the controls described by the script.
+
 Swish owns the application: an atom holds the name, greeting and click count;
 `dispatch!` handles edits, greetings and resets; `screen` returns vectors
 describing the native controls. All of that lives in
