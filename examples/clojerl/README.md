@@ -3,12 +3,15 @@
 A client BEAM node sends correlated requests to a registered actor on a separate
 BEAM node. The actor owns a request counter and replies with its node name.
 Docker Compose supplies the private network and a shared demo cookie.
+The cookie is **Erlang’s shared secret for connecting nodes**.
 
 ```sh
 cd examples/clojerl
 docker compose up --build --abort-on-container-exit --exit-code-from client
 docker compose down
 ```
+
+**OTP 26 is version 26 of Erlang/OTP**, the platform Clojerl runs on.
 
 Verified on Linux ARM64 with OTP 26 and Clojerl commit
 `4ad14e57df85d30cc3332308f861f4e174383483`:
