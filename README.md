@@ -19,34 +19,7 @@ The catalogue contains **134 projects and historical attempts**. It accounts for
 No finite web search can prove that every private, deleted, unindexed, unnamed or newly published interpreter has been found. This is a comprehensive, auditable public inventory with an explicit boundary, rather than a claim of mathematical completeness. The [research notes](research/methodology.md) explain coverage, ambiguities and remaining gaps. [Machine-readable catalogue](research/catalogue.json) contains the same entries, source URLs, selected repository metadata and documentation hashes.
 
 
-## Demo overview
-
-Related examples are grouped together below. “Execution” describes the Clojure
-code in this demo; an interpreter can itself be packaged as a native executable.
-AOT means compiled ahead of execution; JIT means compiled during execution.
-The JVM and CLR examples remain in the verification table below, but are left
-out of this overview for now.
-
-| Group | Demo | Host / target | Execution | What the demo reveals |
-| --- | --- | --- | --- | --- |
-| Embedded evaluation | [SCI eval](examples/sci-eval/) | JVM Clojure, Babashka, JavaScript, Dart, Chez Scheme | SCI interprets the supplied expression inside each host. | One `.cljc` evaluator runs across five compatible hosts. |
-| Embedded evaluation | [SCI FFI](examples/sci-ffi/) | Rust and Zig calling a GraalVM native library | SCI is AOT-compiled into a library; expressions remain interpreted. | Embed the same evaluator through a C ABI, without a JVM process. |
-| Embedded evaluation | [Scittle](examples/scittle/) | JavaScript / browser | SCI interprets inline Clojure in the page. | Add Clojure behavior to plain HTML with script tags and an atom; no build step. |
-| ClojureScript compilation | [ClojureScript + Replicant](examples/clojurescript/) | JavaScript / browser | ClojureScript is compiled to JavaScript before loading the page. | A reactive SPA with data-driven rendering and hash routing, served even from `file://`. |
-| ClojureScript compilation | [Planck](examples/planck/) | JavaScriptCore | The self-hosted ClojureScript compiler compiles expressions to JavaScript at runtime. | Evaluate ClojureScript without a JVM or Node.js. |
-| Clojure and Rust | [Rustly](examples/rustly-rpi/) | Rust / bare-metal ARMv6 and ARM64 | A small Clojure subset is transpiled to Rust, then AOT-compiled to firmware. | Clojure-authored messages and Morse alphabet run on Pi 1 and Pi 4 alongside Rust hardware drivers. |
-| Clojure and Rust | [Clojurust](examples/clojurust/) | Rust runtime / Cranelift | Tiered interpreter/JIT in the REPL; the AOT demo retains an interpreted entry point for `eval`. | Immutable snapshots, undo and live redefinition; a native executable can still evaluate new expressions. |
-| Native graphical applications | [ClojureDart + Flutter](examples/clojuredart/) | Dart / Flutter | Transpiled to Dart; Flutter uses JIT for native development, AOT for native release, and JavaScript for this web build. | One UI for iOS, Linux and web, with hot reload and an atom-backed scrolling greeting history. |
-| Native graphical applications | [Swish + SwiftUI](examples/swish/) | Swift / SwiftUI | A Swift-written interpreter evaluates the bundled Swish script at runtime. | Clojure data describes native controls; Swift dispatches events and explicitly refreshes the view. |
-| Native graphical applications | [jank + SDL](examples/jank/) | LLVM / native code and C++ libraries | JIT-compiles the program to native code. | Call SDL directly from jank to create a window, draw, and handle input. |
-| Deployment and distributed systems | [Glojure](examples/glojure/) | Go | A compiled Go executable embeds the Glojure interpreter and application script. | Package a Go-hosted Clojure HTTP service in a small `FROM scratch` OCI image. |
-| Deployment and distributed systems | [Clojerl](examples/clojerl/) | Erlang/OTP / BEAM | Compiled to BEAM bytecode; the VM executes it. | Actors on separate nodes exchange messages while each actor owns its state. |
-| Alternative execution models | [Jolt](examples/jolt/) | Chez Scheme | Compiled through Scheme using Chez's native compiler. | Ordinary tail-recursive Fibonacci runs without growing the call stack, unlike JVM Clojure. |
-| Alternative execution models | [Cream](examples/cream/) | GraalVM / Crema and Ristretto | Native executable containing Clojure's compiler; runtime-generated JVM bytecode can be JIT-compiled. | Create JVM interfaces and implementing classes at runtime inside a native executable. |
-
-Scittle also connects naturally to the browser examples: it interprets code in
-the page, while Replicant's example arrives as compiled JavaScript. The groups
-are a reading order, not mutually exclusive language categories.
+[Demo overview: hosts, execution models, and what each example reveals](examples/README.md).
 
 ## Implementation status
 
