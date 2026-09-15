@@ -16,6 +16,101 @@ Type a name, press **Say hello**, and watch the greeting and counter change.
 **Start again** resets the state. Change the script to rearrange controls or
 change their behavior without editing Swift; rerun to load the bundled script.
 
+## Directory structure
+
+```text
+HelloSwish/
+├── Package.swift
+├── Sources/
+│   ├── GreetingCore/
+│   │   ├── Greeting.swift            Swift ↔ Swish bridge
+│   │   └── Resources/greeting.swish  State, events, and screen description
+│   └── HelloSwish/
+│       └── HelloSwish.swift          SwiftUI application and renderer
+└── Tests/
+    └── GreetingCoreTests/            Bridge and script tests
+```
+
+`GreetingCore` is a **Swift module**, declared as a target in
+[Package.swift](HelloSwish/Package.swift). It is not a Clojure namespace;
+`greeting.swish` has no `ns` declaration. The UI uses `import GreetingCore` to
+access the bridge.
+
+This split lets the tests exercise the script and bridge without opening a
+SwiftUI window. It is an optional organization choice for this demo, not a
+requirement of Swish. The script is declared as a package resource, so SwiftPM
+bundles it and the bridge finds it using `Bundle.module` before loading it into
+the interpreter.
+
+## From Clojure data to SwiftUI
+
+The Swish `screen` function reads the atom and returns vectors such as:
+
+```clojure
+[[:text :title "Hello, Swish!"]
+ [:field :name "Ada"]
+ [:button :greet "Say hello"]]
+```
+
+Each control follows the demo's `[kind id text]` convention. The `screen()`
+method in [Greeting.swift](HelloSwish/Sources/GreetingCore/Greeting.swift)
+evaluates `(screen)`, validates the vectors, and decodes them into Swift
+`Element` values. For example:
+
+```swift
+Element(kind: "button", id: "greet", text: "Say hello")
+```
+
+The actual view construction happens in `ScriptView.body` in
+[HelloSwish.swift](HelloSwish/Sources/HelloSwish/HelloSwish.swift). Its
+`ForEach(elements)` loops over the controls and `switch element.kind` selects
+the SwiftUI view:
+
+| Swish control | SwiftUI view |
+| --- | --- |
+| `[:text :title "Hello"]` | `Text` |
+| `[:field :name "Ada"]` | `TextField` with a binding that sends edits to Swish |
+| `[:button :greet "Say hello"]` | `Button` that sends the `:greet` event |
+
+Clicking the button makes the bridge evaluate `(dispatch! :greet "")`;
+editing the field sends `(dispatch! :name "Ada")`. The Swish function updates
+its atom accordingly. The vector format resembles Hiccup, but this renderer
+is specific to the example: adding sliders or nested layouts would require
+extending the Swift decoder and renderer.
+
+## How the UI refreshes
+
+There is **no watch or listener on the Swish atom**. After each event,
+`ScriptView.send` explicitly fetches the new screen:
+
+```swift
+try engine.send(event, value: value)
+elements = try engine.screen()
+```
+
+The `elements` property is declared with SwiftUI's `@State`:
+
+```swift
+@State private var elements: [Element] = []
+```
+
+Assigning the new elements tells SwiftUI to update the views. The initial screen
+is fetched when the view loads; subsequent refreshes follow this cycle:
+
+```text
+Swish atom → (screen) → vectors → Swift elements → SwiftUI controls
+    ↑                                                  │
+    └──────────────── (dispatch!) ← interaction ────────┘
+```
+
+Reactivity therefore lives on the Swift side, with an explicit refresh after
+each dispatched event. If the Swish atom changed independently, such as from a
+background task, the UI would not automatically notice. That would require a
+watch/callback or another mechanism to fetch `screen()` and update `elements`
+on the UI thread.
+
+## Run
+
 On a Mac with Xcode and Swift 6.2 or later:
 
 ```sh
