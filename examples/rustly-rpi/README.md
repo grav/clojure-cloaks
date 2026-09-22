@@ -189,6 +189,13 @@ Start the automatic hardware check before powering on the Pi:
 ./serial.sh
 ```
 
+On macOS, `serial.sh` automatically selects a single USB serial adapter and
+opens the built-in `screen` terminal at 115200 baud. You can also select a device
+explicitly, for example `./serial.sh /dev/cu.usbserial-140`. If multiple adapters
+are connected, the script lists them and requires an explicit device. Exit the
+terminal with **Ctrl-A**, then **K**, then **Y**. Linux continues to use the
+Docker-based serial terminal.
+
 The check waits for the Rustly-specific banner and prompt before sending test
 input; it will not mistake the pure Rust baseline for this demo. It saves the
 capture in `build/physical-serial.log`.
